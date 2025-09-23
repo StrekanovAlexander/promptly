@@ -1,8 +1,11 @@
 import express from "express";
 import cors from "cors";
+/*
 import { db } from "./src/config/db.js";
 import { authRoutes, categoryRoutes, promptRoutes, userRoutes } from "./src/routes/index.js";
+*/
 
+/*
 (async () => {
     try {
         await db.authenticate();
@@ -12,16 +15,17 @@ import { authRoutes, categoryRoutes, promptRoutes, userRoutes } from "./src/rout
         console.error('❌ DB connection failed:', err);
     }
 })();
+*/
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => res.send('Prompts library'));
-app.use("/api/auth", authRoutes);
-app.use("/api/categories", categoryRoutes);
-app.use("/api/prompts", promptRoutes);
-app.use("/api/users", userRoutes);
+// app.use("/api/auth", authRoutes);
+// app.use("/api/categories", categoryRoutes);
+// app.use("/api/prompts", promptRoutes);
+// app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
