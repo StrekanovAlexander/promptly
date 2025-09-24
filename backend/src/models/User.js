@@ -25,6 +25,18 @@ export const User = db.define("User", {
         allowNull: true,
         field: "avatar_url"
     },
+    createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        field: "created_at",
+        defaultValue: db.Sequelize.literal("CURRENT_TIMESTAMP"),
+    },
+    updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+         field: "updated_at",
+        defaultValue: db.Sequelize.literal("CURRENT_TIMESTAMP"),
+    },
 },  {
     tableName: "users",
     timestamps: false,

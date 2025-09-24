@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { CircleUserRound } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 import Logo from "./Logo.jsx";
 
 export default function Header() {
-    const { logout } = useAuth();
-
+    const { logout } = useAuth()
     return (
         <header className="w-full fixed top-0 left-0 z-50 bg-gradient-to-b from-gray-100 to-gray-50 h-[70px]">
             <div className="max-w-5xl mx-auto px-4 h-full">
@@ -20,7 +19,7 @@ export default function Header() {
                         <Link to="/login" className="text-blue-600 hover:text-blue-700">
                             <CircleUserRound className="w-5 h-5" />
                         </Link>
-                        <button onClick={logout}>
+                        <button onClick={() => logout()}>
                             Exit
                         </button>
                     </nav>
