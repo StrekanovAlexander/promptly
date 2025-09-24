@@ -2,7 +2,13 @@ import express from "express";
 import cors from "cors";
 
 import { db } from "./src/config/db.js";
-import { authRoutes, categoryRoutes, promptRoutes, userRoutes } from "./src/routes/index.js";
+import { 
+    authRoutes, 
+    categoryRoutes, 
+    postCategoryRoutes, 
+    promptRoutes, 
+    userRoutes 
+} from "./src/routes/index.js";
 
 
 
@@ -24,6 +30,7 @@ app.use(express.json());
 app.get('/', (req, res) => res.send('Server is running...'));
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/post-categories", postCategoryRoutes);
 app.use("/api/prompts", promptRoutes);
 app.use("/api/users", userRoutes);
 

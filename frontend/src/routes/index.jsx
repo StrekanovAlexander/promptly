@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "../components/layouts/Layout.jsx";
 import AuthLayout from "../components/layouts/AuthLayout.jsx";
 import UserLayout from "../components/layouts/UserLayout.jsx";
-import { HomePage, LoginPage, OAuthCallback, ProfilePage } from "../pages/index.jsx";
+import BlogLayout from "../components/layouts/blog/BlogLayout.jsx";
+import { BlogPage, HomePage, LoginPage, OAuthCallback, ProfilePage } from "../pages/index.jsx";
 
 export default function Routing() {
     return (
@@ -16,6 +17,9 @@ export default function Routing() {
             </Route>
             <Route element={<UserLayout />}>
                 <Route path="/profile" element={<ProfilePage />} />
+            </Route>
+            <Route element={<BlogLayout />}>
+                <Route path="/blog" element={<BlogPage />} />
             </Route>
         </Routes>
     )
