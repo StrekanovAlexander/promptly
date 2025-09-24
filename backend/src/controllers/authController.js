@@ -56,8 +56,7 @@ export async function githubCallback(req, res) {
             { expiresIn: "7d" }
         );
         // res.json({ token, user: { id: user.id, name: user.name, email: user.email, avatarUrl: user.avatarUrl } });
-        // const redirectUrl = `${process.env.FRONTEND_URL}/oauth/callback?username=${encodeURIComponent(user.name)}&email=${encodeURIComponent(user.email)}&token=${token}`;
-        const redirectUrl = `https://promptly-app-nu.vercel.app/oauth/callback?username=${encodeURIComponent(user.name)}&email=${encodeURIComponent(user.email)}&token=${token}`;
+        const redirectUrl = `${process.env.FRONTEND_URL}/oauth/callback?username=${encodeURIComponent(user.name)}&email=${encodeURIComponent(user.email)}&token=${token}`;
         res.redirect(redirectUrl);
     
     } catch (err) {
