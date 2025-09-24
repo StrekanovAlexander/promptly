@@ -4,7 +4,7 @@ import { getAllUsers, getUserWithPrompts } from "../controllers/userController.j
 
 const router = Router();
 
-router.get("/", getAllUsers);
+router.get("/", authMiddleware, getAllUsers);
 router.get("/:id", authMiddleware, getUserWithPrompts);
 
 export default router;

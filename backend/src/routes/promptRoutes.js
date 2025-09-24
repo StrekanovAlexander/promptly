@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 import {
     getAllPrompts,
     createPrompt,
@@ -10,7 +11,7 @@ import {
 const router = Router();
 
 router.get("/", getAllPrompts);
-router.post("/", createPrompt);
+router.post("/", authMiddleware, createPrompt);
 router.put("/:id", updatePrompt);
 router.delete("/:id", deletePrompt);
 router.patch("/:id/usage", incrementUsage);

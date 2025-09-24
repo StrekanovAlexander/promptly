@@ -8,9 +8,13 @@ export async function getPrompts() {
 }
 
 export async function createPrompt(data) {
+    const token = localStorage.getItem("token");
     const res = await fetch(`${API_URL}/prompts`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            Authorization: `Bearer ${token}`, 
+            "Content-Type": "application/json" 
+        },
         body: JSON.stringify(data),
     });
     if (!res.ok) throw new Error("Failed to create prompt");

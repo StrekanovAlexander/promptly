@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { getUserData } from "../../services/api.js";
-import FormEditPrompt from "../../components/forms/FormEditPrompt.jsx";
+import FormCreatePrompt from "../../components/forms/FormCreatePrompt.jsx";
+import Spinner from "../../components/icons/Spinner.jsx";
 
 export default function ProfilePage() {
     const { user, setUser } = useAuth();
@@ -11,34 +12,26 @@ export default function ProfilePage() {
 
     useEffect(() => {
         if (!user?.userId) return;
-
-        const fetchUser = async () => {
-            try {
-                const data = await getUserData(user.userId);
-                setUserData(data);
-                const { prompts, ...newFields } = data;
-                const hasExtraFields = Object.keys(newFields).every(key => key in user);
-
-                if (!hasExtraFields) {
-                    setUser(prev => ({ ...prev, ...newFields }));
-                }
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setIsLoaded(true);
-            }
-        };
-
-        fetchUser();
+        fetchUser(user.userId);
     }, [user?.userId]);
 
-    if (!user) return <p>Загрузка данных пользователя...</p>;
-    if (!userData) return <p>Загрузка профиля...</p>;
+    async function fetchUser() {
+        try {
+            const data = await getUserData(user.userId);
+            setUserData(data);
+            const { prompts, ...newFields } = data;
+            const hasExtraFields = Object.keys(newFields).every(key => key in user);
 
-    const handleCreatePrompt = (promptData) => {
-        console.log("Создан промпт:", promptData);
+            if (!hasExtraFields) {
+                setUser(prev => ({ ...prev, ...newFields }));
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsLoaded(true);
+        }
     };
-    
+
     return (
         <div className="max-w-6xl mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
@@ -50,21 +43,24 @@ export default function ProfilePage() {
                     Создать промпт
                 </button>
                 { isModalOpen && 
-                    <FormEditPrompt
+                    <FormCreatePrompt
                         isOpen={isModalOpen}
                         onClose={() => setIsModalOpen(false)}
-                        onSubmit={handleCreatePrompt}
+                        onCreated={fetchUser}
                     /> 
                 }
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                {userData.prompts.map(prompt => (
-                    <div key={prompt.id} className="border rounded-lg p-4 shadow-sm">
-                        <h2 className="font-semibold">{prompt.title}</h2>
-                        <p className="text-sm text-gray-600">{prompt.body}</p>
-                    </div>
-                ))}
-            </div>
+            {!isLoaded 
+                ? <Spinner />
+                : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                    {userData.prompts.map(prompt => (
+                        <div key={prompt.id} className="border rounded-lg p-4 shadow-sm">
+                            <h2 className="font-semibold">{prompt.title}</h2>
+                            <p className="text-sm text-gray-600">{prompt.body}</p>
+                        </div>
+                    ))}
+                </div>
+            }
         </div>
     );
 }

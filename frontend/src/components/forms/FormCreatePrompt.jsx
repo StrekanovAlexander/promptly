@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
-import { getCategories } from "../../services/api.js";
+import { useAuth } from "../../context/AuthContext.jsx";
+import { getCategories, createPrompt } from "../../services/api.js";
 
-export default function FormEditPrompt({ isOpen, onClose, onSubmit }) {
+export default function FormCreatePrompt({ isOpen, onClose, onCreated }) {
+  const { user } = useAuth();
   const [categories, setCategories] = useState([]);
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [tags, setTags] = useState("");
-  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("Title 2");
+  const [body, setBody] = useState("Body 2");
+  const [tags, setTags] = useState("Tags 2");
+  const [category, setCategory] = useState("Category 2");
+  const [loading, setLoading] = useState(false);
     
   useEffect(() => {
     (async () => {
@@ -15,14 +18,20 @@ export default function FormEditPrompt({ isOpen, onClose, onSubmit }) {
     })();
   }, []);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    onSubmit({ title, body, tags, category });
-    setTitle("");
-    setBody("");
-    setTags("");
-    setCategory("");
-    onClose();
+    setLoading(true);
+    try {
+      const prompt = { userId: user.id, title, body, tags, category };
+      await createPrompt(prompt);
+      onCreated();
+      onClose();
+    } catch (err) {
+      console.error("Не удалось создать промпт:", err);
+      alert("Ошибка при создании промпта");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!isOpen) return null;
