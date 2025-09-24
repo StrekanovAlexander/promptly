@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { getUserData } from "../../services/api.js";
 import FormCreatePrompt from "../../components/forms/FormCreatePrompt.jsx";
+import ProfileCard from "../../components/cards/ProfileCard.jsx";
 import Spinner from "../../components/icons/Spinner.jsx";
 
 export default function ProfilePage() {
@@ -12,10 +13,10 @@ export default function ProfilePage() {
 
     useEffect(() => {
         if (!user?.userId) return;
-        fetchUser(user.userId);
+        fetchUserData(user.userId);
     }, [user?.userId]);
 
-    async function fetchUser() {
+    async function fetchUserData() {
         try {
             const data = await getUserData(user.userId);
             setUserData(data);
@@ -38,7 +39,7 @@ export default function ProfilePage() {
                 <h1 className="text-2xl font-semibold mb-4">Мои промпты</h1>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-sm text-white font-medium rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200"
                 >
                     Создать промпт
                 </button>
@@ -46,19 +47,20 @@ export default function ProfilePage() {
                     <FormCreatePrompt
                         isOpen={isModalOpen}
                         onClose={() => setIsModalOpen(false)}
-                        onCreated={fetchUser}
+                        onCreated={fetchUserData}
                     /> 
                 }
             </div>
             {!isLoaded 
                 ? <Spinner />
                 : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                    {userData.prompts.map(prompt => (
-                        <div key={prompt.id} className="border rounded-lg p-4 shadow-sm">
-                            <h2 className="font-semibold">{prompt.title}</h2>
-                            <p className="text-sm text-gray-600">{prompt.body}</p>
-                        </div>
-                    ))}
+                    {userData.prompts.map(el => 
+                        <ProfileCard 
+                            key={el.id} 
+                            prompt={el}
+                            fetchUserData={fetchUserData} 
+                        />
+                    )}
                 </div>
             }
         </div>

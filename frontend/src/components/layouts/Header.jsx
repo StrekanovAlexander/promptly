@@ -26,12 +26,12 @@ export default function Header() {
                             <>
                                 <Link to="/profile" className="text-sm text-gray-600 hover:text-blue-700 flex items-center gap-1">
                                     <FileText className="text-gray-600 hover:text-blue-700 w-4 h-4" /> Мои промпты
-                                </Link>        
+                                </Link>
+                                <button onClick={() => logout()}>
+                                    {user?.email && <LogOut className="text-blue-600 hover:text-blue-700 w-4 h-4 ml-2" />}
+                                </button>        
                             </>
                         }
-                        <button onClick={() => logout()}>
-                            {user?.email && <LogOut className="text-blue-600 hover:text-blue-700 w-4 h-4 ml-2" />}
-                        </button>
                     </nav>
                 </div>
             </div>

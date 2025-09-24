@@ -12,7 +12,7 @@ const router = Router();
 
 router.get("/", getAllPrompts);
 router.post("/", authMiddleware, createPrompt);
-router.put("/:id", updatePrompt);
+router.put("/:id", authMiddleware, updatePrompt);
 router.delete("/:id", deletePrompt);
 router.patch("/:id/usage", incrementUsage);
 

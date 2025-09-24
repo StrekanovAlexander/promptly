@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { useAuth } from "../../context/AuthContext.jsx";
-import { getCategories, createPrompt } from "../../services/api.js";
+import { getCategories, updatePrompt } from "../../services/api.js";
 
-export default function FormCreatePrompt({ isOpen, onClose, onCreated }) {
-  const { user } = useAuth();
+export default function FormEditPrompt({ prompt, isOpen, onClose, onUpdated }) {
   const [categories, setCategories] = useState([]);
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [tags, setTags] = useState("");
-  const [category, setCategory] = useState("");
+  const [promptId, setPromptId] = useState(prompt.id);
+  const [title, setTitle] = useState(prompt.title);
+  const [body, setBody] = useState(prompt.body);
+  const [tags, setTags] = useState(prompt.tags);
+  const [category, setCategory] = useState(prompt.category);
   const [loading, setLoading] = useState(false);
     
   useEffect(() => {
@@ -23,13 +22,13 @@ export default function FormCreatePrompt({ isOpen, onClose, onCreated }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const prompt = { userId: user.id, title, body, tags, category };
-      await createPrompt(prompt);
-      toast.success(`Промпт "${title}" был создан`);
-      onCreated();
+      const prompt = { id: promptId, title, body, tags, category };
+      await updatePrompt(prompt);
+      toast.success(`Промпт "${title}" был отредакирован`);
+      onUpdated();
       onClose();
     } catch (err) {
-      toast.error("Ошибка при создании промпта");
+      toast.error("Ошибка при редактировании промпта");
     } finally {
       setLoading(false);
     }
@@ -40,7 +39,7 @@ export default function FormCreatePrompt({ isOpen, onClose, onCreated }) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md mx-1">
-        <h2 className="text-xl font-semibold mb-4">Создать новый промпт</h2>
+        <h2 className="text-xl font-semibold mb-4">Редактировать промпт</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Название</label>
