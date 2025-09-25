@@ -46,6 +46,18 @@ export async function getPostCategories() {
     if (!res.ok) throw new Error("Failed to fetch post categories");
     return res.json();
 }
+// Posts
+export async function getPosts() {
+    const res = await fetch(`${API_URL}/posts`);
+    if (!res.ok) throw new Error("Failed to fetch posts");
+    return res.json();
+}
+
+export async function getPost(id) {
+    const res = await fetch(`${API_URL}/posts/${id}`);
+    if (!res.ok) throw new Error("Failed to fetch post");
+    return res.json();
+}
 // User data
 export async function getUserData(id) {
     const res = await fetch(`${API_URL}/users/${id}`, {

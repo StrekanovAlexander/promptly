@@ -2,8 +2,15 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "../components/layouts/Layout.jsx";
 import AuthLayout from "../components/layouts/AuthLayout.jsx";
 import UserLayout from "../components/layouts/UserLayout.jsx";
-import BlogLayout from "../components/layouts/blog/BlogLayout.jsx";
-import { BlogPage, HomePage, LoginPage, OAuthCallback, ProfilePage } from "../pages/index.jsx";
+import PostLayout from "../components/layouts/post/PostLayout.jsx";
+import { 
+    PostPage, 
+    PostsPage, 
+    HomePage, 
+    LoginPage, 
+    OAuthCallback, 
+    ProfilePage 
+} from "../pages/index.jsx";
 
 export default function Routing() {
     return (
@@ -18,8 +25,9 @@ export default function Routing() {
             <Route element={<UserLayout />}>
                 <Route path="/profile" element={<ProfilePage />} />
             </Route>
-            <Route element={<BlogLayout />}>
-                <Route path="/blog" element={<BlogPage />} />
+            <Route element={<PostLayout />}>
+                <Route path="/posts" element={<PostsPage />} />
+                <Route path="/posts/:id" element={<PostPage />} />
             </Route>
         </Routes>
     )

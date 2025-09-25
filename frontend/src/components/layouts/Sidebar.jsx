@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import { useFilters } from "../../context/FiltersContext.jsx";
 import { getCategories } from "../../services/api.js";
-import { sleep } from "../../utils/times.js";
 import Icon from "../icons/Icon.jsx";
 import Spinner from "../icons/Spinner.jsx";
 
 export default function Sidebar() {
-    const [categories, setCategories] = useState([]);
     const { category, setCategory } = useFilters();
+    const [categories, setCategories] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         (async () => {
             const data = await getCategories();
             setCategories(data);
-            await sleep(500);
             setIsLoaded(true);
         })();
     }, []);

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { useFilters } from "../../../context/PostFiltersContext.jsx";
 import { getPostCategories } from "../../../services/api.js";
 import { sleep } from "../../../utils/times.js";
 import Icon from "../../icons/Icon.jsx";
 import Spinner from "../../icons/Spinner.jsx";
 
-export default function BlogSidebar() {
-    const [postCategory, setPostCategory] = useState("all");
+export default function PostSidebar() {
+    const { postCategory, setPostCategory } = useFilters();
     const [postCategories, setPostCategories] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -29,7 +30,7 @@ export default function BlogSidebar() {
                         className={`w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg transition ${
                             postCategory === "all" ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
                         }`}
-                        onClick={() => console.log("Something")}
+                        onClick={() => setPostCategory("all")}
                     >
                         <Icon icon="Layers" />Все
                     </button>
@@ -43,7 +44,7 @@ export default function BlogSidebar() {
                             className={`w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg transition ${
                                 postCategory.name === el.name ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
                             }`}
-                            onClick={() => console.log(el)}
+                             onClick={() => setPostCategory(el)}
                         >
                             <Icon icon={el.icon} />
                             {el.name}

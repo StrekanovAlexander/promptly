@@ -11,7 +11,9 @@ export default function Header() {
             <div className="max-w-5xl mx-auto px-4 h-full">
                 <div className="bg-white border-b rounded-bl-lg rounded-br-lg px-4 py-3 flex items-center justify-between shadow">
                     <div className="flex flex-col mr-2">
-                        <Logo />
+                        <a href="/" title="Начало">
+                            <Logo />
+                        </a>
                         <span className="text-xs text-gray-500">
                             your community at promptly.team
                         </span>
@@ -20,7 +22,7 @@ export default function Header() {
                         <a href="/" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
                             <House className="w-4 h-4" />Начало
                         </a>
-                        <a href="/blog" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
+                        <a href="/posts" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
                             <FileText className="w-4 h-4" />Публикации
                         </a>
                         <a href="/profile" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
@@ -31,31 +33,6 @@ export default function Header() {
                         </a>
                     </nav>  
                 </div>
-                {/* <div className="bg-white border-b rounded-bl-lg rounded-br-lg px-4 py-3 flex items-center justify-between shadow">
-                    <Link to="/" className="flex items-center gap-3">
-                        <Logo />
-                        <span className="hidden md:block text-sm text-gray-500 italic">
-                            "Prompt smarter, create faster"
-                        </span>
-                    </Link>    
-                    <nav className="flex items-center gap-3">
-                        {!user &&
-                            <Link to="/login" className="text-blue-600 hover:text-blue-700">
-                                <CircleUserRound className="w-5 h-5" />
-                            </Link>
-                        }
-                        {user && 
-                            <>
-                                <Link to="/profile" className="text-sm text-gray-600 hover:text-blue-700 flex items-center gap-1">
-                                    <FileText className="text-gray-600 hover:text-blue-700 w-4 h-4" /> Мои промпты
-                                </Link>
-                                <button onClick={() => logout()}>
-                                    {user?.email && <LogOut className="text-blue-600 hover:text-blue-700 w-4 h-4 ml-2" />}
-                                </button>        
-                            </>
-                        }
-                    </nav>
-                </div> */}
             </div>
         </header>
     )
