@@ -1,8 +1,22 @@
 import { useEffect, useState } from "react";
+import { getPostCategories } from "../../../services/api.js";
+import { sleep } from "../../../utils/times.js";
 import Icon from "../../icons/Icon.jsx";
+import Spinner from "../../icons/Spinner.jsx";
 
 export default function BlogSidebar() {
-    const [category, setCategory] = useState("all");
+    const [postCategory, setPostCategory] = useState("all");
+    const [postCategories, setPostCategories] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        (async () => {
+            const data = await getPostCategories();
+            setPostCategories(data);
+            await sleep(500);
+            setIsLoaded(true);
+        })();
+    }, []);
 
     return (
         <aside className="w-full md:w-64 self-start bg-white rounded-lg border shadow-sm p-4 md:sticky md:top-[85px]">
@@ -13,27 +27,29 @@ export default function BlogSidebar() {
                 <li>
                     <button
                         className={`w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg transition ${
-                            category === "all" ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
+                            postCategory === "all" ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
                         }`}
                         onClick={() => console.log("Something")}
                     >
-                        <Icon icon="Layers" />
-                        Все
+                        <Icon icon="Layers" />Все
                     </button>
                 </li>
-                {/* {categories.map((el) => (
+
+                {!isLoaded && <Spinner />}        
+
+                {isLoaded && postCategories.map((el) => (
                     <li key={el.id}>
                         <button
                             className={`w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg transition ${
-                                category.name === el.name ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
+                                postCategory.name === el.name ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
                             }`}
-                            onClick={() => setCategory(el)}
+                            onClick={() => console.log(el)}
                         >
                             <Icon icon={el.icon} />
                             {el.name}
                         </button>
                     </li>
-                ))} */}
+                ))}
             </ul>
         </aside>
     )

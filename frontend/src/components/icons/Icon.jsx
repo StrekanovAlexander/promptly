@@ -1,16 +1,22 @@
 import * as Icons from "lucide-react";
 
 const icons = {
-    FileText: Icons.FileText,
-    Code: Icons.Code,
-    Megaphone: Icons.Megaphone,
-    Palette: Icons.Palette,
-    GraduationCap: Icons.GraduationCap,
+    BookOpen: Icons.BookOpen,
+    Brain: Icons.Brain,
     Briefcase: Icons.Briefcase,
-    Info: Icons.Info,
-    Sparkles: Icons.Sparkles, 
     Calendar: Icons.Calendar,
-    Layers: Icons.Layers 
+    CheckCircle: Icons.CheckCircle,
+    Code: Icons.Code,
+    FileText: Icons.FileText,
+    GraduationCap: Icons.GraduationCap,
+    Info: Icons.Info,
+    Laptop: Icons.Laptop,
+    Layers: Icons.Layers,
+    Megaphone: Icons.Megaphone,
+    Newspaper: Icons.Newspaper,
+    Palette: Icons.Palette,
+    PenTool: Icons.PenTool,
+    Sparkles: Icons.Sparkles, 
 };
 
 export default function Icon({ icon }) {

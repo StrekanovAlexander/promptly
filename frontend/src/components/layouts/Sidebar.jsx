@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { useFilters } from "../../context/FiltersContext.jsx";
 import { getCategories } from "../../services/api.js";
+import { sleep } from "../../utils/times.js";
 import Icon from "../icons/Icon.jsx";
+import Spinner from "../icons/Spinner.jsx";
 
 export default function Sidebar() {
     const [categories, setCategories] = useState([]);
     const { category, setCategory } = useFilters();
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         (async () => {
             const data = await getCategories();
             setCategories(data);
+            await sleep(500);
+            setIsLoaded(true);
         })();
     }, []);
 
@@ -31,7 +36,10 @@ export default function Sidebar() {
                         Все
                     </button>
                 </li>
-                {categories.map((el) => (
+                
+                {!isLoaded && <Spinner />} 
+
+                {isLoaded && categories.map((el) => (
                     <li key={el.id}>
                         <button
                             className={`w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg transition ${

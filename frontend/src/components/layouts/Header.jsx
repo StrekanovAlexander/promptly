@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FileText, CircleUserRound, LogOut } from "lucide-react";
+import { CircleUserRound, FileText, House, UserPen, LogOut } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import Logo from "./Logo.jsx";
 
@@ -16,15 +16,15 @@ export default function Header() {
                             your community at promptly.team
                         </span>
                     </div>
-                    <nav className="flex items-center gap-4">
-                        <a href="/" className="text-sm text-gray-700 hover:text-blue-600">
-                            Home
+                    <nav className="flex items-center gap-6">
+                        <a href="/" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
+                            <House className="w-4 h-4" />Начало
                         </a>
-                        <a href="/blog" className="text-sm text-gray-700 hover:text-blue-600">
-                            Blog
+                        <a href="/blog" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
+                            <FileText className="w-4 h-4" />Публикации
                         </a>
-                        <a href="/profile" className="text-sm text-gray-700 hover:text-blue-600">
-                            Profile
+                        <a href="/profile" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
+                            <UserPen className="w-4 h-4" />Профиль
                         </a>
                         <a href="/login" className="text-gray-500 hover:text-blue-600">
                             <CircleUserRound className="w-5 h-5" />
