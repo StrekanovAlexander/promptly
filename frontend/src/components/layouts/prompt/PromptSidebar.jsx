@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useFilters } from "../../context/FiltersContext.jsx";
-import { getCategories } from "../../services/api.js";
-import Icon from "../icons/Icon.jsx";
-import Spinner from "../icons/Spinner.jsx";
+import { useFilters } from "../../../context/FiltersContext.jsx";
+import { getCategories } from "../../../services/api.js";
+import Icon from "../../icons/Icon.jsx";
+import Spinner from "../../icons/Spinner.jsx";
 
-export default function Sidebar() {
-    const { category, setCategory } = useFilters();
+export default function PromptSidebar() {
+    const { promptCategory, setPromptCategory } = useFilters();
     const [categories, setCategories] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -26,9 +26,9 @@ export default function Sidebar() {
                 <li>
                     <button
                         className={`w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg transition ${
-                            category === "all" ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
+                            promptCategory === "all" ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
                         }`}
-                        onClick={() => setCategory("all")}
+                        onClick={() => setPromptCategory("all")}
                     >
                         <Icon icon="Layers" />
                         Все
@@ -41,9 +41,9 @@ export default function Sidebar() {
                     <li key={el.id}>
                         <button
                             className={`w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg transition ${
-                                category.name === el.name ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
+                                promptCategory.name === el.name ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
                             }`}
-                            onClick={() => setCategory(el)}
+                            onClick={() => setPromptCategory(el)}
                         >
                             <Icon icon={el.icon} />
                             {el.name}

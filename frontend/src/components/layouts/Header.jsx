@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import { CircleUserRound, FileText, House, UserPen, LogOut } from "lucide-react";
+import { User, FileText, House, Settings, LogOut } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useLanguage } from "../../context/LanguageContext.jsx";
 import Logo from "./Logo.jsx";
 
 export default function Header() {
-    const { user, logout } = useAuth();
-
+    const { user } = useAuth();
+    const { language, setLanguage } = useLanguage();
     return (
         <header className="w-full fixed top-0 left-0 z-50 bg-gradient-to-b from-gray-100 to-gray-50 h-[70px]">
             <div className="max-w-5xl mx-auto px-4 h-full">
@@ -20,17 +20,27 @@ export default function Header() {
                     </div>
                     <nav className="flex items-center gap-6">
                         <a href="/" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
-                            <House className="w-4 h-4" />Начало
+                            <House className="w-5 h-5" />Начало
                         </a>
                         <a href="/posts" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
-                            <FileText className="w-4 h-4" />Публикации
+                            <FileText className="w-5 h-5" />Публикации
                         </a>
-                        <a href="/profile" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
-                            <UserPen className="w-4 h-4" />Профиль
-                        </a>
-                        <a href="/login" className="text-gray-500 hover:text-blue-600">
-                            <CircleUserRound className="w-5 h-5" />
-                        </a>
+                        {!user &&
+                            <a href="/login" className="text-gray-500 hover:text-blue-600">
+                                <User className="w-5 h-5" />
+                            </a>
+                        }
+                        {user &&
+                            <>
+                                <a href="/profile" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
+                                    <Settings className="w-5 h-5" />
+                                </a>
+                                <a href="/logout" className="text-gray-500 hover:text-blue-600">
+                                    <LogOut className="w-5 h-5" />
+                                </a>
+                            </>
+                        }
+                        {/* <span>{ language }</span> */}
                     </nav>  
                 </div>
             </div>

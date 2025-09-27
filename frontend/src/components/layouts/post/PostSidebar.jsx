@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFilters } from "../../../context/PostFiltersContext.jsx";
+import { useFilters } from "../../../context/FiltersContext.jsx";
 import { getPostCategories } from "../../../services/api.js";
 import { sleep } from "../../../utils/times.js";
 import Icon from "../../icons/Icon.jsx";

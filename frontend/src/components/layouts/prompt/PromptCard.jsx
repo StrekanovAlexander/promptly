@@ -1,7 +1,7 @@
 import { Heart, Eye } from "lucide-react";
-import { formatDate } from "../../utils/formats";
+import { formatDate } from "../../../utils/formats";
 
-export default function Card({ prompt }) {
+export default function PromptCard({ prompt }) {
     const tags = prompt.tags.split(',');
 
     return (

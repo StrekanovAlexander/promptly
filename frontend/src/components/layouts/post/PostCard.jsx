@@ -14,7 +14,7 @@ export default function PostCard({ post }) {
         </span>
         <span className="flex items-center gap-1">
           <User size={14} />
-          {post.author || "Неизвестный автор"}
+          {post.author || "Unknown author"}
         </span>
       </div>
 

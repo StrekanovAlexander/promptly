@@ -1,3 +1,11 @@
+export default function ProfilePage() {
+    return (
+        <h1>Profile</h1>
+    )
+}
+
+
+/*
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { getUserData } from "../../services/api.js";
@@ -6,6 +14,7 @@ import ProfileCard from "../../components/cards/ProfileCard.jsx";
 import Spinner from "../../components/icons/Spinner.jsx";
 
 export default function ProfilePage() {
+    
     const { user, setUser } = useAuth();
     const [userData, setUserData] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -66,3 +75,4 @@ export default function ProfilePage() {
         </div>
     );
 }
+    */

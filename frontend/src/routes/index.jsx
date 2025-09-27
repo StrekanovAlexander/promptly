@@ -8,6 +8,7 @@ import {
     PostsPage, 
     HomePage, 
     LoginPage, 
+    Logout,
     OAuthCallback, 
     ProfilePage 
 } from "../pages/index.jsx";
@@ -24,6 +25,7 @@ export default function Routing() {
             </Route>
             <Route element={<UserLayout />}>
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/logout" element={<Logout />} />
             </Route>
             <Route element={<PostLayout />}>
                 <Route path="/posts" element={<PostsPage />} />

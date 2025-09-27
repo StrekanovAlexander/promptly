@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useFilters } from "../context/FiltersContext.jsx";
 import { getPrompts } from "../services/api.js";
-import Card from "../components/cards/Card.jsx";
-import PromtsToolbar from "../components/layouts/PromtsToolbar.jsx";
+import PromptCard from "../components/layouts/prompt/PromptCard.jsx";
+import PromptToolbar from "../components/layouts/prompt/PromptToolbar.jsx";
 
 export default function HomePage() {
-    const { category, search, sortByPopularity } = useFilters();
+    const { promptCategory, promptSearch, promptSorting } = useFilters();
     const [prompts, setPrompts] = useState([]);
 
     useEffect(() => {
@@ -17,18 +17,18 @@ export default function HomePage() {
 
     let filteredPrompts = prompts;
 
-    if (category !== "all") {
-        filteredPrompts = prompts.filter(el => el.category === category.name);
+    if (promptCategory !== "all") {
+        filteredPrompts = prompts.filter(el => el.category === promptCategory.name);
     } 
 
-    if (search.trim()) {
+    if (promptSearch.trim()) {
         filteredPrompts = filteredPrompts.filter(el =>
-            el.title.toLowerCase().includes(search.toLowerCase()) ||
-            el.body.toLowerCase().includes(search.toLowerCase())
+            el.title.toLowerCase().includes(promptSearch.toLowerCase()) ||
+            el.body.toLowerCase().includes(promptSearch.toLowerCase())
         );
     }
 
-    if (sortByPopularity) {
+    if (promptSorting === "popularity") {
         filteredPrompts = [...filteredPrompts].sort((a, b) => b.usageCount - a.usageCount);
     } else {
         filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
@@ -36,10 +36,10 @@ export default function HomePage() {
 
     return (
         <>
-            <PromtsToolbar />
+            <PromptToolbar />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredPrompts.map(el =>  
-                    <Card 
+                    <PromptCard 
                         key={ el.id } 
                         prompt={ el } 
                     />

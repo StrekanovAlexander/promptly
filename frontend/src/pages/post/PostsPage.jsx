@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useFilters } from "../../context/PostFiltersContext.jsx";
 import { Link } from "react-router-dom";
+import { useFilters } from "../../context/FiltersContext.jsx";
 import { getPosts } from "../../services/api.js";
 import Spinner from "../../components/icons/Spinner.jsx";
-import PostCard from "../../components/cards/PostCard";
+import PostCard from "../../components/layouts/post/PostCard.jsx";
 import PostToolBar from "../../components/layouts/post/PostToolBar.jsx";
 
 export default function PostsPage() {

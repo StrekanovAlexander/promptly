@@ -1,11 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { parseJwt } from "../utils/tokens.js";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-    const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -29,7 +27,6 @@ export function AuthProvider({ children }) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         setUser(null);
-        navigate("/login");
     };
 
     const updateUser = (newUser) => {
