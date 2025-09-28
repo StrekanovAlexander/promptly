@@ -49,7 +49,7 @@ export default function Header() {
                             <>
                                 <li>
                                     <a href="/account" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
-                                        <Settings className="w-5 h-5" />
+                                        <Settings className="w-5 h-5" />Profile
                                     </a>
                                 </li>
                                 <li>
