@@ -8,6 +8,16 @@ export const getAllPrompts = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+// GET /api/prompts/user/:id
+export const getPromptsByUserId = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const prompts = await Prompt.findAll({ where: { userId } });
+        res.json(prompts);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
 // POST /api/prompts
 export const createPrompt = async (req, res) => {
     try {

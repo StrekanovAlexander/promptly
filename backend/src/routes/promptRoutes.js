@@ -6,11 +6,13 @@ import {
     updatePrompt,
     deletePrompt,
     incrementUsage,
+    getPromptsByUserId,
 } from "../controllers/promptController.js";
 
 const router = Router();
 
 router.get("/", getAllPrompts);
+router.get("/user/:id", authMiddleware, getPromptsByUserId);
 router.post("/", authMiddleware, createPrompt);
 router.put("/:id", authMiddleware, updatePrompt);
 router.delete("/:id", deletePrompt);

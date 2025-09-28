@@ -34,6 +34,17 @@ export async function updatePrompt(data) {
     if (!res.ok) throw new Error("Failed to create prompt");
     return res.json();
 }
+// Prompts By User
+export async function getPromptsByUser(id, token) {
+    const res = await fetch(`${API_URL}/prompts/user/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    });
+    if (!res.ok) throw new Error("Failed to fetch user prompts");
+    return res.json();
+}
 // Categories
 export async function getCategories() {
     const res = await fetch(`${API_URL}/categories`);
@@ -59,13 +70,13 @@ export async function getPost(id) {
     return res.json();
 }
 // User data
-export async function getUserData(id) {
-    const res = await fetch(`${API_URL}/users/${id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
-    
-    if (!res.ok) throw new Error("Failed to fetch user data");
-    return res.json();
-}
+// export async function getUserData(id) {
+//     const res = await fetch(`${API_URL}/users/${id}`, {
+//         headers: {
+//             Authorization: `Bearer ${token}`
+//         }
+//     });
+//     
+//     if (!res.ok) throw new Error("Failed to fetch user data");
+//     return res.json();
+// }
