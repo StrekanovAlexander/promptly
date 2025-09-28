@@ -1,6 +1,12 @@
+import { useAuth } from "../../context/AuthContext.jsx";
+
 export default function ProfilePage() {
+    const { user } = useAuth();
+    // console.log(user);
     return (
-        <h1>Profile</h1>
+        <div className="max-w-5xl mx-auto px-4 py-8">
+            <h1 className="text-3xl font-bold mb-6">Account</h1>
+        </div>
     )
 }
 

@@ -1,11 +1,18 @@
 import { User, FileText, House, Settings, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext.jsx";
 import { useLanguage } from "../../../context/LanguageContext.jsx";
 import Logo from "./Logo.jsx";
 
 export default function Header() {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const { language, setLanguage } = useLanguage();
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        logout();
+        navigate("/login");
+    }
 
     return (
         <header className="w-full fixed top-0 left-0 z-50 bg-gradient-to-b from-gray-100 to-gray-50 h-[70px]">
@@ -41,12 +48,15 @@ export default function Header() {
                         {user &&
                             <>
                                 <li>
-                                    <a href="/profile" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
+                                    <a href="/account" className="text-sm text-gray-700 hover:text-blue-600 flex items-center gap-1">
                                         <Settings className="w-5 h-5" />
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/logout" className="text-gray-500 hover:text-blue-600">
+                                    <a href="#" 
+                                        onClick={handleLogout} 
+                                        className="text-gray-500 hover:text-blue-600 bg-yellow-300"
+                                    >
                                         <LogOut className="w-5 h-5" />
                                     </a>
                                 </li>

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { parseJwt } from "../../utils/tokens.js";
 
 export default function OAuthCallback() {
-    const { user, setUser } = useAuth();
+    const { updateUser } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -14,15 +15,22 @@ export default function OAuthCallback() {
 
         if (token) {
             localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify({ name: username, email }));
-            setUser(localStorage.getItem("user"));
+            
+            const decoded = parseJwt(token);
+            const userObj = {
+                id: decoded.userId,
+                name: username,
+                email: email,
+                token
+            };
+            updateUser(userObj);
 
             const newUrl = window.location.origin + window.location.pathname;
             window.history.replaceState({}, "", newUrl);
             
-            navigate("/profile");
+            navigate("/account");
         }
     }, [navigate]);
 
-    return <p>Login handle ...</p>;
+    return <p>Login handle...</p>;
 }

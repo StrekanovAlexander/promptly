@@ -1,16 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "../components/layouts/Layout.jsx";
-import AuthLayout from "../components/layouts/AuthLayout.jsx";
-import UserLayout from "../components/layouts/UserLayout.jsx";
+import AuthLayout from "../components/layouts/auth/AuthLayout.jsx";
 import PostLayout from "../components/layouts/post/PostLayout.jsx";
+import ProfileLayout from "../components/layouts/profile/ProfileLayout.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 import { 
     PostPage, 
     PostsPage, 
     HomePage, 
     LoginPage, 
-    Logout,
     OAuthCallback, 
-    ProfilePage 
+    AccountPage,
+    MyPromptsPage 
 } from "../pages/index.jsx";
 
 export default function Routing() {
@@ -23,9 +24,11 @@ export default function Routing() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/oauth/callback" element={<OAuthCallback />} />
             </Route>
-            <Route element={<UserLayout />}>
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/logout" element={<Logout />} />
+            <Route element={<ProtectedRoute />}>
+                <Route element={<ProfileLayout />}>
+                    <Route path="/account" element={<AccountPage />} />
+                    <Route path="/my-prompts" element={<MyPromptsPage />} />
+                </Route>
             </Route>
             <Route element={<PostLayout />}>
                 <Route path="/posts" element={<PostsPage />} />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext.jsx";
 import { useFilters } from "../../../context/FiltersContext.jsx";
 import { getCategories } from "../../../services/api.js";
@@ -7,6 +8,7 @@ import Icon from "../../icons/Icon.jsx";
 import Spinner from "../../icons/Spinner.jsx";
 
 export default function PromptSidebar() {
+    const navigate = useNavigate();
     const { user } = useAuth();
     const { promptCategory, setPromptCategory } = useFilters();
     const [categories, setCategories] = useState([]);

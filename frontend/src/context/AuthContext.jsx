@@ -5,38 +5,47 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
             try {
                 const decoded = parseJwt(token);
-                setUser({ ...decoded, token });
+                if (decoded.exp * 1000 > Date.now()) {
+                    setUser(prev => ({
+                        id: decoded.userId,
+                        name: prev?.name || null,
+                        email: prev?.email || null,
+                        token
+                    }));
+                } else {
+                    localStorage.removeItem("token");
+                }
             } catch {
                 localStorage.removeItem("token");
             }
         }
+        setLoading(false);
     }, []);
 
     const login = (token, userData) => {
-        localStorage.setItem("token", token);
-        setUser({ ...userData, token });
+        localStorage.setItem("token", token); 
+        setUser(userData); 
     };
 
     const logout = () => {
         localStorage.removeItem("token");
-        localStorage.removeItem("user");
         setUser(null);
     };
 
     const updateUser = (newUser) => {
-        setUser(newUser);
-        localStorage.setItem("user", JSON.stringify(newUser));
+        setUser(newUser); 
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, setUser: updateUser }}>
-            {children}
+        <AuthContext.Provider value={{ user, login, logout, updateUser, loading }}>
+            { children }
         </AuthContext.Provider>
     );
 }

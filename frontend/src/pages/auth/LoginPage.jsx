@@ -1,18 +1,19 @@
+import { toast } from "react-hot-toast";
 import Logo from "../../components/layouts/common/Logo.jsx";
 
 export default function LoginPage() {
-    const handleLogin = (provider) => {
+    function handleLogin(provider) {
         if (provider === "github") {
             const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
             const redirectUri = encodeURIComponent(`${import.meta.env.VITE_API_URL}/auth/github/callback`);
             const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email`;
             window.location.href = url;
         } else if (provider === "google") {
-            console.log(provider);
+            toast.error("This functionality is still under development, but you can log in with GitHub.");
         } else if (provider === "facebook") {
-            console.log(provider);
+            toast.error("This functionality is still under development, but you can log in with GitHub.");
         } else {
-            console.log("Not such provider")
+            return;
         }
     };
     
