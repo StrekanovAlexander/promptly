@@ -25,6 +25,17 @@ export const User = db.define("User", {
         allowNull: true,
         field: "avatar_url"
     },
+    role: {
+        type: DataTypes.ENUM('admin', 'user'),
+        allowNull: false,
+        defaultValue: 'user',
+    },
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+        field: "is_active"
+    },
     createdAt: {
         type: DataTypes.DATE,
         allowNull: false,

@@ -51,7 +51,7 @@ export async function githubCallback(req, res) {
         }
 
         const token = jwt.sign(
-            { userId: user.id },
+            { userId: user.id, email: user.email, role: user.role },
             process.env.JWT_SECRET,
             { expiresIn: "7d" }
         );

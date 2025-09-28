@@ -13,12 +13,12 @@ export function AuthProvider({ children }) {
             try {
                 const decoded = parseJwt(token);
                 if (decoded.exp * 1000 > Date.now()) {
-                    setUser(prev => ({
+                    setUser({
                         id: decoded.userId,
-                        name: prev?.name || null,
-                        email: prev?.email || null,
+                        email: decoded.email,
+                        role: decoded.role,
                         token
-                    }));
+                    });
                 } else {
                     localStorage.removeItem("token");
                 }

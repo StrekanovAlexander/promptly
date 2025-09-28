@@ -10,8 +10,6 @@ export default function OAuthCallback() {
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const token = params.get("token");
-        const username = params.get("username");
-        const email = params.get("email");
 
         if (token) {
             localStorage.setItem("token", token);
@@ -19,8 +17,8 @@ export default function OAuthCallback() {
             const decoded = parseJwt(token);
             const userObj = {
                 id: decoded.userId,
-                name: username,
-                email: email,
+                email: decoded.email,
+                role: decoded.role,
                 token
             };
             updateUser(userObj);
