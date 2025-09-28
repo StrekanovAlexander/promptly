@@ -12,7 +12,7 @@ export default function PostToolBar() {
                     <input
                         value={postSearch} 
                         type="text"
-                        placeholder="Например: маркетинг, дизайн, код..."
+                        placeholder="Marketing, design, code..."
                         onChange={(ev) => setPostSearch(ev.target.value)}
                         className="w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -24,10 +24,10 @@ export default function PostToolBar() {
                     onChange={ev => setPostSorting(ev.target.value)}
                     className="rounded-lg border border-gray-300 px-2 py-2 text-sm text-gray-700"
                 >
-                    <option value="newest">Сначала новые</option>
-                    <option value="oldest">Сначала старые</option>
-                    <option value="up">По алфавиту (А-Я)</option>
-                    <option value="down">По алфавиту (Я-А)</option>
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="up">Alphabetic up</option>
+                    <option value="down">Alphabetic down</option>
                 </select>
             </div>
         </div>

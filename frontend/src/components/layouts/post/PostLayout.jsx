@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Header from "../Header.jsx";
-import Footer from "../Footer.jsx";
+import Header from "../common/Header.jsx";
+import Footer from "../common/Footer.jsx";
 import PostSidebar from "./PostSidebar.jsx";
 
 export default function PostLayout() {

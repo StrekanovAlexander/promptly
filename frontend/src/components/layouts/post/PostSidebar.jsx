@@ -22,7 +22,7 @@ export default function PostSidebar() {
     return (
         <aside className="w-full md:w-64 self-start bg-white rounded-lg border shadow-sm p-4 md:sticky md:top-[85px]">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">
-                Категории
+                Categories
             </h2>
             <ul className="space-y-1">
                 <li>
@@ -32,7 +32,7 @@ export default function PostSidebar() {
                         }`}
                         onClick={() => setPostCategory("all")}
                     >
-                        <Icon icon="Layers" />Все
+                        <Icon icon="Layers" />All
                     </button>
                 </li>
 

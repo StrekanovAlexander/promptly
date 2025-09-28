@@ -1,4 +1,4 @@
-import Logo from "../../components/layouts/Logo.jsx";
+import Logo from "../../components/layouts/common/Logo.jsx";
 
 export default function LoginPage() {
     const handleLogin = (provider) => {
@@ -23,7 +23,7 @@ export default function LoginPage() {
                     <Logo />
                 </div>
                 
-                <p className="text-gray-500 mb-6">Вход в Promptly</p>
+                <p className="text-gray-500 mb-6 text-sm">Sign in with</p>
 
                 <div className="flex justify-center gap-4">
                     
@@ -53,7 +53,7 @@ export default function LoginPage() {
                 </div>
 
                 <p className="text-xs text-gray-400 mt-6">
-                    Используя вход, вы соглашаетесь с условиями использования
+                    By logging in, you agree to the Terms of Use
                 </p>
             </div>
         </div>

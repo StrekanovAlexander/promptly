@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { FiltersProvider } from "../../context/FiltersContext.jsx";
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
+import Header from "./common/Header.jsx";
+import Footer from "./common/Footer.jsx";
 import PromptSidebar from "./prompt/PromptSidebar.jsx";
 
 export default function Layout() {

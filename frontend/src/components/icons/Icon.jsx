@@ -8,6 +8,7 @@ const icons = {
     CheckCircle: Icons.CheckCircle,
     Code: Icons.Code,
     FileText: Icons.FileText,
+    FilePlus2: Icons.FilePlus2,
     GraduationCap: Icons.GraduationCap,
     Info: Icons.Info,
     Laptop: Icons.Laptop,
