@@ -39,15 +39,12 @@ export default function MyPromptsPage() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-3">
                     <div className="flex flex-col sm:flex-row gap-2">
                         <select className="border rounded-lg px-3 py-2 text-sm bg-white">
-                            <option value="">Все категории</option>
-                            <option value="content">Контент</option>
-                            <option value="productivity">Продуктивность</option>
-                            <option value="tools">Инструменты</option>
+                            <option value="">All categories</option>
                         </select>
                         <select className="border rounded-lg px-3 py-2 text-sm bg-white">
-                            <option value="newest">Сначала новые</option>
-                            <option value="oldest">Сначала старые</option>
-                            <option value="title">По названию</option>
+                            <option value="newest">Newest</option>
+                            <option value="oldest">Oldest</option>
+                            <option value="title">Title</option>
                         </select>
                     </div>
                     <button 
