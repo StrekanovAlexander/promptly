@@ -9,7 +9,15 @@ export default function LoginPage() {
             const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email`;
             window.location.href = url;
         } else if (provider === "google") {
-            toast.error("This functionality is still under development, but you can log in with GitHub.");
+            const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+            const redirectUri = encodeURIComponent(`${import.meta.env.VITE_API_URL}/auth/google/callback`);
+            const scope = encodeURIComponent("openid email profile");
+            const responseType = "code";
+            const accessType = "offline"; // если хочешь refresh_token
+            const prompt = "consent";     // чтобы Google всегда показывал выбор аккаунта
+            const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&access_type=${accessType}&prompt=${prompt}`;
+            window.location.href = url;
+            //toast.error("This functionality is still under development, but you can log in with GitHub.");
         } else if (provider === "facebook") {
             toast.error("This functionality is still under development, but you can log in with GitHub.");
         } else {
