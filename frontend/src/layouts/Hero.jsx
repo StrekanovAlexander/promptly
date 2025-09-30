@@ -1,4 +1,4 @@
-import { categoryConfig } from "@/config/categoryConfig.js";
+// import { categoryConfig } from "@/config/categoryConfig.js";
 // import WritingPad from "@/assets/Writing-Pad.svg";
 // import Code from "@/assets/Code.svg";
 
