@@ -1,4 +1,18 @@
-import { categoryConfig } from "@/config/categoryConfig.js";
+import { FileText, Code, Megaphone, Palette, GraduationCap, Briefcase, Info, Sparkles, Calendar } from "lucide-react";
+
+const categoryConfig = {
+  "Контент": { icon: FileText, color: "bg-blue-100 text-blue-700" },
+  "Программирование": { icon: Code, color: "bg-indigo-100 text-indigo-700" },
+  "Маркетинг": { icon: Megaphone, color: "bg-yellow-100 text-yellow-700" },
+  "Дизайн": { icon: Palette, color: "bg-pink-100 text-pink-700" },
+  "Образование": { icon: GraduationCap, color: "bg-green-100 text-green-700" },
+  "Бизнес": { icon: Briefcase, color: "bg-teal-100 text-teal-700" },
+  "Информационные": { icon: Info, color: "bg-gray-100 text-gray-700" },
+  "Креатив": { icon: Sparkles, color: "bg-purple-100 text-purple-700" },
+  "Организация": { icon: Calendar, color: "bg-orange-100 text-orange-700" }
+};
+
+//import { categoryConfig } from "@/config/categoryConfig.js";
 
 export default function PromptCard({ prompt }) {
     return (
