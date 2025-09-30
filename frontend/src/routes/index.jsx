@@ -11,8 +11,13 @@ import {
     LoginPage, 
     OAuthCallback, 
     AccountPage,
-    MyPromptsPage 
+    MyPromptsPage,
 } from "../pages/index.jsx";
+
+// ***************** Next version 
+import MainLayout from "../layouts/MainLayout.jsx";
+import { IndexPage } from "../pages/index.jsx"
+// ***************** End next version
 
 export default function Routing() {
     return (
@@ -34,6 +39,11 @@ export default function Routing() {
                 <Route path="/posts" element={<PostsPage />} />
                 <Route path="/posts/:id" element={<PostPage />} />
             </Route>
+            
+            <Route element={<MainLayout />}>
+                <Route path="/sketch" element={<IndexPage />} />
+            </Route>
+
         </Routes>
     )
 }

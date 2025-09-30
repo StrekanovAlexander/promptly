@@ -13,13 +13,12 @@ export default function LoginPage() {
             const redirectUri = encodeURIComponent(`${import.meta.env.VITE_API_URL}/auth/google/callback`);
             const scope = encodeURIComponent("openid email profile");
             const responseType = "code";
-            const accessType = "offline"; // если хочешь refresh_token
-            const prompt = "consent";     // чтобы Google всегда показывал выбор аккаунта
+            const accessType = "offline";
+            const prompt = "consent";
             const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&access_type=${accessType}&prompt=${prompt}`;
             window.location.href = url;
-            //toast.error("This functionality is still under development, but you can log in with GitHub.");
         } else if (provider === "facebook") {
-            toast.error("This functionality is still under development, but you can log in with GitHub.");
+            toast.error("This functionality is still under development, but you can log in with Google or GitHub.");
         } else {
             return;
         }

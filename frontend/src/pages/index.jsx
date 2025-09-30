@@ -6,6 +6,10 @@ import OAuthCallback from "./auth/OAuthCallback.jsx";
 import AccountPage from "./profile/AccountPage.jsx";
 import MyPromptsPage from "./profile/MyPromptsPage.jsx";
 
+// ***************** Next version
+import IndexPage from "./IndexPage.jsx";
+// ***************** End next version
+
 export {
     HomePage,
     PostPage,
@@ -13,5 +17,7 @@ export {
     LoginPage,
     OAuthCallback,
     AccountPage,
-    MyPromptsPage
+    MyPromptsPage,
+    
+    IndexPage,
 }
