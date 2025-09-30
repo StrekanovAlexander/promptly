@@ -1,6 +1,6 @@
 import Hero from "@/layouts/Hero.jsx";
 import PromptCard from "@/components/Prompts/PromptCard.jsx";
-import GuideCard from "@/components/Guides/GuideCard.jsx";
+// import GuideCard from "@/components/Guides/GuideCard.jsx";
 
 const prompts = [
   {
@@ -9,7 +9,7 @@ const prompts = [
     body: "Предложи 5 идей для технологического стартапа с кратким бизнес-планом.",
     author: "Alex",
     tags: ["стартап", "идеи", "бизнес"],
-    category: "Бизнес",
+    category: "Business",
     usageCount: 124
   },
   {
@@ -18,7 +18,7 @@ const prompts = [
     body: "Создай engaging пост для Instagram о новом продукте компании.",
     author: "Maria",
     tags: ["контент", "маркетинг", "соцсети"],
-    category: "Маркетинг",
+    category: "Marketing",
     usageCount: 98
   },
   {
@@ -27,7 +27,7 @@ const prompts = [
     body: "Составь сценарий короткого видео для продвижения онлайн-курса.",
     author: "Ivan",
     tags: ["контент", "видео", "гайды"],
-    category: "Образование",
+    category: "Education",
     usageCount: 56
   },
   {
@@ -36,7 +36,7 @@ const prompts = [
     body: "Напиши функцию на Python, которая сортирует список словарей по ключу 'score'.",
     author: "Olga",
     tags: ["код", "python", "программирование"],
-    category: "Программирование",
+    category: "Programming",
     usageCount: 142
   },
   {
@@ -45,7 +45,7 @@ const prompts = [
     body: "Предложи цветовую палитру для лендинга приложения о здоровье.",
     author: "Nikita",
     tags: ["дизайн", "цвет", "UX"],
-    category: "Дизайн",
+    category: "Design",
     usageCount: 77
   },
   {
@@ -54,7 +54,7 @@ const prompts = [
     body: "Создай 10 коротких слоганов для бренда одежды.",
     author: "Sofia",
     tags: ["креатив", "маркетинг", "брендинг"],
-    category: "Креатив",
+    category: "Creative",
     usageCount: 65
   },
   {
@@ -63,7 +63,7 @@ const prompts = [
     body: "Составь план на неделю для проведения онлайн-вебинаров.",
     author: "Pavel",
     tags: ["организация", "вебинар", "план"],
-    category: "Организация",
+    category: "Organization",
     usageCount: 38
   },
   {
@@ -72,7 +72,7 @@ const prompts = [
     body: "Составь список из 10 часто задаваемых вопросов и ответов для сайта компании.",
     author: "Alex",
     tags: ["контент", "информация", "FAQ"],
-    category: "Информационные",
+    category: "Info",
     usageCount: 84
   },
   {
@@ -81,7 +81,7 @@ const prompts = [
     body: "Придумай 5 идей для постов в блоге о технологиях ИИ.",
     author: "Maria",
     tags: ["креатив", "блог", "ИИ"],
-    category: "Креатив",
+    category: "Creative",
     usageCount: 91
   },
   {
@@ -90,7 +90,7 @@ const prompts = [
     body: "Создай 3 задания для студентов по теме 'машинное обучение'.",
     author: "Ivan",
     tags: ["образование", "учеба", "ИИ"],
-    category: "Образование",
+    category: "Education",
     usageCount: 47
   }
 ];
@@ -99,16 +99,83 @@ export default function IndexPage() {
   return (
       <>
         <Hero />
-        <section className="container mx-auto px-4 py-12">
-          <h2 className="text-2xl font-bold mb-6">Популярные промпты</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {prompts.slice(0,4).map((el) => (
-              <PromptCard key={el.id} prompt={el} />
-            ))}
+
+        <section className="container mx-auto px-4 py-12 flex flex-col lg:flex-row gap-12">
+          {/* Left column */}
+          <div className="flex-1 space-y-4">
+            <h2 className="text-4xl font-baloo font-semibold">What can you do with Promptly?</h2>
+
+            {/* Block 1 */}
+<div className="p-4">
+  <h3 className="text-2xl font-baloo font-semibold mb-3 flex items-center gap-2">
+    <span className="w-3 h-3 rounded-full bg-[#C66E58]"></span>
+    Ready-to-use templates
+  </h3>
+  <p className="text-md text-gray-700 leading-relaxed">
+    Start faster, no guesswork. Use pre-built prompts for various tasks and save time in your workflow. 
+    Explore multiple scenarios for text, images, code, marketing, and learning. Customize each template 
+    to fit your projects and consistently achieve high-quality results. This helps streamline your process 
+    and inspires new ideas without starting from scratch every time.
+  </p>
+</div>
+
+{/* Block 2 */}
+<div className="p-4">
+  <h3 className="text-2xl font-baloo font-semibold mb-3 flex items-center gap-2">
+    <span className="w-3 h-3 rounded-full bg-[#C66E58]"></span>
+    Smart filters
+  </h3>
+  <p className="text-md text-gray-700 leading-relaxed">
+    Find exactly what you need. Filter prompts by category, usage, or popularity with ease. 
+    Quickly narrow down results using multiple criteria and tags. Save your favorite searches 
+    and access relevant prompts whenever you need them. This ensures you spend less time searching 
+    and more time creating.
+  </p>
+</div>
+
+{/* Block 3 */}
+<div className="p-4">
+  <h3 className="text-2xl font-baloo font-semibold mb-3 flex items-center gap-2">
+    <span className="w-3 h-3 rounded-full bg-[#C66E58]"></span>
+    Learn & improve
+  </h3>
+  <p className="text-md text-gray-700 leading-relaxed">
+    Guides and best practices. Discover tips and strategies to create more effective prompts for AI. 
+    Step-by-step tutorials and curated examples help you understand how to achieve better results, 
+    experiment confidently, and continuously improve your prompt-writing skills.
+  </p>
+</div>
+
+{/* Block 4 */}
+<div className="p-4">
+  <h3 className="text-2xl font-baloo font-semibold mb-3 flex items-center gap-2">
+    <span className="w-3 h-3 rounded-full bg-[#C66E58]"></span>
+    Community sharing
+  </h3>
+  <p className="text-md text-gray-700 leading-relaxed">
+    Contribute and inspire others. Share your prompts and explore creations from the community. 
+    Engage with like-minded users, learn from others’ approaches, and build a collaborative environment 
+    that encourages creativity, experimentation, and collective growth.
+  </p>
+</div>
+
+
+            
+          </div>
+
+          {/* Right column */}
+          <div className="flex-1 space-y-8">
+            <h2 className="text-4xl font-baloo font-semibold">Popular prompts</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {prompts.slice(0, 6).map((el) => (
+                <PromptCard key={el.id} prompt={el} />
+              ))}
+            </div>
           </div>
         </section>
+
     
-        <section className="py-16 border-b">
+        {/* <section className="py-16 border-b">
           <h2 className="text-2xl font-bold mb-6 text-center">Гайды и обучение</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             <GuideCard
@@ -130,7 +197,7 @@ export default function IndexPage() {
               date="27.09.2025"
             />
           </div>
-        </section>
+        </section> */}
       </>
   )
 }

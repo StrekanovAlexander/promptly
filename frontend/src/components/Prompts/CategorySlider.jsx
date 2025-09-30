@@ -14,7 +14,7 @@ export default function CategorySlider({ categories }) {
     }, [categories]);
 
     return (
-        <div className="relative w-full h-96 rounded-2xl overflow-hidden shadow-lg">
+        <div className="relative w-full h-96 rounded-md overflow-hidden shadow-lg hidden md:block">
             {categories.map((el, ix) => (    
                 <div
                     key={el.id}
@@ -29,7 +29,7 @@ export default function CategorySlider({ categories }) {
                     />
 
                     <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
-                        <h3 className="text-3xl font-bold sm:text-4xl mb-4">{el.name}</h3>
+                        <h3 className="text-3xl font-baloo font-semibold sm:text-4xl mb-4">{el.name}</h3>
                         <p className="text-lg sm:text-xl max-w-2xl">
                             {el.description}
                         </p>

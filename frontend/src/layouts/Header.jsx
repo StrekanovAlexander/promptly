@@ -17,27 +17,21 @@ export default function Header() {
                 <nav className="space-x-6 hidden md:flex">
                     <Link
                         to="/prompts"
-                        className="text-gray-700 hover:text-blue-600 font-medium"
+                        className="text-gray-700 hover:text-[#a75745] font-medium"
                     >
-                        Промпты
+                        Prompts
                     </Link>
                     <Link
                         to="/publications"
-                        className="text-gray-700 hover:text-blue-600 font-medium"
+                        className="text-gray-700 hover:text-[#a75745] font-medium"
                     >
-                        Публикации
-                    </Link>
-                    <Link
-                        to="/about"
-                        className="text-gray-700 hover:text-blue-600 font-medium"
-                    >
-                        О проекте
+                        Blog
                     </Link>
                     <Link
                         to="/contacts"
-                        className="text-gray-700 hover:text-blue-600 font-medium"
+                        className="text-gray-700 hover:text-[#a75745] font-medium"
                     >
-                        Контакты
+                        Contacts
                     </Link>
                 </nav>
                 {/* Login */}
@@ -46,7 +40,7 @@ export default function Header() {
                         to="/login"
                         className="px-4 py-2 rounded-2xl bg-[#C66E58] text-white hover:bg-[#a75745] shadow"
                     >
-                        Вход
+                        Log in
                     </Link>
                 </div>
                 {/* Burger-Menu */}
@@ -62,38 +56,31 @@ export default function Header() {
                     <nav className="flex flex-col px-4 py-4 space-y-2">
                         <Link
                             to="/prompts"
-                            className="text-gray-700 hover:text-blue-600 font-medium"
+                            className="text-gray-700 hover:text-[#a75745] font-medium"
                             onClick={toggleMenu}
                         >
-                            Промпты
+                            Prompts
                         </Link>
                         <Link
                             to="/publications"
-                            className="text-gray-700 hover:text-blue-600 font-medium"
+                            className="text-gray-700 hover:text-[#a75745] font-medium"
                             onClick={toggleMenu}
                         >
-                            Публикации
-                        </Link>
-                        <Link
-                            to="/about"
-                            className="text-gray-700 hover:text-blue-600 font-medium"
-                            onClick={toggleMenu}
-                        >
-                            О проекте
+                            Blog
                         </Link>
                         <Link
                             to="/contacts"
-                            className="text-gray-700 hover:text-blue-600 font-medium"
+                            className="text-gray-700 hover:text-[#a75745] font-medium"
                             onClick={toggleMenu}
                         >
-                            Контакты
+                            Contacts
                         </Link>
                         <Link
                             to="/login"
-                            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                            className="mt-2 px-4 py-2 bg-[#C66E58] text-white rounded-2xl hover:hover:bg-[#a75745]"
                             onClick={toggleMenu}
                         >
-                            Вход
+                            Log in
                         </Link>
                     </nav>
                 </div>

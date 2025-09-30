@@ -8,19 +8,18 @@ export default function Hero() {
             <div className="container mx-auto px-4 flex flex-col lg:flex-row items-start gap-12">
 
                 <div className="flex-1 text-center lg:text-left">
-                    <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-                        Найди лучшие промпты для любых задач
+                    <h1 className="text-4xl lg:text-5xl font-baloo font-semibold text-gray-800 mb-6">
+                        Explore top prompts for any challenge
                     </h1>
                     <p className="text-lg text-gray-600 mb-8 max-w-xl">
-                        Тексты, изображения, код, маркетинг и обучение - 
-                        выбирай сценарий, вдохновляйся идеями и используй в своих проектах.
+                        Create with prompts for text, images, code, marketing, and learning - discover ideas and apply them to your projects.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
                         <button className="px-6 py-3 rounded-2xl bg-[#C66E58] text-white hover:bg-[#a75745] shadow">
-                            Попробовать промпты
+                            Try prompts
                         </button>
                         <button className="px-6 py-3 rounded-2xl bg-[#F9F7F5] text-gray-800 hover:bg-gray-200 shadow">
-                            Добавить свой промпт
+                            Add your prompt
                         </button>
                     </div>
                 </div>
