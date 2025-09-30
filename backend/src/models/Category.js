@@ -8,6 +8,10 @@ export const Category = db.define("Category", {
         allowNull: false,
         unique: true,
     },
+    slug: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     icon: {
         type: DataTypes.STRING,
         allowNull: true,

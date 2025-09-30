@@ -1,14 +1,12 @@
-// import { categoryConfig } from "@/config/categoryConfig.js";
-// import WritingPad from "@/assets/Writing-Pad.svg";
-// import Code from "@/assets/Code.svg";
-
-import CategorySlider from "../components/Prompts/CategorySlider.jsx";
+import { useCategories } from "@/context/GlobalContext.jsx";
+import CategorySlider from "@/components/Prompts/CategorySlider.jsx";
 
 export default function Hero() {
+    const { categories } = useCategories();
     return (
         <section className="relative bg-white py-16">
             <div className="container mx-auto px-4 flex flex-col lg:flex-row items-start gap-12">
-                {/* Текстовая часть */}
+
                 <div className="flex-1 text-center lg:text-left">
                     <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
                         Найди лучшие промпты для любых задач
@@ -28,8 +26,9 @@ export default function Hero() {
                 </div>
 
                 <div className="flex-1">
-                    <CategorySlider />
+                    <CategorySlider categories={categories} />
                 </div>
+
             </div>
         </section>
     );
