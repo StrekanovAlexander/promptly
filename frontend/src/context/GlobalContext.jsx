@@ -10,14 +10,6 @@ export function GlobalProvider({ children }) {
     const [ categories, setCategories ] = useState([]);
     const { setLoading, setError } = useApiStatus();
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const data = await getCategories();
-    //         setCategories(data);
-    //         setIsLoaded(true);
-    //     })();
-    //  }, []);
-
     useEffect(() => {
         const loadCategories = async () => {
             setLoading("categories", true);

@@ -16,33 +16,29 @@ export default function PromptCard({ prompt }) {
   const Icon = categoryIcons[prompt.category] || null;
 
   return (
-    <div className="bg-white shadow rounded-xl p-4 hover:shadow-md transition">
+    <div className="bg-[#F9F7F5] shadow rounded-xl p-4 hover:shadow-md transition">
       {/* Category */}
       {prompt.category && (
-        <span className="inline-flex items-center gap-1 mb-2 px-3 py-1 text-xs font-medium rounded-full bg-[#F5E9E5] text-[#C66E58]">
+        <span className="inline-flex items-center gap-1 mb-2 px-3 py-1 text-xs font-medium rounded-full bg-[#EDEBE7] text-gray-700">
           {Icon && <Icon className="w-3 h-3" />}
           {prompt.category}
         </span>
       )}
-
       {/* Title */}
-      <h3 className="text-lg font-semibold text-gray-800 mb-2">{prompt.title}</h3>
-
+      <h3 className="text-lg font-baloo font-semibold text-gray-800 mb-2">{prompt.title}</h3>
       {/* Short body */}
       <p className="text-gray-600 text-sm mb-4 line-clamp-3">{prompt.body}</p>
-
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-3">
-        {prompt.tags.slice(0, 3).map((el, idx) => (
+        {prompt.tags.split(',').map((el, idx) => (
           <span
             key={idx}
-            className="bg-[#F5E9E5] text-[#C66E58] text-xs px-2 py-1 rounded-full"
+            className="text-[#C66E58] text-xs px-2 py-1 rounded-full"
           >
             #{el}
           </span>
         ))}
       </div>
-
       {/* Footer */}
       <div className="flex justify-between items-center text-xs text-gray-500">
         <span>Author: {prompt.author}</span>
