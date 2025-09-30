@@ -4,31 +4,31 @@ const categorySlides = [
     {
         name: "Маркетинг",
         description: "Генерируй рекламные тексты, слоганы, контент для соцсетей и email-рассылки. Поможет создать вирусные и креативные материалы.",
-        img: "/public/assets/marketing.png",
+        img: "/assets/marketing.png",
     },
     {
         name: "Дизайн",
         description: "Идеи для графики, презентаций, интерфейсов и брендового контента. Поможет визуализировать концепции и создавать прототипы.",
-        img: "/public/assets/design.jpg",
+        img: "/assets/design.jpg",
     },
     {
         name: "Программирование",
         description: "Автоматизируй код, получай шаблоны функций, решения задач или целые фрагменты программ. Идеально для разработчиков любого уровня.",
-        img: "/public/assets/programming.jpg",
+        img: "/assets/programming.jpg",
     },
     {
         name: "Образование",
         description: "Учебные материалы, тесты, шпаргалки и объяснения сложных тем. Для преподавателей, студентов и самообучающихся.",
-        img: "/public/assets/education.jfif",
+        img: "/assets/education.jfif",
     },
     {
         name: "Текст",
-        img: "public/assets/writing.webp",
+        img: "/assets/writing.webp",
         description: "Создавай статьи, посты, письма и любые тексты для работы, обучения и развлечений. Используй готовые промпты или генерируй свои."
     },
     {
         name: "Бизнес",
-        img: "public/assets/business.jpg",
+        img: "assets/business.jpg",
         description: "Планы, стратегии, отчёты, email-сообщения и деловые тексты. Для стартапов, менеджеров и специалистов по развитию."
     }
 ];
