@@ -3,7 +3,100 @@ import Header from "@/layouts/Header.jsx";
 import Hero from "@/layouts/Hero.jsx";
 import PromptCard from "@/components/Prompts/PromptCard.jsx";
 import GuideCard from "@/components/Guides/GuideCard.jsx";
-import prompts from "@/config/promptConfig.js";
+// import prompts from "@/config/promptConfig.js";
+
+const prompts = [
+  {
+    id: 1,
+    title: "Генератор идей стартапов",
+    body: "Предложи 5 идей для технологического стартапа с кратким бизнес-планом.",
+    author: "Alex",
+    tags: ["стартап", "идеи", "бизнес"],
+    category: "Бизнес",
+    usageCount: 124
+  },
+  {
+    id: 2,
+    title: "Напиши пост для соцсетей",
+    body: "Создай engaging пост для Instagram о новом продукте компании.",
+    author: "Maria",
+    tags: ["контент", "маркетинг", "соцсети"],
+    category: "Маркетинг",
+    usageCount: 98
+  },
+  {
+    id: 3,
+    title: "Сценарий для видео",
+    body: "Составь сценарий короткого видео для продвижения онлайн-курса.",
+    author: "Ivan",
+    tags: ["контент", "видео", "гайды"],
+    category: "Образование",
+    usageCount: 56
+  },
+  {
+    id: 4,
+    title: "Генератор кода на Python",
+    body: "Напиши функцию на Python, которая сортирует список словарей по ключу 'score'.",
+    author: "Olga",
+    tags: ["код", "python", "программирование"],
+    category: "Программирование",
+    usageCount: 142
+  },
+  {
+    id: 5,
+    title: "Промпт для дизайнера",
+    body: "Предложи цветовую палитру для лендинга приложения о здоровье.",
+    author: "Nikita",
+    tags: ["дизайн", "цвет", "UX"],
+    category: "Дизайн",
+    usageCount: 77
+  },
+  {
+    id: 6,
+    title: "Генератор креативных слоганов",
+    body: "Создай 10 коротких слоганов для бренда одежды.",
+    author: "Sofia",
+    tags: ["креатив", "маркетинг", "брендинг"],
+    category: "Креатив",
+    usageCount: 65
+  },
+  {
+    id: 7,
+    title: "План организации событий",
+    body: "Составь план на неделю для проведения онлайн-вебинаров.",
+    author: "Pavel",
+    tags: ["организация", "вебинар", "план"],
+    category: "Организация",
+    usageCount: 38
+  },
+  {
+    id: 8,
+    title: "FAQ для сайта",
+    body: "Составь список из 10 часто задаваемых вопросов и ответов для сайта компании.",
+    author: "Alex",
+    tags: ["контент", "информация", "FAQ"],
+    category: "Информационные",
+    usageCount: 84
+  },
+  {
+    id: 9,
+    title: "Креативные идеи для блога",
+    body: "Придумай 5 идей для постов в блоге о технологиях ИИ.",
+    author: "Maria",
+    tags: ["креатив", "блог", "ИИ"],
+    category: "Креатив",
+    usageCount: 91
+  },
+  {
+    id: 10,
+    title: "Образовательные упражнения",
+    body: "Создай 3 задания для студентов по теме 'машинное обучение'.",
+    author: "Ivan",
+    tags: ["образование", "учеба", "ИИ"],
+    category: "Образование",
+    usageCount: 47
+  }
+];
 
 export default function IndexPage() {
   const [selectedPromptCategory, setSelectedPromptCategory] = useState(null);
