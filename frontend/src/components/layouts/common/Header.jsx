@@ -1,12 +1,10 @@
 import { User, FileText, House, Settings, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext.jsx";
-import { useLanguage } from "../../../context/LanguageContext.jsx";
 import Logo from "./Logo.jsx";
 
 export default function Header() {
     const { user, logout } = useAuth();
-    const { language, setLanguage } = useLanguage();
     const navigate = useNavigate();
 
     function handleLogout() {
@@ -63,7 +61,6 @@ export default function Header() {
                             </>
                         }
                         </ul>
-                        {/* <span>{ language }</span> */}
                     </nav>  
                 </div>
             </div>

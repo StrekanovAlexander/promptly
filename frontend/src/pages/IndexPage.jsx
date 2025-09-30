@@ -1,9 +1,6 @@
-import { useState } from "react";
-import Header from "@/layouts/Header.jsx";
 import Hero from "@/layouts/Hero.jsx";
 import PromptCard from "@/components/Prompts/PromptCard.jsx";
 import GuideCard from "@/components/Guides/GuideCard.jsx";
-// import prompts from "@/config/promptConfig.js";
 
 const prompts = [
   {
@@ -99,11 +96,8 @@ const prompts = [
 ];
 
 export default function IndexPage() {
-  const [selectedPromptCategory, setSelectedPromptCategory] = useState(null);
   return (
-    <div className="min-h-screen bg-white text-gray-800">
-      <Header />
-      <main className="container mx-auto px-4 py-8">
+      <>
         <Hero />
         <section className="container mx-auto px-4 py-12">
           <h2 className="text-2xl font-bold mb-6">Популярные промпты</h2>
@@ -137,13 +131,6 @@ export default function IndexPage() {
             />
           </div>
         </section>
-      </main>
-
-      <footer className="bg-white shadow-inner py-6 mt-16">
-        <div className="container mx-auto px-4 text-center text-gray-600">
-          © 2025 Promptly. Все права защищены.
-        </div>
-      </footer>
-    </div>
-    )
+      </>
+  )
 }

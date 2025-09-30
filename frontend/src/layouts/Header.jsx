@@ -10,8 +10,9 @@ export default function Header() {
     return (
         <header className="sticky top-0 z-50 bg-white shadow-sm py-4">
             <div className="container mx-auto flex justify-between items-center px-4">
-                {/* Logo */}
-                <Logo />
+                <Link to="/" title="Home">
+                    <Logo />
+                </Link>
                 {/* Navigation */}
                 <nav className="space-x-6 hidden md:flex">
                     <Link
