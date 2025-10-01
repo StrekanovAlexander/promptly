@@ -35,14 +35,23 @@ export default function Header() {
                     </Link>
                 </nav>
                 {/* Login */}
-                <div className="ml-4 hidden md:flex">
+                <div className="text-gray-400 text-sm">
+                    {new Date().toLocaleString('ru-RU', { 
+                        weekday: 'long', 
+                        day: 'numeric', 
+                        month: 'long', 
+                        hour: '2-digit', 
+                        minute:'2-digit' 
+                    })}
+                </div>
+                {/* <div className="ml-4 hidden md:flex">
                     <Link
                         to="/login"
-                        className="px-4 py-2 rounded-2xl bg-[#C66E58] text-white hover:bg-[#a75745] shadow"
+                        className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm hover:shadow-md transition font-medium text-sm"
                     >
-                        Log in
+                        Вход
                     </Link>
-                </div>
+                </div> */}
                 {/* Burger-Menu */}
                 <div className="md:hidden flex items-center">
                     <button onClick={toggleMenu} className="focus:outline-none">
@@ -74,13 +83,6 @@ export default function Header() {
                             onClick={toggleMenu}
                         >
                             Contacts
-                        </Link>
-                        <Link
-                            to="/login"
-                            className="mt-2 px-4 py-2 bg-[#C66E58] text-white rounded-2xl hover:hover:bg-[#a75745]"
-                            onClick={toggleMenu}
-                        >
-                            Log in
                         </Link>
                     </nav>
                 </div>

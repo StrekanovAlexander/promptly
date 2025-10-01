@@ -7,8 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        baloo2: ['"Baloo 2"', 'cursive'],
         sans: ['"Roboto Flex"', 'sans-serif'],
-        baloo: ['"Baloo 2"', 'cursive'],
+        opensans: ['"Open Sans"', 'sans-serif'],
       },
     },
   },
