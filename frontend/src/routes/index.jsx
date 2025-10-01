@@ -15,15 +15,17 @@ import {
 } from "../pages/index.jsx";
 
 // ***************** Next version 
-import MainLayout from "../layouts/MainLayout.jsx";
-import { IndexPage } from "../pages/index.jsx"
+import MainLayout from "@/layouts/MainLayout.jsx";
+import SidebarLayout from "@/layouts/SidebarLayout.jsx";
+import CategoryNav from "@/components/Prompts/CategoryNav.jsx";
+import { IndexPage, PromptsPage } from "@/pages/index.jsx"
 // ***************** End next version
 
 export default function Routing() {
     return (
         <Routes>
             <Route element={<Layout />}>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/sketch" element={<HomePage />} />
             </Route>
             <Route element={<AuthLayout />}>
                 <Route path="/login" element={<LoginPage />} />
@@ -41,7 +43,10 @@ export default function Routing() {
             </Route>
             
             <Route element={<MainLayout />}>
-                <Route path="/sketch" element={<IndexPage />} />
+                <Route path="/" element={<IndexPage />} />
+            </Route>
+            <Route element={<SidebarLayout nav={<CategoryNav />} />}>
+                <Route path="/prompts" element={<PromptsPage />} />
             </Route>
 
         </Routes>

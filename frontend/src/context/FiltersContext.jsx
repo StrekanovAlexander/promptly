@@ -4,8 +4,10 @@ const FiltersContext = createContext();
 
 export function FiltersProvider({ children }) {
     
-    const [promptCategory, setPromptCategory] = useState("all");
-    const [promptSearch, setPromptSearch] = useState("");
+    const [filterCategory, setFilterCategory] = useState("all");
+    
+    const [promptCategory, setPromptCategory] = useState("all"); // !!!!!
+    const [promptSearch, setPromptSearch] = useState(""); // !!!!!! filterPrompt
     const [promptSorting, setPromptSorting] = useState("popularity");
 
     const [postCategory, setPostCategory] = useState("all");
@@ -13,6 +15,9 @@ export function FiltersProvider({ children }) {
     const [postSorting, setPostSorting] = useState("newest");
 
     const value = {
+        filterCategory, 
+        setFilterCategory,
+        
         promptCategory,
         setPromptCategory,
         promptSearch,

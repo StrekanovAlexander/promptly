@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
@@ -80,16 +81,25 @@ export default function IndexPage() {
 
       <section className="max-w-7xl mx-auto px-4">
         {status.prompts?.isLoading && <Spinner />}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {!status.prompts?.isLoading && prompts.map((el) => (
-            <Card key={el.id} prompt={el} />
-          ))}
-          {/* {!status.prompts?.isLoading && filteredPrompts.map((el) => (
-            <Card key={el.id} prompt={el} />
-          ))} */}
-        </div>
+        {!status.prompts?.isLoading &&
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredPrompts.map((el) => (
+              <Card key={el.id} prompt={el} />
+            ))}
+          </div>
+        }
       </section>
 
+      {filteredPrompts.length &&  
+        <div className="mt-8 flex justify-center">
+          <Link
+            to="/prompts"
+            className="text-[#4F8EF7] hover:text-[#3A6DD1] font-medium transition-colors"
+          >
+            Смотреть все промпты
+          </Link>
+        </div>
+      }
     </>  
   );
 }
