@@ -3,6 +3,10 @@ const { DataTypes } = pkg;
 import { db } from "../config/db.js";
 
 export const Prompt = db.define("Prompt", {
+    categoryId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -14,6 +18,18 @@ export const Prompt = db.define("Prompt", {
     body: {
         type: DataTypes.TEXT,
         allowNull: false,
+    },
+    response: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    language: {
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     tags: {
         type: DataTypes.STRING,
