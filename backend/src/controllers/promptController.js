@@ -1,8 +1,10 @@
-import { Prompt, User } from "../models/index.js";
+import { Prompt, Category } from "../models/index.js";
 // GET /api/prompts
 export const getAllPrompts = async (req, res) => {
     try {
-        const prompts = await Prompt.findAll();
+        const prompts = await Prompt.findAll({
+            include: [{ model: Category, attributes: ['name', 'icon'] }]
+        });
         res.json(prompts);
     } catch (err) {
         res.status(500).json({ error: err.message });
