@@ -38,7 +38,7 @@ const prompts = [{
 */
 
 export default function IndexPage() {
-  const { promptSearch } = useFilters();
+  const { filterSearch } = useFilters();
   const { status, setLoading, setError } = useApiStatus();
   const [prompts, setPrompts] = useState([]);
 
@@ -60,11 +60,11 @@ export default function IndexPage() {
 
   let filteredPrompts=[];
   
-  if (prompts && promptSearch.trim()) {
+  if (prompts && filterSearch.trim()) {
     filteredPrompts = prompts.filter(el =>
-      el.title.toLowerCase().includes(promptSearch.toLowerCase()) ||
-      el.body.toLowerCase().includes(promptSearch.toLowerCase()) ||
-      el.response.toLowerCase().includes(promptSearch.toLowerCase())
+      el.title.toLowerCase().includes(filterSearch.toLowerCase()) ||
+      el.body.toLowerCase().includes(filterSearch.toLowerCase()) ||
+      el.response.toLowerCase().includes(filterSearch.toLowerCase())
     );
   }
 
