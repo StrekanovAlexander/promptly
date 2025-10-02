@@ -6,20 +6,23 @@ export function FiltersProvider({ children }) {
     
     const [filterSearch, setFilterSearch] = useState("");
     const [filterCategory, setFilterCategory] = useState("all");
+    const [sorting, setSorting] = useState("popular");
     
-    const [promptCategory, setPromptCategory] = useState("all");    // !!!!! Done
-    const [promptSearch, setPromptSearch] = useState("");           // !!!!! Done
-    const [promptSorting, setPromptSorting] = useState("popularity");
+    const [promptCategory, setPromptCategory] = useState("all");        // !!!!! Done
+    const [promptSearch, setPromptSearch] = useState("");               // !!!!! Done
+    const [promptSorting, setPromptSorting] = useState("popularity");   // !!!!! Done
 
     const [postCategory, setPostCategory] = useState("all");
     const [postSearch, setPostSearch] = useState("");
     const [postSorting, setPostSorting] = useState("newest");
 
     const value = {
-        filterSearch, 
+        filterSearch,  
         setFilterSearch,
         filterCategory, 
         setFilterCategory,
+        sorting, 
+        setSorting,
         
         promptCategory,
         setPromptCategory,

@@ -1,44 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
-import SearchInput from "@/components/Prompts/SearchInput.jsx";
 import Card from "@/components/Prompts/Card.jsx";
 import Spinner from "@/components/ui/Spinner.jsx";
 
-/*
-const prompts = [{
-  title: "Instagram пост о кофе",
-  body: "Создай продающий пост для Instagram про новый кофе в зернах...",
-  category: "Маркетинг",
-  tags: "Instagram, копирайтинг, кофе",
-  author: "Иван Иванов",
-  usageCount: 124,
-  isFavorite: false,
-},
-{
-  title: "Instagram пост о кофе",
-  body: "Создай продающий пост для Instagram про новый кофе в зернах...",
-  category: "Маркетинг",
-  tags: "Instagram, копирайтинг, кофе",
-  author: "Иван Иванов",
-  usageCount: 124,
-  isFavorite: false,
-},
-{
-  title: "Instagram пост о кофе",
-  body: "Создай продающий пост для Instagram про новый кофе в зернах...",
-  category: "Маркетинг",
-  tags: "Instagram, копирайтинг, кофе",
-  author: "Иван Иванов",
-  usageCount: 124,
-  isFavorite: false,
-}];
-*/
-
 export default function IndexPage() {
-  const { filterSearch } = useFilters();
+  const { filterSearch, setFilterSearch } = useFilters();
   const { status, setLoading, setError } = useApiStatus();
   const [prompts, setPrompts] = useState([]);
 
@@ -58,7 +28,7 @@ export default function IndexPage() {
     loadPrompts();
   }, []);
 
-  let filteredPrompts=[];
+  let filteredPrompts = prompts;
   
   if (prompts && filterSearch.trim()) {
     filteredPrompts = prompts.filter(el =>
@@ -75,7 +45,21 @@ export default function IndexPage() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-opensans font-semibold text-gray-800 mb-10 leading-tight">
             Подбери идеальный промпт для своей задачи
           </h1>
-          <SearchInput />
+          { status.prompts?.isLoading && <Spinner /> }
+          { !status.prompts?.isLoading && 
+            <div className="max-w-xl mx-auto relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 transition-colors duration-200 peer-focus:text-blue-500" />
+              <input
+                type="text"
+                value={filterSearch}
+                placeholder="Например: маркетинг, дизайн, код..."
+                onChange={(ev) => setFilterSearch(ev.target.value)}
+                className="peer w-full rounded-xl border border-gray-300 pl-10 pr-4 py-3 sm:py-4 text-base sm:text-lg 
+                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm
+                placeholder-gray-400 placeholder-opacity-100 focus:placeholder-opacity-0 transition-all duration-200"
+              />
+            </div> 
+          }
         </div>
       </section>
 
@@ -103,111 +87,3 @@ export default function IndexPage() {
     </>  
   );
 }
-
-
-
-/*
-import { useState, useEffect } from "react";
-import { useApiStatus } from "@/context/ApiStatusContext.jsx";
-import { getPrompts } from "@/services/api.js";
-import Hero from "@/layouts/Hero.jsx";
-import PromptCard from "@/components/Prompts/PromptCard.jsx";
-
-export default function IndexPage() {
-  const { setLoading, setError } = useApiStatus();
-  const [prompts, setPrompts] = useState([]);
-
-  useEffect(() => {
-    const loadPrompts = async () => {
-      setLoading("prompts", true);
-      setError("prompts", null);
-      try {
-        const data = await getPrompts();
-        setPrompts(data);
-      } catch (err) {
-        setError("prompts", err.toString());
-      } finally {
-        setLoading("prompts", false);
-      }
-    };
-
-    loadPrompts();
-  }, []); 
-
-  return (
-      <>
-        <Hero />
-
-        <section className="container mx-auto px-4 py-12 flex flex-col lg:flex-row gap-12">
-          <div className="flex-1 space-y-4">
-            <h2 className="text-4xl font-baloo font-semibold">What can you do with Promptly?</h2>
-
-
-<div className="p-4">
-  <h3 className="text-2xl font-baloo font-semibold mb-3 flex items-center gap-2">
-    <span className="w-3 h-3 rounded-full bg-[#C66E58]"></span>
-    Ready-to-use templates
-  </h3>
-  <p className="text-md text-gray-700 leading-relaxed">
-    Start faster, no guesswork. Use pre-built prompts for various tasks and save time in your workflow. 
-    Explore multiple scenarios for text, images, code, marketing, and learning. Customize each template 
-    to fit your projects and consistently achieve high-quality results. This helps streamline your process 
-    and inspires new ideas without starting from scratch every time.
-  </p>
-</div>
-
-<div className="p-4">
-  <h3 className="text-2xl font-baloo font-semibold mb-3 flex items-center gap-2">
-    <span className="w-3 h-3 rounded-full bg-[#C66E58]"></span>
-    Smart filters
-  </h3>
-  <p className="text-md text-gray-700 leading-relaxed">
-    Find exactly what you need. Filter prompts by category, usage, or popularity with ease. 
-    Quickly narrow down results using multiple criteria and tags. Save your favorite searches 
-    and access relevant prompts whenever you need them. This ensures you spend less time searching 
-    and more time creating.
-  </p>
-</div>
-
-<div className="p-4">
-  <h3 className="text-2xl font-baloo font-semibold mb-3 flex items-center gap-2">
-    <span className="w-3 h-3 rounded-full bg-[#C66E58]"></span>
-    Learn & improve
-  </h3>
-  <p className="text-md text-gray-700 leading-relaxed">
-    Guides and best practices. Discover tips and strategies to create more effective prompts for AI. 
-    Step-by-step tutorials and curated examples help you understand how to achieve better results, 
-    experiment confidently, and continuously improve your prompt-writing skills.
-  </p>
-</div>
-
-<div className="p-4">
-  <h3 className="text-2xl font-baloo font-semibold mb-3 flex items-center gap-2">
-    <span className="w-3 h-3 rounded-full bg-[#C66E58]"></span>
-    Community sharing
-  </h3>
-  <p className="text-md text-gray-700 leading-relaxed">
-    Contribute and inspire others. Share your prompts and explore creations from the community. 
-    Engage with like-minded users, learn from others’ approaches, and build a collaborative environment 
-    that encourages creativity, experimentation, and collective growth.
-  </p>
-</div>
-
-
-            
-          </div>
-
-          <div className="flex-1 space-y-8">
-            <h2 className="text-4xl font-baloo font-semibold">Popular prompts</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {prompts.slice(0, 6).map((el) => (
-                <PromptCard key={el.id} prompt={el} />
-              ))}
-            </div>
-          </div>
-        </section>
-      </>
-  )
-}
-  */
-
