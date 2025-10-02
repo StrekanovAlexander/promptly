@@ -2,6 +2,7 @@ import { Router } from "express";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import {
     getAllPrompts,
+    getPrompt,
     createPrompt,
     updatePrompt,
     deletePrompt,
@@ -12,6 +13,7 @@ import {
 const router = Router();
 
 router.get("/", getAllPrompts);
+router.get("/:id", getPrompt);
 router.get("/user/:id", authMiddleware, getPromptsByUserId);
 router.post("/", authMiddleware, createPrompt);
 router.put("/:id", authMiddleware, updatePrompt);

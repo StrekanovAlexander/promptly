@@ -9,6 +9,7 @@ import MyPromptsPage from "./profile/MyPromptsPage.jsx";
 // ***************** Next version
 import IndexPage from "./IndexPage.jsx";
 import PromptsPage from "./PromptsPage.jsx";
+import PromptPage from "./PromptPage.jsx";
 // ***************** End next version
 
 export {
@@ -21,5 +22,6 @@ export {
     MyPromptsPage,
     
     IndexPage,
-    PromptsPage
+    PromptsPage,
+    PromptPage
 }

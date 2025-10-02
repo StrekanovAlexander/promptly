@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Heart, BarChart3 } from "lucide-react";
 import Icon from "../ui/Icon.jsx";
 
@@ -49,9 +50,12 @@ export default function Card({ prompt }) {
           <button className="flex-1 min-w-[100px] bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm transition font-medium text-sm">
             Скопировать
           </button>
-          <button className="flex-1 min-w-[100px] bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-xl shadow-sm transition font-medium text-sm">
+          <Link
+            to={`/prompts/${prompt.id}`} 
+            className="flex-1 min-w-[100px] bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-xl shadow-sm transition font-medium text-sm text-center"
+          >
             Подробнее
-          </button>
+          </Link>
         </div>
       </div>
     </div>

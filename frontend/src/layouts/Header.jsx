@@ -21,7 +21,7 @@ export default function Header() {
                     >
                         Промпты
                     </Link>
-                    <Link
+                    {/* <Link
                         to="/publications"
                         className="text-gray-700 hover:text-[#4F8EF7] font-medium"
                     >
@@ -32,7 +32,7 @@ export default function Header() {
                         className="text-gray-700 hover:hover:text-[#4F8EF7] font-medium"
                     >
                         Контакты
-                    </Link>
+                    </Link> */}
                 </nav>
                 {/* Login */}
                 <div className="text-gray-400 text-sm">
@@ -70,7 +70,7 @@ export default function Header() {
                         >
                             Промпты
                         </Link>
-                        <Link
+                        {/* <Link
                             to="/publications"
                             className="text-gray-700 hover:hover:text-[#4F8EF7] font-medium"
                             onClick={toggleMenu}
@@ -83,7 +83,7 @@ export default function Header() {
                             onClick={toggleMenu}
                         >
                             Контакты
-                        </Link>
+                        </Link> */}
                     </nav>
                 </div>
             )}
