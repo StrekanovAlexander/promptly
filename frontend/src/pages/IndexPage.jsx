@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
-import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
 import Card from "@/components/Prompts/Card.jsx";
 import Spinner from "@/components/ui/Spinner.jsx";
 
 export default function IndexPage() {
-  const { filterSearch, setFilterSearch } = useFilters();
   const { status, setLoading, setError } = useApiStatus();
+  const [ search, setSearch ] = useState("");
   const [prompts, setPrompts] = useState([]);
 
   useEffect(() => {
@@ -28,13 +27,13 @@ export default function IndexPage() {
     loadPrompts();
   }, []);
 
-  let filteredPrompts = prompts;
+  let filteredPrompts = [];
   
-  if (prompts && filterSearch.trim()) {
+  if (prompts && search.trim()) {
     filteredPrompts = prompts.filter(el =>
-      el.title.toLowerCase().includes(filterSearch.toLowerCase()) ||
-      el.body.toLowerCase().includes(filterSearch.toLowerCase()) ||
-      el.response.toLowerCase().includes(filterSearch.toLowerCase())
+      el.title.toLowerCase().includes(search.toLowerCase()) ||
+      el.body.toLowerCase().includes(search.toLowerCase()) ||
+      el.response.toLowerCase().includes(search.toLowerCase())
     );
   }
 
@@ -51,9 +50,9 @@ export default function IndexPage() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 transition-colors duration-200 peer-focus:text-blue-500" />
               <input
                 type="text"
-                value={filterSearch}
+                value={search}
                 placeholder="Например: маркетинг, дизайн, код..."
-                onChange={(ev) => setFilterSearch(ev.target.value)}
+                onChange={(ev) => setSearch(ev.target.value)}
                 className="peer w-full rounded-xl border border-gray-300 pl-10 pr-4 py-3 sm:py-4 text-base sm:text-lg 
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm
                 placeholder-gray-400 placeholder-opacity-100 focus:placeholder-opacity-0 transition-all duration-200"
@@ -64,7 +63,6 @@ export default function IndexPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4">
-        {status.prompts?.isLoading && <Spinner />}
         {!status.prompts?.isLoading &&
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPrompts.map((el) => (
@@ -74,7 +72,7 @@ export default function IndexPage() {
         }
       </section>
 
-      {filteredPrompts.length &&  
+      {filteredPrompts.length > 0 &&  
         <div className="mt-8 flex justify-center">
           <Link
             to="/prompts"

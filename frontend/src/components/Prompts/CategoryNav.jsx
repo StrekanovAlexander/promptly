@@ -3,7 +3,7 @@ import { useFilters } from "@/context/FiltersContext.jsx";
 import Icon from "@/components/ui/Icon.jsx";
 
 export default function CategoryNav() {
-  const { categories, setCategories } = useCategories();
+  const { categories } = useCategories();
   const { filterCategory, setFilterCategory } = useFilters();
   
   return (

@@ -14,24 +14,24 @@ export default function Header() {
                     <Logo />
                 </Link>
                 {/* Navigation */}
-                <nav className="space-x-6 hidden md:flex">
+                <nav className="space-x-8 hidden md:flex">
                     <Link
                         to="/prompts"
-                        className="text-gray-700 hover:text-[#a75745] font-medium"
+                        className="text-gray-700 hover:text-[#4F8EF7] font-medium"
                     >
-                        Prompts
+                        Промпты
                     </Link>
                     <Link
                         to="/publications"
-                        className="text-gray-700 hover:text-[#a75745] font-medium"
+                        className="text-gray-700 hover:text-[#4F8EF7] font-medium"
                     >
-                        Blog
+                        Публикации
                     </Link>
                     <Link
                         to="/contacts"
-                        className="text-gray-700 hover:text-[#a75745] font-medium"
+                        className="text-gray-700 hover:hover:text-[#4F8EF7] font-medium"
                     >
-                        Contacts
+                        Контакты
                     </Link>
                 </nav>
                 {/* Login */}
@@ -65,24 +65,24 @@ export default function Header() {
                     <nav className="flex flex-col px-4 py-4 space-y-2">
                         <Link
                             to="/prompts"
-                            className="text-gray-700 hover:text-[#a75745] font-medium"
+                            className="text-gray-700 hover:hover:text-[#4F8EF7] font-medium"
                             onClick={toggleMenu}
                         >
-                            Prompts
+                            Промпты
                         </Link>
                         <Link
                             to="/publications"
-                            className="text-gray-700 hover:text-[#a75745] font-medium"
+                            className="text-gray-700 hover:hover:text-[#4F8EF7] font-medium"
                             onClick={toggleMenu}
                         >
-                            Blog
+                            Публикации
                         </Link>
                         <Link
                             to="/contacts"
-                            className="text-gray-700 hover:text-[#a75745] font-medium"
+                            className="text-gray-700 hover:hover:text-[#4F8EF7] font-medium"
                             onClick={toggleMenu}
                         >
-                            Contacts
+                            Контакты
                         </Link>
                     </nav>
                 </div>

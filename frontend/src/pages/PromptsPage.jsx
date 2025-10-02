@@ -7,7 +7,7 @@ import PromptCard from "@/components/Prompts/Card.jsx";
 
 export default function PromptsPage() {
   const { setLoading, setError } = useApiStatus();
-  const { filterSearch, setFilterSearch, sorting, setSorting } = useFilters();
+  const { filterCategory, filterSearch, setFilterSearch, sorting, setSorting } = useFilters();
   const [prompts, setPrompts] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,11 @@ export default function PromptsPage() {
     loadPrompts();
   }, []); 
 
-  let filteredPrompts=prompts;
+  let filteredPrompts = prompts;
+
+  if (filterCategory !== "all") {
+    filteredPrompts = prompts.filter(el => el.categoryId === filterCategory);
+  } 
   
   if (filterSearch.trim()) {
     filteredPrompts = prompts.filter(el =>
