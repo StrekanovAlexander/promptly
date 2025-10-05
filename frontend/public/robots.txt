@@ -1,0 +1,19 @@
+User-agent: *
+
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /api/
+Disallow: /*?*
+
+Allow: /
+Allow: /prompts
+Allow: /prompts/programmirovanie
+Allow: /prompts/design
+Allow: /prompts/marketing
+Allow: /prompts/obrazovanie
+Allow: /prompts/biznes
+Allow: /prompts/kreativ
+
+Allow: /prompts/*/*
+Sitemap: https://api.promptly.team/sitemap.xml

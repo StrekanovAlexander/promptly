@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import cors from "cors";
 
 import { db } from "./src/config/db.js";
@@ -8,10 +9,9 @@ import {
     postRoutes,
     postCategoryRoutes, 
     promptRoutes, 
+    sitemapRoutes,
     userRoutes 
 } from "./src/routes/index.js";
-
-
 
 (async () => {
     try {
@@ -25,6 +25,9 @@ import {
 
 
 const app = express();
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(cors());
 app.use(express.json());
 
@@ -34,6 +37,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/post-categories", postCategoryRoutes);
 app.use("/api/prompts", promptRoutes);
+app.use("/api/sitemap", sitemapRoutes);
 app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 3000;
