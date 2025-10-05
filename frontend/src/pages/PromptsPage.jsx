@@ -4,6 +4,7 @@ import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useCategories } from "@/context/GlobalContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
+import { useSEO } from "@/hooks/useSEO";
 import PromptCard from "@/components/Prompts/Card.jsx";
 
 export default function PromptsPage() {
@@ -68,6 +69,14 @@ export default function PromptsPage() {
   } else {
     filteredPrompts.sort((a, b) => a.title.localeCompare(b.title));
   }
+
+  useSEO({
+    title: category ? `${category.name} — Промпты` : "Библиотека промптов",
+    description: category?.description || "Подборка промптов по разным направлениям",
+    canonical: category
+      ? `https://www.promptly.team/prompts/${category.slug}`
+      : "https://www.promptly.team/prompts"
+  });
 
   return (
     <div className="flex flex-col gap-6">

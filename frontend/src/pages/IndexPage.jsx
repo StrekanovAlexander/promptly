@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { getPrompts } from "@/services/api.js";
+import { useSEO } from "@/hooks/useSEO";
 import Card from "@/components/Prompts/Card.jsx";
 import Spinner from "@/components/ui/Spinner.jsx";
 
@@ -36,6 +37,12 @@ export default function IndexPage() {
       el.response.toLowerCase().includes(search.toLowerCase())
     );
   }
+
+  useSEO({
+    title: "Promptly — библиотека промптов для ChatGPT и AI",
+    description: "Поиск и подборка промптов: программирование, маркетинг, дизайн, обучение.",
+    canonical: "https://www.promptly.team"
+  });
 
   return (
     <>

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { getPrompt } from "@/services/api.js";
+import { useSEO } from "@/hooks/useSEO";
 import { Icon, Spinner } from "@/components/ui/index.jsx";
 
 export default function PromptPage() {
-  const { slug } = useParams();
+  const { categorySlug, slug } = useParams();
   const { setLoading, setError } = useApiStatus();
   const [ prompt, setPrompt ] = useState([]);
   const parts = slug.split('-');
@@ -26,6 +27,13 @@ export default function PromptPage() {
     };
     loadPrompt();
   }, []); 
+
+  useSEO({
+    title: prompt ? prompt.title : "Загрузка — Promptly",
+    description: prompt ? (prompt.description || prompt.body?.slice(0, 150)) : null,
+    canonical: prompt ? `https://www.promptly.team/prompts/${categorySlug}/${slug}` : null,
+    ogImage: prompt?.previewImage
+  });
 
   return (
     <div className="flex flex-col gap-6">
