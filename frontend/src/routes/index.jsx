@@ -45,10 +45,10 @@ export default function Routing() {
             <Route element={<MainLayout />}>
                 <Route path="/" element={<IndexPage />} />
             </Route>
+            
             <Route element={<SidebarLayout nav={<CategoryNav />} />}>
                 <Route path="/prompts" element={<PromptsPage />} />
-            </Route>
-            <Route element={<SidebarLayout nav={<CategoryNav />} />}>
+                <Route path="/prompts/:categorySlug" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} />
             </Route>
 
