@@ -38,7 +38,7 @@ export function useSEO(options = {}) {
         canonical,
         ogTitle,
         ogDescription,
-        ogImage,
+        ogImage = "/default-preview.jpg",
         ogType = "article",
         twitterCard = "summary_large_image",
         keywords,
