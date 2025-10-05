@@ -1,11 +1,5 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Prompt, Category } from "../models/index.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export const generateSitemap = async (req, res) => {
     try {
@@ -33,12 +27,9 @@ export const generateSitemap = async (req, res) => {
         });
     
         sitemap.end();
-    
         const xml = await streamToPromise(sitemap);
-        const outputPath = path.join(__dirname, "../../public/sitemap.xml");
-        fs.writeFileSync(outputPath, xml.toString());
-        
-        res.status(200).json({ message: "Sitemap was generated..." });
+        res.setHeader("Content-Type", "application/xml");
+        res.status(200).send(xml.toString());
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

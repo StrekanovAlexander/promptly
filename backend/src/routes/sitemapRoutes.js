@@ -3,6 +3,6 @@ import { generateSitemap } from "../controllers/sitemapController.js";
 
 const router = Router();
 
-router.get("/generate", generateSitemap);
+router.get("/", generateSitemap);
 
 export default router;
