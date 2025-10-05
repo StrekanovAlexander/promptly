@@ -8,6 +8,12 @@ export async function getPrompts() {
     return res.json();
 }
 
+export async function getPrompt(id) {
+    const res = await fetch(`${API_URL}/prompts/${id}`);
+    if (!res.ok) throw new Error("Failed to fetch prompts");
+    return res.json();
+}
+
 export async function createPrompt(data) {
     const res = await fetch(`${API_URL}/prompts`, {
         method: "POST",

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
@@ -8,7 +7,7 @@ import PromptCard from "@/components/Prompts/Card.jsx";
 export default function PromptsPage() {
   const { setLoading, setError } = useApiStatus();
   const { filterCategory, filterSearch, setFilterSearch, sorting, setSorting } = useFilters();
-  const [prompts, setPrompts] = useState([]);
+  const [ prompts, setPrompts ] = useState([]);
 
   useEffect(() => {
     const loadPrompts = async () => {

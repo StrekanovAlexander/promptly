@@ -3,6 +3,7 @@ import { Category } from "../models/Category.js";
 export const getAllCategories = async (req, res) => {
     try {
         const categories = await Category.findAll({
+            where: { isActive: true },
             order: ['name']
         });
         res.json(categories);

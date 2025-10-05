@@ -20,6 +20,10 @@ export const Category = db.define("Category", {
         type: DataTypes.TEXT,
         allowNull: true,
     },
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    },
     createdAt: {
         type: DataTypes.DATE,
         allowNull: false,

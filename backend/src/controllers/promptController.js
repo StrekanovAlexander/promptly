@@ -3,22 +3,26 @@ import { Prompt, Category } from "../models/index.js";
 export const getAllPrompts = async (req, res) => {
     try {
         const prompts = await Prompt.findAll({
-            include: [{ model: Category, attributes: ['name', 'icon'] }]
+            include: [{ model: Category, attributes: ['name', 'slug', 'icon'] }]
         });
         res.json(prompts);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
-// GET /api/prompts/:id
+// GET /api/prompts/id
 export const getPrompt = async (req, res) => {
     try {
-        const prompt = await Prompt.findByPk(req.params.id);
+        const prompt = await Prompt.findOne({
+            where: { id: req.params.id },
+            include: [{ model: Category, attributes: ['name', 'slug', 'icon', 'description']}],
+        });
         res.json(prompt);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
 // GET /api/prompts/user/:id
 export const getPromptsByUserId = async (req, res) => {
     try {

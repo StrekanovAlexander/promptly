@@ -49,7 +49,7 @@ export default function Routing() {
                 <Route path="/prompts" element={<PromptsPage />} />
             </Route>
             <Route element={<SidebarLayout nav={<CategoryNav />} />}>
-                <Route path="/prompts/:slug" element={<PromptPage />} />
+                <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} />
             </Route>
 
         </Routes>

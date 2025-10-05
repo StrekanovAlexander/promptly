@@ -51,7 +51,7 @@ export default function Card({ prompt }) {
             Скопировать
           </button>
           <Link
-            to={`/prompts/${prompt.id}`} 
+            to={`/prompts/${prompt.Category.slug}/${prompt.slug}-${prompt.id}`} 
             className="flex-1 min-w-[100px] bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-xl shadow-sm transition font-medium text-sm text-center"
           >
             Подробнее
