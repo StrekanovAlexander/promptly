@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
+import { useAuth } from "@/context/AuthContext.jsx";
 import { useCategories } from "@/context/GlobalContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
@@ -9,6 +10,7 @@ import PromptCard from "@/components/Prompts/Card.jsx";
 import FormCreatePrompt from "@/components/Prompts/FormCreatePrompt";
 
 export default function PromptsPage() {
+  const { user } = useAuth();
   const { categories } = useCategories();
   const { categorySlug } = useParams();
   const { setLoading, setError } = useApiStatus();
@@ -102,11 +104,14 @@ export default function PromptsPage() {
             { category.name }
           </h1>
         }
-        <button
-          onClick={() => setIsModalOpen(true)} 
-          className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm transition font-medium text-sm">
-          Создать промпт
-        </button>
+        {user &&
+          <button
+            onClick={() => setIsModalOpen(true)} 
+            className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm transition font-medium text-sm"
+          >
+            Создать промпт
+          </button>
+        }
       </div>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
         {/* Поиск */}
