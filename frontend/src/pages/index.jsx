@@ -1,4 +1,3 @@
-import HomePage from "./HomePage.jsx";
 import PostPage from "./post/PostPage.jsx";
 import PostsPage from "./post/PostsPage.jsx";
 import LoginPage from "./auth/LoginPage.jsx";
@@ -13,7 +12,6 @@ import PromptPage from "./PromptPage.jsx";
 // ***************** End next version
 
 export {
-    HomePage,
     PostPage,
     PostsPage,
     LoginPage,

@@ -1,5 +1,5 @@
 export function createSlug(text) {
-    const slug = text
+    return text
         .toLowerCase()
         .replace(/[а-яё]/g, (char) => ({
             а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "e",
@@ -10,6 +10,4 @@ export function createSlug(text) {
         }[char]))
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-+|-+$/g, "");
-
-    return `${slug}-${Date.now()}`;    
 }

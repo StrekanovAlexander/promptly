@@ -6,14 +6,29 @@ import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
 import PromptCard from "@/components/Prompts/Card.jsx";
+import FormCreatePrompt from "@/components/Prompts/FormCreatePrompt";
 
 export default function PromptsPage() {
   const { categories } = useCategories();
   const { categorySlug } = useParams();
   const { setLoading, setError } = useApiStatus();
   const { filterCategory, setFilterCategory, filterSearch, setFilterSearch, sorting, setSorting } = useFilters();
-  const [category, setCategory] = useState(null);
+  const [ category, setCategory ] = useState(null);
   const [ prompts, setPrompts ] = useState([]);
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+
+  const loadPrompts = async () => {
+    setLoading("prompts", true);
+    setError("prompts", null);
+    try {
+      const data = await getPrompts();
+      setPrompts(data);
+    } catch (err) {
+      setError("prompts", err.toString());
+    } finally {
+      setLoading("prompts", false);
+    }
+  };
   
   useEffect(() => {
     if (categorySlug) {
@@ -31,18 +46,6 @@ export default function PromptsPage() {
   }, [categorySlug, setFilterCategory]);
 
   useEffect(() => {
-    const loadPrompts = async () => {
-      setLoading("prompts", true);
-      setError("prompts", null);
-      try {
-        const data = await getPrompts();
-        setPrompts(data);
-      } catch (err) {
-        setError("prompts", err.toString());
-      } finally {
-        setLoading("prompts", false);
-      }
-    };
     loadPrompts();
   }, []); 
 
@@ -82,23 +85,29 @@ export default function PromptsPage() {
     <div className="flex flex-col gap-6">
 
       {category &&
-        <>
-          <nav aria-label="breadcrumb" className="text-sm text-gray-500 mb-4">
-            <Link to="/prompts" className="hover:underline">Промпты</Link>
-            <span className="mx-2">/</span>
-            <span>{category.name}</span>
-          </nav>
-
+        <nav aria-label="breadcrumb" className="text-sm text-gray-500 mb-4">
+          <Link to="/prompts" className="hover:underline">Промпты</Link>
+          <span className="mx-2">/</span>
+          <span>{category.name}</span>
+        </nav>
+      } 
+      <div className="flex items-center justify-between"> 
+        {!category && 
+          <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-6">
+            Библиотека промптов
+          </h1>
+        }
+        {category && 
           <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-6">
             { category.name }
           </h1>
-        </>  
-      }  
-      {!category && 
-        <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-6">
-          Библиотека промптов
-        </h1>
-      }
+        }
+        <button
+          onClick={() => setIsModalOpen(true)} 
+          className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm transition font-medium text-sm">
+          Создать промпт
+        </button>
+      </div>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
         {/* Поиск */}
         <input
@@ -126,6 +135,12 @@ export default function PromptsPage() {
           <PromptCard key={prompt.id} prompt={prompt} />
         ))}
       </div>
+      { isModalOpen && 
+        <FormCreatePrompt 
+          onClose={() => setIsModalOpen(false)} 
+          onCreated={loadPrompts}
+        />
+      }  
     </div>
   );
 }

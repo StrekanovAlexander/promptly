@@ -39,16 +39,7 @@ export const Prompt = db.define("Prompt", {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    translations: {
-        type: DataTypes.JSON,
-        allowNull: true,
-        defaultValue: {},
-    },
     author: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    category: {
         type: DataTypes.STRING,
         allowNull: true,
     },
