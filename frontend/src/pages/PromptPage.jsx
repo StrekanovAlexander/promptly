@@ -85,10 +85,14 @@ export default function PromptPage() {
               ))}
           </div>
           {/* Краткое описание промпта */}     
-          <p className="text-gray-700 my-4 text-sm">{prompt.description}</p>
+          <p className="text-gray-700 my-4 text-sm">
+            Краткое описание промпта: {prompt.description}
+          </p>
           {/* Содержимое промпта */}
           <div className="mb-6 p-6 bg-gray-50 border border-gray-200 rounded-lg">
-            <p className="text-gray-700 whitespace-pre-wrap">{prompt.body}</p>
+            <p className="text-gray-700 whitespace-pre-wrap">
+              {prompt.body}
+            </p>
           </div>
           {/* Пример результата */}
           <div className="mb-6 p-6 bg-gray-50 border border-gray-200 rounded-lg">
