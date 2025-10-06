@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import Logo from "../../components/layouts/common/Logo.jsx";
+import Logo from "@/components/Logo/Logo.jsx";
 
 export default function LoginPage() {
     function handleLogin(provider) {
@@ -25,45 +26,41 @@ export default function LoginPage() {
     };
     
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-            <div className="w-full max-w-md bg-white rounded-lg shadow p-8 text-center">
-                <div className="flex justify-center mb-4">
-                    <Logo />
-                </div>
-                
-                <p className="text-gray-500 mb-6 text-sm">Sign in with</p>
-
-                <div className="flex justify-center gap-4">
-                    
-                    <button
-                        onClick={() => handleLogin("google")}
-                        className="flex items-center justify-center w-12 h-12 rounded-lg border border-gray-300 hover:bg-gray-50 transition"
-                        title="Google"
-                    >
-                        <img src="/icons/google.svg" alt="Google" className="w-6 h-6" />
-                    </button>
-
-                    <button
-                        onClick={() => handleLogin("github")}
-                        className="flex items-center justify-center w-12 h-12 rounded-lg border border-gray-300 hover:bg-gray-50 transition"
-                        title="GitHub"
-                    >
-                        <img src="/icons/github-mark.svg" alt="GitHub" className="w-6 h-6" />
-                    </button>
-
-                    <button
-                        onClick={() => handleLogin("facebook")}
-                        className="flex items-center justify-center w-12 h-12 rounded-lg border border-gray-300 hover:bg-gray-50 transition"
-                        title="Facebook"
-                    >
-                        <img src="/icons/facebook.svg" alt="Facebook" className="w-6 h-6" />
-                    </button>
-                </div>
-
-                <p className="text-xs text-gray-400 mt-6">
-                    By logging in, you agree to the Terms of Use
-                </p>
+        <div className="max-w-md mx-auto bg-white rounded-lg shadow p-8 text-center mt-10">
+            <div className="flex justify-center mb-4">
+                <Logo />
             </div>
+
+            <div className="flex justify-center gap-4">
+                
+                <button
+                    onClick={() => handleLogin("google")}
+                    className="flex items-center justify-center w-12 h-12 rounded-lg border border-gray-300 hover:bg-gray-50 transition"
+                    title="Google"
+                >
+                    <img src="/icons/google.svg" alt="Google" className="w-6 h-6" />
+                </button>
+
+                <button
+                    onClick={() => handleLogin("github")}
+                    className="flex items-center justify-center w-12 h-12 rounded-lg border border-gray-300 hover:bg-gray-50 transition"
+                    title="GitHub"
+                >
+                    <img src="/icons/github-mark.svg" alt="GitHub" className="w-6 h-6" />
+                </button>
+
+                <button
+                    onClick={() => handleLogin("facebook")}
+                    className="flex items-center justify-center w-12 h-12 rounded-lg border border-gray-300 hover:bg-gray-50 transition"
+                    title="Facebook"
+                >
+                    <img src="/icons/facebook.svg" alt="Facebook" className="w-6 h-6" />
+                </button>
+            </div>
+
+            <p className="text-xs text-gray-400 mt-6">
+                <Link to="/" className="text-gray-500 hover:text-blue-600">На главную страницу</Link>        
+            </p>
         </div>
     )
 }

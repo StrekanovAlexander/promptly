@@ -26,7 +26,7 @@ export default function OAuthCallback() {
             const newUrl = window.location.origin + window.location.pathname;
             window.history.replaceState({}, "", newUrl);
             
-            navigate("/account");
+            navigate("/prompts");
         }
     }, [navigate]);
 

@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useAuth } from "@/context/AuthContext.jsx";
 import Logo from "../components/Logo/Logo.jsx";
 
 export default function Header() {
+    const { user, logout } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen(!isOpen);
+
+    function handleLogout() {
+        logout();
+        navigate("/login");
+    }
 
     return (
         <header className="sticky top-0 z-50 bg-white shadow-sm py-4">
@@ -14,13 +21,21 @@ export default function Header() {
                     <Logo />
                 </Link>
                 {/* Navigation */}
-                <nav className="space-x-8 hidden md:flex">
+                <nav className="space-x-8 hidden md:flex items-center">
                     <Link
                         to="/prompts"
                         className="text-gray-700 hover:text-[#4F8EF7] font-medium"
                     >
                         Промпты
                     </Link>
+                    {user && <button
+                        onClick={handleLogout}
+                        className="bg-white text-gray-700 hover:bg-gray-500 hover:text-white px-4 py-2 rounded-xl font-medium transition"
+                    >
+                        Выход
+                    </button>
+
+                    }
                     {/* <Link
                         to="/publications"
                         className="text-gray-700 hover:text-[#4F8EF7] font-medium"
