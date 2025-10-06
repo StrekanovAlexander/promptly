@@ -1,30 +1,36 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
+import { useAuth } from "@/context/AuthContext.jsx";
 import { getPrompt } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
+import FormEditPrompt from "@/components/Prompts/FormEditPrompt.jsx";
 import { Icon, Spinner } from "@/components/ui/index.jsx";
 
 export default function PromptPage() {
+  const { user } = useAuth();
   const { categorySlug, slug } = useParams();
   const { setLoading, setError } = useApiStatus();
   const [ prompt, setPrompt ] = useState([]);
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+
   const parts = slug.split('-');
   const id = parseInt(parts.pop(), 10);
 
+  const loadPrompt = async () => {
+    setLoading("prompt", true);
+    setError("prompt", null);
+    try {
+      const data = await getPrompt(id);
+      setPrompt(data);
+    } catch (err) {
+      setError("prompt", err.toString());
+    } finally {
+      setLoading("prompt", false);
+    }
+  };
+
   useEffect(() => {
-    const loadPrompt = async () => {
-      setLoading("prompt", true);
-      setError("prompt", null);
-      try {
-        const data = await getPrompt(id);
-        setPrompt(data);
-      } catch (err) {
-          setError("prompt", err.toString());
-      } finally {
-        setLoading("prompt", false);
-      }
-    };
     loadPrompt();
   }, []); 
 
@@ -51,9 +57,19 @@ export default function PromptPage() {
               <span>{prompt.title}</span>
           </nav>
 
-          <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-6">
-            { prompt.title }
-          </h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-6">
+              { prompt.title }
+            </h1>
+            {user &&
+              <button
+                onClick={() => setIsModalOpen(true)} 
+                className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm transition font-medium text-sm"
+              >
+                Редактировать
+              </button>
+            }
+          </div>
 
           <div className="flex flex-wrap gap-2 mb-6">
               <span className="flex items-center gap-1 bg-blue-100 text-blue-800 px-3 py-1 rounded text-sm font-medium">
@@ -82,10 +98,14 @@ export default function PromptPage() {
             <button className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm hover:shadow-md transition font-medium text-sm">
               Скопировать
             </button>
-            {/* <button className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-xl shadow-sm hover:shadow-md transition font-medium text-sm">
-              Изменить
-            </button> */}
           </div>
+          { isModalOpen && 
+            <FormEditPrompt 
+              prompt={prompt}
+              onClose={() => setIsModalOpen(false)} 
+              onEdited={loadPrompt}
+            />
+          }
         </>
       }  
     </div>
