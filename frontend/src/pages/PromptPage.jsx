@@ -71,7 +71,7 @@ export default function PromptPage() {
             }
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-2">
               <span className="flex items-center gap-1 bg-blue-100 text-blue-800 px-3 py-1 rounded text-sm font-medium">
                 <Icon icon={prompt.Category.icon} size={4} /> {prompt.Category.name}
               </span>
@@ -84,6 +84,8 @@ export default function PromptPage() {
                 </span>
               ))}
           </div>
+          {/* Краткое описание промпта */}     
+          <p className="text-gray-700 my-4 text-sm">{prompt.description}</p>
           {/* Содержимое промпта */}
           <div className="mb-6 p-6 bg-gray-50 border border-gray-200 rounded-lg">
             <p className="text-gray-700 whitespace-pre-wrap">{prompt.body}</p>
