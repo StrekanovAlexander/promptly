@@ -7,8 +7,8 @@ export const generateSitemap = async (req, res) => {
         sitemap.write({ url: "/", changefreq: "daily", priority: 1.0 });
         sitemap.write({ url: "/prompts", changefreq: "daily", priority: 0.9 });
     
-        const categories = await Category.findAll();
-    
+        const categories = await Category.findAll({ where: {isActive: true}});
+
         categories.forEach((el) => {
             sitemap.write({
                 url: `/prompts/${el.slug}`,
@@ -17,7 +17,13 @@ export const generateSitemap = async (req, res) => {
             });
         });
     
-        const prompts = await Prompt.findAll({ include: [{ model: Category }] });
+        const prompts = await Prompt.findAll({ 
+            include: [{ 
+                model: Category,
+                where: { isActive: true } 
+            }] 
+        });
+        
         prompts.forEach((el) => {
             sitemap.write({
                 url: `/prompts/${el.Category.slug}/${el.slug}-${el.id}`,
