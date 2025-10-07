@@ -16,7 +16,7 @@ router.get("/", getAllPrompts);
 router.get("/:id", getPrompt);
 router.get("/user/:id", authMiddleware, getPromptsByUserId);
 router.post("/", authMiddleware, createPrompt);
-router.put("/:id", updatePrompt);
+router.put("/:id", authMiddleware, updatePrompt);
 router.delete("/:id", deletePrompt);
 router.patch("/:id/usage", incrementUsage);
 
