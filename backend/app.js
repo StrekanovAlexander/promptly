@@ -27,8 +27,8 @@ const app = express();
 
 app.use(cors({
     origin: [
-        "https://promptly.com",
-        "https://www.promptly.com",
+        "https://promptly.team",
+        "https://www.promptly.team",
         "http://localhost:5173"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
