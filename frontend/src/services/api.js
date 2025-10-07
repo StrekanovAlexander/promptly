@@ -1,5 +1,4 @@
 const API_URL = import.meta.env.VITE_API_URL;
-const token = localStorage.getItem("token");
 
 // Prompts
 export async function getPrompts() {
@@ -15,6 +14,7 @@ export async function getPrompt(id) {
 }
 
 export async function createPrompt(data) {
+    const token = localStorage.getItem("token");
     const res = await fetch(`${API_URL}/prompts`, {
         method: "POST",
         headers: {
@@ -29,8 +29,6 @@ export async function createPrompt(data) {
 
 export async function updatePrompt(data) {
     const token = localStorage.getItem("token");
-    console.log("Token before request:", token);
-    console.log("Backend api url:", API_URL);
     const { id, ...restData } = data;
     const res = await fetch(`${API_URL}/prompts/${id}`, {
         method: "PUT",
