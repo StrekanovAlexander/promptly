@@ -28,6 +28,8 @@ export async function createPrompt(data) {
 }
 
 export async function updatePrompt(data) {
+    console.log("Token before request:", token);
+    console.log("Backend api url:", API_URL);
     const { id, ...restData } = data;
     const res = await fetch(`${API_URL}/prompts/${id}`, {
         method: "PUT",
