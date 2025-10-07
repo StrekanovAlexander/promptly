@@ -16,6 +16,7 @@ export default function PromptPage() {
 
   const parts = slug.split('-');
   const id = parseInt(parts.pop(), 10);
+  const placeholders = normalizePlaceholders(prompt?.placeholders || []);
 
   const loadPrompt = async () => {
     setLoading("prompt", true);
@@ -71,34 +72,76 @@ export default function PromptPage() {
             }
           </div>
 
-          <div className="flex flex-wrap gap-2">
-              <span className="flex items-center gap-1 bg-blue-100 text-blue-800 px-3 py-1 rounded text-sm font-medium">
-                <Icon icon={prompt.Category.icon} size={4} /> {prompt.Category.name}
-              </span>
-              {prompt.tags?.split(",").map((tag) => ( 
-                <span 
-                  key={tag} 
-                  className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm"
+          {/* Категория и теги */}
+          <div className="flex flex-wrap gap-2 items-center">
+            <span className="flex items-center gap-1 bg-blue-100 text-blue-800 px-3 py-1 rounded text-sm font-medium">
+              <Icon icon={prompt.Category.icon} size={4} /> {prompt.Category.name}
+            </span>
+            {prompt.tags &&
+              prompt.tags.split(",").map((tag) => (
+                <span
+                  key={tag.trim()}
+                  className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm"
                 >
-                  {tag}
+                  #{tag.trim()}
                 </span>
               ))}
           </div>
+
           {/* Краткое описание промпта */}     
-          <p className="text-gray-700 my-4 text-sm">
-            Краткое описание промпта: {prompt.description}
-          </p>
+          {prompt.description && (
+            <div className="border-l-4 border-blue-400 pl-4 text-gray-700">
+              <p className="text-sm leading-relaxed">
+                {prompt.description}
+              </p>
+            </div>
+          )}
+
           {/* Содержимое промпта */}
-          <div className="mb-6 p-6 bg-gray-50 border border-gray-200 rounded-lg">
-            <p className="text-gray-700 whitespace-pre-wrap">
+          <div className="p-6 bg-gray-50 border border-gray-200 rounded-xl">
+            <h2 className="text-lg font-semibold text-gray-800 mb-3">
+              Содержимое промпта
+            </h2>
+            <pre className="text-gray-700 whitespace-pre-wrap font-sans text-sm leading-relaxed">
               {prompt.body}
-            </p>
+            </pre>
           </div>
           {/* Пример результата */}
-          <div className="mb-6 p-6 bg-gray-50 border border-gray-200 rounded-lg">
-            <h2 className="text-lg font-medium text-gray-800 mb-2">Пример результата</h2>
-            <p className="text-gray-700 whitespace-pre-wrap">{prompt.response}</p>
-          </div>
+          {prompt.response && (
+            <div className="p-6 bg-gray-50 border border-gray-200 rounded-xl">
+              <h2 className="text-lg font-semibold text-gray-800 mb-3">
+                Пример результата
+              </h2>
+              <pre className="text-gray-700 whitespace-pre-wrap font-sans text-sm leading-relaxed">
+                {prompt.response}
+              </pre>
+            </div>
+          )}
+          {/* Плейсхолдеры (если есть) */}
+          {prompt.placeholders && prompt.placeholders.length > 0 && (
+            <div className="p-6 bg-gray-50 border border-gray-200 rounded-xl">
+              <h2 className="text-lg font-semibold text-gray-800 mb-3">
+                Переменные (Placeholders)
+              </h2>
+              <table className="w-full text-sm text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-100">
+                    <th className="py-2 px-3 text-gray-700 font-medium">Имя</th>
+                    <th className="py-2 px-3 text-gray-700 font-medium">Описание</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {placeholders.map((ph, idx) => (
+                    <tr key={idx} className="border-b border-gray-100">
+                      <td className="py-2 px-3 text-gray-800 font-mono">{ph.name}</td>
+                      <td className="py-2 px-3 text-gray-700">{ph.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
           {/* Кнопки действий */}
           <div className="flex flex-wrap gap-4">
             <button className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm hover:shadow-md transition font-medium text-sm">
@@ -116,4 +159,22 @@ export default function PromptPage() {
       }  
     </div>
   )
+}
+
+function normalizePlaceholders(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string") {
+    try {
+      const parsed = JSON.parse(value);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+  if (typeof value === "object" && value !== null) {
+    if ("name" in value && "description" in value) return [value];
+    return [];
+  }
+  return [];
 }

@@ -36,6 +36,18 @@ export const getPromptsByUserId = async (req, res) => {
 // POST /api/prompts
 export const createPrompt = async (req, res) => {
     try {
+        //
+        if (req.body.placeholders) {
+            try {
+                if (typeof req.body.placeholders === "string") {
+                    req.body.placeholders = JSON.parse(req.body.placeholders);
+                }
+            } catch (err) {
+                console.warn("Parsing placeholders error: ", err);
+                req.body.placeholders = [];
+            }
+        }
+        //
         const prompt = await Prompt.create(req.body);
         res.status(201).json(prompt);
     } catch (err) {
@@ -47,6 +59,18 @@ export const updatePrompt = async (req, res) => {
     try {
         const prompt = await Prompt.findByPk(req.params.id);
         if (!prompt) return res.status(404).json({ error: "Prompt not found" });
+        //
+        if (req.body.placeholders) {
+            try {
+                if (typeof req.body.placeholders === "string") {
+                    req.body.placeholders = JSON.parse(req.body.placeholders);
+                }
+            } catch (err) {
+                console.warn("Parsing placeholders error: ", err);
+                req.body.placeholders = [];
+            }
+        }
+        //
         await prompt.update(req.body);
         res.json(prompt);
     } catch (err) {
