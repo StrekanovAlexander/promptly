@@ -23,6 +23,8 @@ export default function FormCreatePrompt({ onClose, onCreated }) {
         language: "ru",
     });
 
+    const [activeTab, setActiveTab] = useState("tab1");
+
     const handleChange = (ev) => {
         if (ev.target.name === "title") {
             const slug = createSlug(ev.target.value);
@@ -129,6 +131,7 @@ export default function FormCreatePrompt({ onClose, onCreated }) {
                             />
                         </div>
                     </div>
+
                     <div className="flex gap-4">
                         {/* Описание */}
                         <div className="flex-1">
@@ -160,35 +163,60 @@ export default function FormCreatePrompt({ onClose, onCreated }) {
                             </select>
                         </div>
                     </div>            
-                    {/* Тело промпта */}
+
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Текст промпта
-                        </label>
-                        <textarea
-                            name="body"
-                            value={formData.body}
-                            onChange={handleChange}
-                            rows={4}
-                            required
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 resize-none focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                            placeholder="Введите текст промпта..."
-                        />
-                    </div>
-                    {/* Пример ответа */}
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Пример ответа
-                        </label>
-                        <textarea
-                            name="response"
-                            value={formData.response}
-                            onChange={handleChange}
-                            rows={5}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 resize-none focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                            placeholder="Пример результата от ИИ..."
-                        />
-                    </div>
+                        <div className="flex border-b border-gray-300 mb-4">
+                            <button
+                                type="button"
+                                className={`px-4 py-2 -mb-px font-medium text-sm ${
+                                    activeTab === "tab1"
+                                    ? "border-b-2 border-blue-500 text-blue-500"
+                                    : "text-gray-500 hover:text-blue-500"
+                                }`}
+                                onClick={() => setActiveTab("tab1")}
+                            >
+                                Текст промпта
+                            </button>
+
+                            <button
+                                type="button"
+                                className={`px-4 py-2 -mb-px font-medium text-sm ${
+                                    activeTab === "tab2"
+                                    ? "border-b-2 border-blue-500 text-blue-500"
+                                    : "text-gray-500 hover:text-blue-500"
+                                }`}
+                                onClick={() => setActiveTab("tab2")}
+                            >
+                                Пример ответа
+                            </button>
+
+                        </div>
+                        {/* Контент вкладок */}
+                        <div>
+                            {activeTab === "tab1" && 
+                                <textarea
+                                    name="body"
+                                    value={formData.body}
+                                    onChange={handleChange}
+                                    rows={11}
+                                    required
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 resize-none focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                    placeholder="Введите текст промпта..."
+                                />
+                            }
+                            {activeTab === "tab2" &&
+                                <textarea
+                                    name="response"
+                                    value={formData.response}
+                                    onChange={handleChange}
+                                    rows={11}
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 resize-none focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                    placeholder="Пример ответа от ИИ..."
+                                /> 
+                            }
+                        </div>
+                    </div>            
+
                 </form>
                 {/* Footer */}
                 <div className="border-t border-gray-200 px-6 py-4 flex justify-end gap-3 bg-gray-50">
