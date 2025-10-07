@@ -43,6 +43,14 @@ export const Prompt = db.define("Prompt", {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    license: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    placeholders: {
+      type: DataTypes.JSON,
+      allowNull: true,
+    },
     isPublic: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,

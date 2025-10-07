@@ -5,6 +5,7 @@ import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useCategories } from "@/context/GlobalContext.jsx";
 import { updatePrompt } from "@/services/api.js";
 import { createSlug } from "@/utils/strings.js";
+import PlaceholdersEditor from "./PlaceholdersEditor.jsx";
 
 export default function FormEditPrompt({ prompt, onClose, onEdited }) {
     const { categories } = useCategories();
@@ -19,6 +20,9 @@ export default function FormEditPrompt({ prompt, onClose, onEdited }) {
         description: prompt.description,
         tags: prompt.tags,
         language: prompt.language,
+        license: prompt.license,
+        author: prompt.author,
+        placeholders: prompt.placeholders ? JSON.parse(prompt.placeholders) : []
     });
 
     const [activeTab, setActiveTab] = useState("tab1");
@@ -32,10 +36,16 @@ export default function FormEditPrompt({ prompt, onClose, onEdited }) {
         }
     };
 
+    const handlePlaceholdersChange = (newPlaceholders) => {
+        setFormData((prev) => ({ ...prev, placeholders: newPlaceholders }));
+    };
+
     const handleSubmit = async (ev) => {
         ev.preventDefault();
+        const payload = { ...formData, placeholders: JSON.stringify(formData.placeholders) };
+
         try {
-            await updatePrompt(formData);
+            await updatePrompt(payload);
             toast.success(`Промпт был отредактирован`);
             onEdited();
         } catch(err) {
@@ -129,37 +139,6 @@ export default function FormEditPrompt({ prompt, onClose, onEdited }) {
                             />
                         </div>
                     </div>
-                    <div className="flex gap-4">
-                        {/* Описание */}
-                        <div className="flex-1">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Описание промпта
-                            </label>
-                            <input
-                                type="text"
-                                name="description"
-                                value={formData.description}
-                                onChange={handleChange}
-                                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                placeholder="Краткое описание для каталога"
-                            />
-                        </div>
-                        {/* Язык */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Язык
-                            </label>
-                            <select
-                                name="language"
-                                value={formData.language}
-                                onChange={handleChange}
-                                className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                            >
-                                <option value="ru">Русский</option>
-                                <option value="en">English</option>
-                            </select>
-                        </div>
-                    </div>
 
                     <div>
                         <div className="flex border-b border-gray-300 mb-4">
@@ -187,6 +166,29 @@ export default function FormEditPrompt({ prompt, onClose, onEdited }) {
                                 Пример ответа
                             </button>
 
+                            <button
+                                type="button"
+                                className={`px-4 py-2 -mb-px font-medium text-sm ${
+                                    activeTab === "tab3"
+                                    ? "border-b-2 border-blue-500 text-blue-500"
+                                    : "text-gray-500 hover:text-blue-500"
+                                }`}
+                                onClick={() => setActiveTab("tab3")}
+                            >
+                                Плейсхолдеры
+                            </button>
+
+                            <button
+                                type="button"
+                                className={`px-4 py-2 -mb-px font-medium text-sm ${
+                                    activeTab === "tab4"
+                                    ? "border-b-2 border-blue-500 text-blue-500"
+                                    : "text-gray-500 hover:text-blue-500"
+                                }`}
+                                onClick={() => setActiveTab("tab4")}
+                            >
+                                Разное
+                            </button>                            
                         </div>
                         {/* Контент вкладок */}
                         <div>
@@ -210,6 +212,70 @@ export default function FormEditPrompt({ prompt, onClose, onEdited }) {
                                     className="w-full border border-gray-300 rounded-lg px-3 py-2 resize-none focus:ring-2 focus:ring-blue-500 focus:outline-none"
                                     placeholder="Пример ответа от ИИ..."
                                 /> 
+                            }
+                            {activeTab === "tab3" &&
+                                <PlaceholdersEditor 
+                                    initialPlaceholders={formData.placeholders}
+                                    onChange={handlePlaceholdersChange}
+                                />
+                            }
+                            {activeTab === "tab4" &&
+                                <>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Описание промпта
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="description"
+                                            value={formData.description}
+                                            onChange={handleChange}
+                                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                            placeholder="Краткое описание для каталога"
+                                        />
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                Лицензия
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="license"
+                                                value={formData.license}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                Автор
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="author"
+                                                value={formData.author}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                Язык
+                                            </label>
+                                            <select
+                                                name="language"
+                                                value={formData.language}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                            >
+                                                <option value="ru">Русский</option>
+                                                <option value="en">English</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </>
                             }
                         </div>
                     </div>            
