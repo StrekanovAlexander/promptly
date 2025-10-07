@@ -28,6 +28,7 @@ export async function createPrompt(data) {
 }
 
 export async function updatePrompt(data) {
+    const token = localStorage.getItem("token");
     console.log("Token before request:", token);
     console.log("Backend api url:", API_URL);
     const { id, ...restData } = data;
