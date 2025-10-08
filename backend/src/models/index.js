@@ -1,4 +1,5 @@
 import { Category } from "./Category.js";
+import { Platform } from "./Platform.js";
 import { Post } from "./Post.js";
 import { PostCategory } from "./PostCategory.js";
 import { Prompt } from "./Prompt.js";
@@ -13,4 +14,4 @@ Prompt.belongsTo(Category, { foreignKey: "categoryId"});
 PostCategory.hasMany(Post, { foreignKey: "postCategoryId", as: "posts" });
 Post.belongsTo(PostCategory, { foreignKey: "postCategoryId", as: "postCategory"});
 
-export { Category, Post, PostCategory, Prompt, User }
+export { Category, Platform, Post, PostCategory, Prompt, User }

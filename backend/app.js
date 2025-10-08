@@ -5,6 +5,7 @@ import { db } from "./src/config/db.js";
 import { 
     authRoutes, 
     categoryRoutes, 
+    platformRoutes, 
     postRoutes,
     postCategoryRoutes, 
     promptRoutes, 
@@ -40,6 +41,7 @@ app.use(express.json());
 app.get('/', (req, res) => res.send('Server is running...'));
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/platforms", platformRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/post-categories", postCategoryRoutes);
 app.use("/api/prompts", promptRoutes);
