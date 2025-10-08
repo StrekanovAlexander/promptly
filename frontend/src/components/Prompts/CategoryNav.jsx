@@ -8,7 +8,7 @@ export default function CategoryNav() {
   const { filterCategory } = useFilters();
   
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 w-64 flex flex-col gap-3">
+    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 w-64 flex flex-col gap-3 md:sticky md:top-[105px]">
       <h3 className="text-gray-800 font-opensans font-semibold text-lg mb-2">Категории</h3>
       <Link
         to={`/prompts`}
