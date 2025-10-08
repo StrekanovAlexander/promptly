@@ -58,6 +58,12 @@ export async function getCategories() {
     if (!res.ok) throw new Error("Failed to fetch categories");
     return res.json();
 }
+// Platforms
+export async function getPlatforms() {
+    const res = await fetch(`${API_URL}/platforms`);
+    if (!res.ok) throw new Error("Failed to fetch platforms");
+    return res.json();
+}
 // Categories
 export async function getPostCategories() {
     const res = await fetch(`${API_URL}/post-categories`);

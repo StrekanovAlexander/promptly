@@ -15,7 +15,7 @@ import {
 import MainLayout from "@/layouts/MainLayout.jsx";
 import SidebarLayout from "@/layouts/SidebarLayout.jsx";
 import BlankLayout from "@/layouts/BlankLayout.jsx";
-import CategoryNav from "@/components/Prompts/CategoryNav.jsx";
+import PromptsNav from "@/components/Prompts/PromptsNav.jsx";
 import { IndexPage, PromptsPage, PromptPage } from "@/pages/index.jsx"
 // ***************** End next version
 
@@ -37,7 +37,7 @@ export default function Routing() {
                 <Route path="/" element={<IndexPage />} />
             </Route>
             
-            <Route element={<SidebarLayout nav={<CategoryNav />} />}>
+            <Route element={<SidebarLayout nav={<PromptsNav />} />}>
                 <Route path="/prompts" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} />
