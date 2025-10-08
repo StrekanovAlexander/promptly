@@ -9,6 +9,9 @@ import MyPromptsPage from "./profile/MyPromptsPage.jsx";
 import IndexPage from "./IndexPage.jsx";
 import PromptsPage from "./PromptsPage.jsx";
 import PromptPage from "./PromptPage.jsx";
+
+import SketchPrompts from "./sketch/SketchPrompts.jsx";
+import SketchIndex from "./sketch/SketchIndex.jsx";
 // ***************** End next version
 
 export {
@@ -21,5 +24,8 @@ export {
     
     IndexPage,
     PromptsPage,
-    PromptPage
+    PromptPage,
+
+    SketchIndex,
+    SketchPrompts
 }

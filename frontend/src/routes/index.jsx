@@ -17,6 +17,9 @@ import SidebarLayout from "@/layouts/SidebarLayout.jsx";
 import BlankLayout from "@/layouts/BlankLayout.jsx";
 import PromptsNav from "@/components/Prompts/PromptsNav.jsx";
 import { IndexPage, PromptsPage, PromptPage } from "@/pages/index.jsx"
+
+import LayoutWithoutSidebar from "@/layouts/graphite/LayoutWithoutSidebar.jsx";
+import { SketchIndex, SketchPrompts } from "@/pages/index.jsx";
 // ***************** End next version
 
 export default function Routing() {
@@ -47,6 +50,11 @@ export default function Routing() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/oauth/callback" element={<OAuthCallback />} />
             </Route>
+
+            <Route element={<LayoutWithoutSidebar />}>
+                <Route path="/sketch/index" element={<SketchIndex />} />
+            </Route>
+            <Route path="/sketch/prompts" element={<SketchPrompts />} />
 
         </Routes>
     )
