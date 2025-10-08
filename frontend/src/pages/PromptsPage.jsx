@@ -95,14 +95,21 @@ export default function PromptsPage() {
       } 
       <div className="flex items-center justify-between"> 
         {!category && 
-          <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-6">
-            Библиотека промптов
-          </h1>
+          <div className="mb-6">
+            <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-4">
+              Библиотека промптов
+            </h1>
+            <p className="text-gray-500 leading-normal">Все промпты каталога</p>
+          </div>
+          
         }
         {category && 
-          <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-6">
-            { category.name }
-          </h1>
+          <div className="mb-6">
+            <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-4">
+              { category.name }
+            </h1>
+            <p className="text-gray-500 leading-normal">{ category.description }</p>
+          </div>
         }
         {user &&
           <button
