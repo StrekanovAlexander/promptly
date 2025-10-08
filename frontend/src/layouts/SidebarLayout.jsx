@@ -4,7 +4,7 @@ import Footer from "./Footer.jsx";
 
 export default function SidebarLayout({ nav }) {
     return (
-        <div className="min-h-screen flex flex-col bg-white text-gray-800">
+        <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
             <Header />
             <div className="flex flex-1 container mx-auto px-4 py-8 gap-6">
                 {/* Sidebar */}

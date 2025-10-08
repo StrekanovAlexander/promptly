@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Heart, BarChart3 } from "lucide-react";
 import Icon from "../ui/Icon.jsx";
+import IconPlatform from "../ui/IconPlatform.jsx";
 
 export default function Card({ prompt }) {
   return (
@@ -19,10 +20,15 @@ export default function Card({ prompt }) {
         </div>
       </div>
       {/* Категория */}
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center justify-between gap-2 mb-3">
         <span className="flex items-center gap-1 bg-blue-50 text-blue-700 px-2 py-1 rounded-md text-xs font-medium">
           <Icon icon={prompt.Category.icon} size="5" />
           {prompt.Category.name}
+        </span>
+        <span className="flex items-center gap-2">
+          {prompt.platforms &&
+            prompt.platforms.map(el => <IconPlatform key={el.id} platform={el} />)
+          }
         </span>
       </div>
       {/* Теги */}

@@ -15,7 +15,7 @@ export default function PromptsPage() {
   const { categories } = useCategories();
   const { categorySlug } = useParams();
   const { setLoading, setError } = useApiStatus();
-  const { filterCategory, setFilterCategory, filterSearch, setFilterSearch, sorting, setSorting } = useFilters();
+  const { filterCategory, setFilterCategory, filterSearch, setFilterSearch, filterPlatforms, sorting, setSorting } = useFilters();
   const [ category, setCategory ] = useState(null);
   const [ prompts, setPrompts ] = useState([]);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -63,6 +63,12 @@ export default function PromptsPage() {
       el.title.toLowerCase().includes(filterSearch.toLowerCase()) ||
       el.body.toLowerCase().includes(filterSearch.toLowerCase()) ||
       el.response.toLowerCase().includes(filterSearch.toLowerCase())
+    );
+  }
+
+  if (filterPlatforms.length > 0) {
+    filteredPrompts = filteredPrompts.filter(el =>
+      el.platforms.some(p => filterPlatforms.includes(p.id))
     );
   }
 
