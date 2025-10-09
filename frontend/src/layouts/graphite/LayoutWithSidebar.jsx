@@ -12,17 +12,19 @@ export default function LayoutWithSidebar({ nav }) {
             <HeaderWide />
 
             {/* Основная область */}
-            <div className="flex flex-grow relative z-10 pt-[125px] px-8">
-                <div className="flex flex-col md:flex-row w-full max-w-[1800px] mx-auto gap-4 md:gap-8">
-                    {/* Сайдбар */}
-                    <aside className="w-full md:w-64 shrink-0 py-8">
-                        {nav}
-                    </aside>
+            <div className="flex flex-grow relative z-10 pt-[125px]">
+                <div className="w-full max-w-[1800px] mx-auto flex flex-col md:flex-row gap-8 px-8 relative">
+                
+                {/* Сайдбар */}
+                <aside className="hidden md:block w-64 h-[calc(100vh-125px)] fixed top-[125px] left-[calc((100%-1800px)/2)] py-8 pr-6 border-r border-neutral-700/50 bg-neutral-900/40 backdrop-blur-md">
+                    {nav}
+                </aside>
 
-                    {/* Контент */}
-                    <main className="flex-grow py-10">
-                        <Outlet />
-                    </main>
+                {/* Контент */}
+                <main className="flex-grow md:ml-64 px-6 py-10">
+                    <Outlet />
+                </main>
+
                 </div>
             </div>
 

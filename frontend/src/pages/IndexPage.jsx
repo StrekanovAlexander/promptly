@@ -79,18 +79,19 @@ export default function IndexPage() {
 
             <section className="mt-10 flex flex-col items-center">
                 
-                <h3 className="text-3xl font-bold font-opensans mb-8 text-center">
-                    Недавно добавленные
-                </h3>
-                
                 { status.prompts?.isLoading && <Spinner2 /> }
 
                 {!status.prompts?.isLoading &&
-                    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
-                        {filteredPrompts.map((el) => (
-                            <Card2 key={el.id} prompt={el} />
-                        ))}
-                    </div>
+                    <>
+                        <h3 className="text-3xl font-bold font-opensans mb-8 text-center">
+                            Недавно добавленные
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
+                            {filteredPrompts.map((el) => (
+                                <Card2 key={el.id} prompt={el} />
+                            ))}
+                        </div>
+                    </>
                 }
 
             </section>
