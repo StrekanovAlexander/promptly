@@ -50,8 +50,9 @@ export default function IndexPage() {
                 <h2 className="text-3xl md:text-4xl font-opensans font-bold mb-4">
                     Найди свой идеальный промпт
                 </h2>
-                <p className="text-neutral-400 text-lg">
-                    Библиотека лучших промптов для генеративного ИИ
+                <p className="text-neutral-400 text-lg max-w-3xl mx-auto leading-relaxed">
+                    Библиотека лучших промптов для генеративного ИИ.
+                    Здесь собраны лучшие промпты для ChatGPT, Bard, Copilot, Claude и других моделей.
                 </p>
             </section>
 
@@ -78,8 +79,8 @@ export default function IndexPage() {
 
             <section className="mt-10 flex flex-col items-center">
                 
-                <h3 className="text-3xl font-semibold font-opensans mb-8 text-center">
-                    Недавно добавленные промпты
+                <h3 className="text-3xl font-bold font-opensans mb-8 text-center">
+                    Недавно добавленные
                 </h3>
                 
                 { status.prompts?.isLoading && <Spinner2 /> }

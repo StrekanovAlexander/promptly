@@ -18,6 +18,8 @@ import PromptsNav from "@/components/Prompts/PromptsNav.jsx";
 import { IndexPage, PromptsPage, PromptPage } from "@/pages/index.jsx"
 
 import LayoutWithoutSidebar from "@/layouts/graphite/LayoutWithoutSidebar.jsx";
+import LayoutWithSidebar from "@/layouts/graphite/LayoutWithSidebar.jsx";
+import SidebarPrompts from "@/components/Prompts/SidebarPrompts.jsx";
 import { SketchIndex, SketchPrompts } from "@/pages/index.jsx";
 // ***************** End next version
 
@@ -36,8 +38,7 @@ export default function Routing() {
             </Route>
             
             <Route element={<SidebarLayout nav={<PromptsNav />} />}>
-                <Route path="/prompts" element={<PromptsPage />} />
-                <Route path="/prompts/:categorySlug" element={<PromptsPage />} />
+                {/* <Route path="/prompts/:categorySlug" element={<PromptsPage />} /> */}
                 <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} />
             </Route>
 
@@ -50,6 +51,12 @@ export default function Routing() {
                 <Route path="/" element={<IndexPage />} />
                 <Route path="/sketch/index" element={<SketchIndex />} />
             </Route>
+
+            <Route element={<LayoutWithSidebar nav={<SidebarPrompts />}  />}>
+                <Route path="/prompts" element={<PromptsPage />} />
+                <Route path="/prompts/:categorySlug" element={<PromptsPage />} />
+            </Route>
+
             <Route path="/sketch/prompts" element={<SketchPrompts />} />
 
         </Routes>

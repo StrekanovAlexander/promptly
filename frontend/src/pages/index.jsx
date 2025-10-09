@@ -7,11 +7,13 @@ import MyPromptsPage from "./profile/MyPromptsPage.jsx";
 
 // ***************** Next version
 import IndexPage from "./IndexPage.jsx";
-import PromptsPage from "./PromptsPage.jsx";
+// import PromptsPage from "./PromptsPage.jsx";
 import PromptPage from "./PromptPage.jsx";
 
 import SketchPrompts from "./sketch/SketchPrompts.jsx";
 import SketchIndex from "./sketch/SketchIndex.jsx";
+
+import PromptsPage from "./PromptsPage.jsx";
 
 // ***************** End next version
 
@@ -25,9 +27,8 @@ export {
     
     IndexPage,
     PromptsPage,
+    
     PromptPage,
-
     SketchIndex,
     SketchPrompts,
-    
 }

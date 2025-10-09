@@ -2,169 +2,190 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Search } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
-import { useAuth } from "@/context/AuthContext.jsx";
 import { useCategories } from "@/context/GlobalContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
-import PromptCard from "@/components/Prompts/Card.jsx";
-import FormCreatePrompt from "@/components/Prompts/FormCreatePrompt";
+import Card2 from "@/components/Prompts/Card2.jsx";
+import { Icon2, Spinner2}  from "@/components/ui/index.jsx";
 
 export default function PromptsPage() {
-  const { user } = useAuth();
-  const { categories } = useCategories();
-  const { categorySlug } = useParams();
-  const { setLoading, setError } = useApiStatus();
-  const { filterCategory, setFilterCategory, filterSearch, setFilterSearch, filterPlatforms, sorting, setSorting } = useFilters();
-  const [ category, setCategory ] = useState(null);
-  const [ prompts, setPrompts ] = useState([]);
-  const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const { status, setLoading, setError } = useApiStatus();
+    const [ prompts, setPrompts ] = useState([]);
+    const { categories } = useCategories();
+    const { categorySlug } = useParams();
+    const { filterCategory, setFilterCategory, filterSearch, setFilterSearch, filterPlatforms, sorting, setSorting } = useFilters();
+    const [ category, setCategory ] = useState(null);
 
-  const loadPrompts = async () => {
-    setLoading("prompts", true);
-    setError("prompts", null);
-    try {
-      const data = await getPrompts();
-      setPrompts(data);
-    } catch (err) {
-      setError("prompts", err.toString());
-    } finally {
-      setLoading("prompts", false);
+    const loadPrompts = async () => {
+        setLoading("prompts", true);
+        setError("prompts", null);
+        try {
+        const data = await getPrompts();
+        setPrompts(data);
+        } catch (err) {
+        setError("prompts", err.toString());
+        } finally {
+        setLoading("prompts", false);
+        }
+    };
+
+    useEffect(() => {
+        loadPrompts();
+    }, []); 
+
+    useEffect(() => {
+        if (categorySlug) {
+            const foundCategory = categories.find((el) => el.slug === categorySlug);
+            setCategory(foundCategory);
+            if (foundCategory) {
+                setFilterCategory(foundCategory.id);
+            } else {
+                setFilterCategory("all");
+            }
+        } else {
+            setCategory(null);
+            setFilterCategory("all");
+        }
+    }, [categorySlug, setFilterCategory]);
+
+    let filteredPrompts = prompts;
+
+    if (filterCategory !== "all") {
+        filteredPrompts = prompts.filter(el => el.categoryId === filterCategory);
+    } 
+
+    if (filterSearch.trim()) {
+        filteredPrompts = prompts.filter(el =>
+            el.title.toLowerCase().includes(filterSearch.toLowerCase()) ||
+            el.body.toLowerCase().includes(filterSearch.toLowerCase()) ||
+            el.response.toLowerCase().includes(filterSearch.toLowerCase())
+        );
     }
-  };
-  
-  useEffect(() => {
-    if (categorySlug) {
-      const foundCategory = categories.find((el) => el.slug === categorySlug);
-      setCategory(foundCategory);
-      if (foundCategory) {
-        setFilterCategory(foundCategory.id);
-      } else {
-        setFilterCategory("all");
-      }
+
+    if (filterPlatforms.length > 0) {
+        filteredPrompts = filteredPrompts.filter(el =>
+            el.platforms.some(p => filterPlatforms.includes(p.id))
+        );
+    }
+
+    if (sorting === "popular") {
+        filteredPrompts = [...filteredPrompts].sort((a, b) => b.usageCount - a.usageCount);
+    } else if (sorting === "newest") {
+        filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    } else if (sorting === "oldest") {
+        filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
     } else {
-      setCategory(null);
-      setFilterCategory("all");
+        filteredPrompts.sort((a, b) => a.title.localeCompare(b.title));
     }
-  }, [categorySlug, setFilterCategory]);
 
-  useEffect(() => {
-    loadPrompts();
-  }, []); 
+    useSEO({
+        title: category ? `${category.name} - Промпты` : "Библиотека промптов",
+        description: category?.description || "Подборка промптов по разным направлениям",
+        canonical: category
+            ? `https://www.promptly.team/prompts/${category.slug}`
+            : "https://www.promptly.team/prompts"
+    });
 
-  let filteredPrompts = prompts;
+    return (
+        <div className="w-full">
+            <nav aria-label="breadcrumb" className="flex items-center gap-2 text-sm text-neutral-400 mb-6">
+                <Link
+                    to="/"
+                    className="hover:text-sky-400 transition-colors duration-200"
+                >
+                    Главная
+                </Link>
+                <span className="text-neutral-600">/</span>
+                <Link
+                    to="/prompts"
+                    className="hover:text-sky-400 transition-colors duration-200"
+                >
+                    Промпты
+                </Link>
+                <span className="text-neutral-600">/</span>
+                <span 
+                    className="text-neutral-300 font-medium relative"
+                    // className="text-sky-400 font-medium relative"
+                    style={{
+                        textShadow: '0 0 4px rgba(56,189,248,0.5), 0 0 10px rgba(56,189,248,0.3)'
+                    }}
+                >
+                    {category ? category?.name : 'Все категории'}
+                </span>
+            </nav>
 
-  if (filterCategory !== "all") {
-    filteredPrompts = prompts.filter(el => el.categoryId === filterCategory);
-  } 
-  
-  if (filterSearch.trim()) {
-    filteredPrompts = prompts.filter(el =>
-      el.title.toLowerCase().includes(filterSearch.toLowerCase()) ||
-      el.body.toLowerCase().includes(filterSearch.toLowerCase()) ||
-      el.response.toLowerCase().includes(filterSearch.toLowerCase())
-    );
-  }
+            {/* Заголовок страницы */}
+            <section className="mb-6">
+                {/* Основной заголовок */}
+                <div className="flex items-center gap-2 mb-2">
+                    {category && (
+                    <Icon2
+                        icon={category.icon}
+                        size={22}
+                        className="text-sky-400 shrink-0"
+                    />
+                    )}
+                    <h1 className="text-2xl md:text-3xl font-bold font-opensans text-neutral-300">
+                        {category ? `Промпты категории «${category.name}»` : "Все промпты библиотеки"}
+                    </h1>
+                </div>
 
-  if (filterPlatforms.length > 0) {
-    filteredPrompts = filteredPrompts.filter(el =>
-      el.platforms.some(p => filterPlatforms.includes(p.id))
-    );
-  }
+                {/* Подзаголовок / описание */}
+                <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-3xl">
+                    {category
+                    ? category.description ||
+                        "Все промпты, связанные с визуальной творческой деятельностью: логотипы, макеты, UI/UX, генерация изображений."
+                    : "Здесь собраны лучшие промпты для ChatGPT, Bard, Copilot, Claude и других моделей. Используй фильтры слева, чтобы выбрать нужную категорию или платформу."}
+                </p>
+            </section>
 
-  if (sorting === "popular") {
-    filteredPrompts = [...filteredPrompts].sort((a, b) => b.usageCount - a.usageCount);
-  } else if (sorting === "newest") {
-    filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-  } else if (sorting === "oldest") {
-    filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
-  } else {
-    filteredPrompts.sort((a, b) => a.title.localeCompare(b.title));
-  }
+            {/* Поиск */}
+            <section className="flex justify-center mt-6">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+                    <div className="relative w-full sm:max-w-md">
+                        <Search
+                            className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-400 transition-colors duration-300
+                            peer-focus:text-sky-300"
+                            size={20}
+                        />
+                        <input
+                            type="text"
+                            value={filterSearch}
+                            onChange={(ev) => setFilterSearch(ev.target.value)}
+                            placeholder="Поиск по промптам..."
+                            className="w-full rounded-xl bg-neutral-800/80 pl-10 pr-4 py-2.5 text-sm 
+                                border border-neutral-700 text-neutral-100 placeholder-neutral-400
+                                focus:outline-none focus:ring-2 focus:ring-sky-500 transition peer h-11"
+                        />
+                    </div>
+                    {/* Селектор сортировки */}
+                    <select
+                        value={sorting}
+                        onChange={(ev) => setSorting(ev.target.value)}
+                        className="rounded-xl bg-neutral-800/80 border border-neutral-700 text-neutral-200 text-sm 
+                            px-4 h-11 focus:outline-none focus:ring-2 focus:ring-sky-500 transition cursor-pointer appearance-none"
+                    >
+                        <option value="popular">По популярности</option>
+                        <option value="newest">Сначала новые</option>
+                        <option value="oldest">Сначала старые</option>
+                        <option value="title">По наименованию</option>
+                    </select>
+                </div>
+            </section>
 
-  useSEO({
-    title: category ? `${category.name} — Промпты` : "Библиотека промптов",
-    description: category?.description || "Подборка промптов по разным направлениям",
-    canonical: category
-      ? `https://www.promptly.team/prompts/${category.slug}`
-      : "https://www.promptly.team/prompts"
-  });
+            {/* Контент */}
+            <section className="mt-10">
+                { status.prompts?.isLoading && <Spinner2 /> }
+                {!status.prompts?.isLoading &&
+                    <div className="grid gap-6 sm:gap-8 grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-center">
+                        {filteredPrompts.map((el) => (
+                            <Card2 key={el.id} prompt={el} />
+                        ))}
+                    </div>
+                }
+            </section>
 
-  return (
-    <div className="flex flex-col gap-6">
-
-      {category &&
-        <nav aria-label="breadcrumb" className="text-sm text-gray-500 mb-4">
-          <Link to="/prompts" className="hover:underline">Промпты</Link>
-          <span className="mx-2">/</span>
-          <span>{category.name}</span>
-        </nav>
-      } 
-      <div className="flex items-center justify-between"> 
-        {!category && 
-          <div className="mb-6">
-            <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-4">
-              Библиотека промптов
-            </h1>
-            <p className="text-gray-500 leading-normal">Все промпты каталога</p>
-          </div>
-          
-        }
-        {category && 
-          <div className="mb-6">
-            <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-4">
-              { category.name }
-            </h1>
-            <p className="text-gray-500 leading-normal">{ category.description }</p>
-          </div>
-        }
-        {user &&
-          <button
-            onClick={() => setIsModalOpen(true)} 
-            className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm transition font-medium text-sm"
-          >
-            Создать промпт
-          </button>
-        }
-      </div>
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-        {/* Поиск */}
-        <div className="relative flex-1">
-          <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
-            <Search className="w-5 h-5" />
-          </span>
-          <input
-            value={filterSearch}
-            onChange={(ev) => setFilterSearch(ev.target.value)}
-            type="text"
-            placeholder="Например: маркетинг, дизайн, код..."
-            className="w-full border border-gray-300 rounded-lg px-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
         </div>
-        {/* Сортировка */}
-        <select
-          value={sorting} 
-          onChange={ev => setSorting(ev.target.value)}
-          className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="popular">По популярности</option>
-          <option value="newest">Сначала новые</option>
-          <option value="oldest">Сначала старые</option>
-          <option value="title">По наименованию</option>
-        </select>
-      </div>
-      {/* Промпты */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPrompts.map((prompt) => (
-          <PromptCard key={prompt.id} prompt={prompt} />
-        ))}
-      </div>
-      { isModalOpen && 
-        <FormCreatePrompt 
-          onClose={() => setIsModalOpen(false)} 
-          onCreated={loadPrompts}
-        />
-      }  
-    </div>
-  );
+    );
 }
