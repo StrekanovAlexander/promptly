@@ -3,6 +3,7 @@ import { Platform, Prompt, Category } from "../models/index.js";
 export const getAllPrompts = async (req, res) => {
     try {
         const prompts = await Prompt.findAll({
+            order: [['createdAt', 'DESC']],
             include: [
                 { model: Category, attributes: ['name', 'slug', 'icon'] },
                 { 

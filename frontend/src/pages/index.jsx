@@ -12,6 +12,7 @@ import PromptPage from "./PromptPage.jsx";
 
 import SketchPrompts from "./sketch/SketchPrompts.jsx";
 import SketchIndex from "./sketch/SketchIndex.jsx";
+
 // ***************** End next version
 
 export {
@@ -27,5 +28,6 @@ export {
     PromptPage,
 
     SketchIndex,
-    SketchPrompts
+    SketchPrompts,
+    
 }

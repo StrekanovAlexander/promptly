@@ -12,7 +12,6 @@ import {
 } from "../pages/index.jsx";
 
 // ***************** Next version 
-import MainLayout from "@/layouts/MainLayout.jsx";
 import SidebarLayout from "@/layouts/SidebarLayout.jsx";
 import BlankLayout from "@/layouts/BlankLayout.jsx";
 import PromptsNav from "@/components/Prompts/PromptsNav.jsx";
@@ -36,10 +35,6 @@ export default function Routing() {
                 <Route path="/posts/:id" element={<PostPage />} />
             </Route>
             
-            <Route element={<MainLayout />}>
-                <Route path="/" element={<IndexPage />} />
-            </Route>
-            
             <Route element={<SidebarLayout nav={<PromptsNav />} />}>
                 <Route path="/prompts" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug" element={<PromptsPage />} />
@@ -52,6 +47,7 @@ export default function Routing() {
             </Route>
 
             <Route element={<LayoutWithoutSidebar />}>
+                <Route path="/" element={<IndexPage />} />
                 <Route path="/sketch/index" element={<SketchIndex />} />
             </Route>
             <Route path="/sketch/prompts" element={<SketchPrompts />} />
