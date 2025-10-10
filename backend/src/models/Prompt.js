@@ -51,14 +51,6 @@ export const Prompt = db.define("Prompt", {
       type: DataTypes.JSON,
       allowNull: true,
     },
-    isPublic: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-    },
-    isFavorite: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-    },
     usageCount: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
@@ -70,6 +62,21 @@ export const Prompt = db.define("Prompt", {
     version: {
         type: DataTypes.INTEGER,
         defaultValue: 1,
+    },
+    status: {
+      type: DataTypes.ENUM('draft', 'published', 'archived', 'review'),
+      allowNull: false,
+      defaultValue: 'published',
+    },
+    visibility: {
+      type: DataTypes.ENUM('public', 'unlisted', 'private'),
+      allowNull: false,
+      defaultValue: 'public',
+    },
+    difficulty: {
+      type: DataTypes.ENUM('easy', 'middle', 'hard'),
+      allowNull: false,
+      defaultValue: 'easy',
     },
     createdAt: {
         type: DataTypes.DATE,
