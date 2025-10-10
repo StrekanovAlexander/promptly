@@ -5,7 +5,7 @@ export const getAllPrompts = async (req, res) => {
         const prompts = await Prompt.findAll({
             order: [['createdAt', 'DESC']],
             include: [
-                { model: Category, attributes: ['name', 'slug', 'icon'] },
+                { model: Category, attributes: ['name', 'slug', 'icon', 'description'] },
                 { 
                     model: Platform, 
                     as: "platforms",
@@ -24,7 +24,15 @@ export const getPrompt = async (req, res) => {
     try {
         const prompt = await Prompt.findOne({
             where: { id: req.params.id },
-            include: [{ model: Category, attributes: ['name', 'slug', 'icon', 'description']}],
+            include: [
+                { model: Category, attributes: ['name', 'slug', 'icon', 'description']},
+                { 
+                    model: Platform, 
+                    as: "platforms",
+                    attributes: ["id", "name", "icon"], 
+                    through: { attributes: [] }
+                },
+            ],
         });
         res.json(prompt);
     } catch (err) {

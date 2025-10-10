@@ -39,7 +39,7 @@ export default function Routing() {
             
             <Route element={<SidebarLayout nav={<PromptsNav />} />}>
                 {/* <Route path="/prompts/:categorySlug" element={<PromptsPage />} /> */}
-                <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} />
+                {/* <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} /> */}
             </Route>
 
             <Route element={<BlankLayout />}>
@@ -55,6 +55,7 @@ export default function Routing() {
             <Route element={<LayoutWithSidebar nav={<SidebarPrompts />}  />}>
                 <Route path="/prompts" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug" element={<PromptsPage />} />
+                <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} />
             </Route>
 
             <Route path="/sketch/prompts" element={<SketchPrompts />} />

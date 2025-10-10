@@ -116,9 +116,9 @@ export default function PromptsPage() {
             </nav>
 
             {/* Заголовок страницы */}
-            <section className="mb-6">
+            <section className="mt-6 mb-8">
                 {/* Основной заголовок */}
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-4">
                     {category && (
                     <Icon2
                         icon={category.icon}

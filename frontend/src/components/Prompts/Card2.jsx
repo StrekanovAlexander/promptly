@@ -1,24 +1,26 @@
+import { Link } from "react-router-dom";
 import { Calendar, Star } from "lucide-react";
 import { Icon2 } from "../ui/index.jsx";
 import CustomIcon from "../ui/custom-icons/CustomIcon.jsx";
 
 export default function Card2({ prompt }) {
   return (
-    <div 
-        className="bg-neutral-800 
-          backdrop-blur-md 
-          border border-neutral-700 
-          p-6 
-          flex flex-col justify-between 
-          rounded-t-2xl rounded-b-xl 
-          shadow-sm 
-          hover:shadow-md 
-          hover:bg-neutral-700/80 
-          transition-colors duration-300 ease-out 
-          cursor-pointer 
-          aspect-[3/4] 
-          relative overflow-hidden"
-      >
+    <Link
+      to={`/prompts/${prompt.Category.slug}/${prompt.slug}-${prompt.id}`} 
+      className="bg-neutral-800 
+        backdrop-blur-md 
+        border border-neutral-700 
+        p-6 
+        flex flex-col justify-between 
+        rounded-t-2xl rounded-b-xl 
+        shadow-sm 
+        hover:shadow-md 
+        hover:bg-neutral-700/80 
+        transition-colors duration-300 ease-out 
+        cursor-pointer 
+        aspect-[3/4] 
+        relative overflow-hidden"
+    >
 
       {/* Неоновая верхняя полоса */}
       <div className="absolute top-0 left-0 w-full h-[2px] bg-sky-400/80 shadow-[0_0_8px_rgba(56,189,248,0.8)]"></div>
@@ -93,7 +95,6 @@ export default function Card2({ prompt }) {
         </div>
 
       </div>
-
-    </div>
+    </Link>
   );
 }
