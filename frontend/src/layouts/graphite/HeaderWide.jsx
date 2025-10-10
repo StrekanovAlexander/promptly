@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext.jsx";
 import Logo from "./Logo.jsx";
 
@@ -11,7 +11,7 @@ export default function HeaderWide() {
 
     function handleLogout() {
         logout();
-        navigate("/");
+        navigate("/login");
     }
 
     return (
@@ -30,14 +30,29 @@ export default function HeaderWide() {
                         Промпты
                     </Link>
 
-                    {user && (
-                        <button
-                            onClick={handleLogout}
-                            className="hover:text-sky-400 transition-colors"
+                    {!user && 
+                        <Link 
+                            to="/login"
+                            className="bg-neutral-800/70 border border-neutral-700/70 rounded-xl p-2 hover:border-sky-500/70 transition-all duration-300"
                         >
-                            Выход
-                        </button>
-                    )}
+                            <LogIn
+                                size={24}
+                                className="text-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.6)]"
+                            />
+                        </Link>
+                    }
+
+                    {user && <button
+                        onClick={handleLogout}
+                        className="bg-neutral-800/70 border border-neutral-700/70 rounded-xl p-2 hover:border-sky-500/70 transition-all duration-300"
+
+                    >
+                        <LogOut
+                            size={24}
+                            className="text-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.6)]"
+                        />
+                    </button>
+                    }
                 </nav>
 
                 {/* Кнопка меню (мобильная) */}

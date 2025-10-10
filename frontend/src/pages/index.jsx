@@ -7,28 +7,21 @@ import MyPromptsPage from "./profile/MyPromptsPage.jsx";
 
 // ***************** Next version
 import IndexPage from "./IndexPage.jsx";
-// import PromptsPage from "./PromptsPage.jsx";
-import PromptPage from "./PromptPage.jsx";
-
-import SketchPrompts from "./sketch/SketchPrompts.jsx";
-import SketchIndex from "./sketch/SketchIndex.jsx";
-
 import PromptsPage from "./PromptsPage.jsx";
+import PromptPage from "./PromptPage.jsx";
 
 // ***************** End next version
 
 export {
     PostPage,
     PostsPage,
-    LoginPage,
+    
     OAuthCallback,
     AccountPage,
     MyPromptsPage,
     
     IndexPage,
+    LoginPage,
     PromptsPage,
-    
     PromptPage,
-    SketchIndex,
-    SketchPrompts,
 }
