@@ -2,20 +2,24 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Search } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
+import { useAuth } from "@/context/AuthContext.jsx";
 import { useCategories } from "@/context/GlobalContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
 import Card2 from "@/components/Prompts/Card2.jsx";
-import { Icon2, Spinner2}  from "@/components/ui/index.jsx";
+import CreatePromptForm from "@/components/Prompts/CreatePromptForm.jsx";
+import { Icon2, NeonButton, Spinner2}  from "@/components/ui/index.jsx";
 
 export default function PromptsPage() {
     const { status, setLoading, setError } = useApiStatus();
+    const { user } = useAuth();
     const [ prompts, setPrompts ] = useState([]);
     const { categories } = useCategories();
     const { categorySlug } = useParams();
     const { filterCategory, setFilterCategory, filterSearch, setFilterSearch, filterPlatforms, sorting, setSorting } = useFilters();
     const [ category, setCategory ] = useState(null);
+    const [ isModalOpen, setIsModalOpen] = useState(false);
 
     const loadPrompts = async () => {
         setLoading("prompts", true);
@@ -117,18 +121,27 @@ export default function PromptsPage() {
 
             {/* Заголовок страницы */}
             <section className="mt-6 mb-8">
-                {/* Основной заголовок */}
-                <div className="flex items-center gap-2 mb-4">
-                    {category && (
-                    <Icon2
-                        icon={category.icon}
-                        size={22}
-                        className="text-sky-400 shrink-0"
-                    />
+                {/* Основной заголовок + кнопка */}
+                <div className="flex items-center gap-4 mb-4 justify-between">
+                    <div className="flex items-center gap-2">
+                        {category && (
+                            <Icon2
+                                icon={category.icon}
+                                size={22}
+                                className="text-sky-400 shrink-0"
+                            />
+                        )}
+                        <h1 className="text-2xl md:text-3xl font-bold font-opensans text-neutral-300">
+                            {category ? `Промпты категории «${category.name}»` : "Все промпты библиотеки"}
+                        </h1>
+                    </div>
+
+                    {/* Кнопка добавления промпта */}
+                    {user && (
+                        <NeonButton onClick={() => setIsModalOpen(true)}>
+                            Добавить промпт
+                        </NeonButton>
                     )}
-                    <h1 className="text-2xl md:text-3xl font-bold font-opensans text-neutral-300">
-                        {category ? `Промпты категории «${category.name}»` : "Все промпты библиотеки"}
-                    </h1>
                 </div>
 
                 {/* Подзаголовок / описание */}
@@ -173,7 +186,6 @@ export default function PromptsPage() {
                     </select>
                 </div>
             </section>
-
             {/* Контент */}
             <section className="mt-10">
                 { status.prompts?.isLoading && <Spinner2 /> }
@@ -185,7 +197,12 @@ export default function PromptsPage() {
                     </div>
                 }
             </section>
-
+            { isModalOpen && 
+                <CreatePromptForm
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                /> 
+            }  
         </div>
     );
 }
