@@ -17,7 +17,7 @@ export default function HeaderWide() {
     return (
         <header className="fixed top-0 left-0 w-full bg-neutral-900/80 border-b border-neutral-700 backdrop-blur-md z-50">
             {/* 🔹 Широкая версия без контейнера */}
-            <div className="flex items-center justify-between py-6 mx-auto max-w-[1800px]">
+            <div className="w-full max-w-[1800px] mx-auto px-8 h-24 flex items-center justify-between">
                 <Link to="/" title="Главная страница">
                     <Logo />
                 </Link>
