@@ -7,28 +7,26 @@ import { useCategories } from "@/context/GlobalContext.jsx";
 import { createPrompt } from "@/services/api.js";
 import { createSlug } from "@/utils/strings.js";
 import PlaceholdersEditor from "./PlaceholdersEditor.jsx";
-import CustomIcon from "../ui/custom-icons/CustomIcon.jsx";
-
 
 export default function CreatePromptForm({ onClose, onCreated }) {
   const { user } = useAuth();
   const { categories, platforms } = useCategories();
   const { setError } = useApiStatus();
   const [formData, setFormData] = useState({
-    categoryId: 2,
+    categoryId: "",
     userId: user.id,
-    title: "Title",
-    slug: "title",
-    body: "Body of prompt",
-    response: "Response of prompt",
-    description: "Description of prompt",
-    tags: "tag1, tag2, tag3",
+    title: "",
+    slug: "",
+    body: "",
+    response: "",
+    description: "",
+    tags: "",
     language: "ru",
-    license: "License",
-    author: "Author",
+    license: "",
+    author: "",
     placeholders: [],
-    difficulty: "easy",
-    platforms: [1, 3]
+    difficulty: "",
+    platforms: []
   });
 
   const handleChange = (ev) => {
@@ -57,21 +55,17 @@ export default function CreatePromptForm({ onClose, onCreated }) {
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     const payload = { ...formData, placeholders: JSON.stringify(formData.placeholders) };
-    console.log(payload);
-    // try {
-    //   await createPrompt(payload);
-    //   toast.success(`Промпт был успешно создан`);
-    //   onCreated();
-    // } catch(err) {
-    //   setError("prompt_creating", err.toString());
-    //   toast.error("Ошибка создания промпта");
-    // } finally {
-    //   onClose();
-    // }   
+    try {
+      await createPrompt(payload);
+      toast.success(`Промпт был успешно создан`);
+      onCreated();
+    } catch(err) {
+      setError("prompt_creating", err.toString());
+      toast.error("Ошибка создания промпта");
+    } finally {
+      onClose();
+    }   
   };
-
-  // if (!isOpen) return null;
-
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">

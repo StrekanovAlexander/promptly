@@ -1,4 +1,4 @@
-import { Platform, Prompt, Category } from "../models/index.js";
+import { Platform, Prompt, PromptPlatform, Category } from "../models/index.js";
 // GET /api/prompts
 export const getAllPrompts = async (req, res) => {
     try {
@@ -53,7 +53,6 @@ export const getPromptsByUserId = async (req, res) => {
 // POST /api/prompts
 export const createPrompt = async (req, res) => {
     try {
-        //
         if (req.body.placeholders) {
             try {
                 if (typeof req.body.placeholders === "string") {
@@ -64,8 +63,16 @@ export const createPrompt = async (req, res) => {
                 req.body.placeholders = [];
             }
         }
-        //
-        const prompt = await Prompt.create(req.body);
+        
+        const {platforms, ...body} = req.body; 
+        const prompt = await Prompt.create(body);
+
+        const platformsToInsert = platforms.map(el => ({
+            prompt_id: prompt.id,
+            platform_id: el
+        }));
+
+        await PromptPlatform.bulkCreate(platformsToInsert);
         res.status(201).json(prompt);
     } catch (err) {
         res.status(400).json({ error: err.message });
