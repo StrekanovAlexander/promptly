@@ -13,6 +13,7 @@ const icons = {
     Info: Icons.Info,
     Laptop: Icons.Laptop,
     Layers: Icons.Layers,
+    Lightbulb: Icons.Lightbulb,
     Megaphone: Icons.Megaphone,
     Newspaper: Icons.Newspaper,
     Palette: Icons.Palette,
