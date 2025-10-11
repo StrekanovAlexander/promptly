@@ -135,7 +135,6 @@ export default function CreatePromptForm({ onClose, onCreated }) {
                 value={formData.description}
                 onChange={handleChange}
                 rows={1}
-                required
                 placeholder="Описание промпта"
                 className="w-full rounded-lg border border-neutral-300 p-4 focus:outline-none focus:ring-2 focus:ring-sky-500 resize-none"
               />
@@ -192,7 +191,6 @@ export default function CreatePromptForm({ onClose, onCreated }) {
                   name="author"
                   value={formData.author}
                   onChange={handleChange}
-                  required
                   placeholder="Автор"
                   className="w-full rounded-lg border border-neutral-300 p-1 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-sky-500"
                 />
@@ -208,7 +206,6 @@ export default function CreatePromptForm({ onClose, onCreated }) {
                   name="license"
                   value={formData.license}
                   onChange={handleChange}
-                  required
                   placeholder="Лицензия"
                   className="w-full rounded-lg border border-neutral-300 p-1 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-sky-500"
                 />

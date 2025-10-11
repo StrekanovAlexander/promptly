@@ -166,7 +166,7 @@ export default function PromptPage() {
             </div>
 
             {/* Переменные / placeholders */}
-            {prompt.placeholders && (
+            {prompt.placeholders?.length && (
               <section className="mt-10 mb-4">
                 <h2 className="text-xl md:text-2xl font-semibold font-opensans text-neutral-200 mb-4">
                   Плейсхолдеры

@@ -6,7 +6,7 @@ export function FiltersProvider({ children }) {
     
     const [filterSearch, setFilterSearch] = useState("");
     const [filterCategory, setFilterCategory] = useState("all");
-    const [sorting, setSorting] = useState("popular");
+    const [sorting, setSorting] = useState("newest");
     const [filterPlatforms, setFilterPlatforms] = useState([]);
 
     const togglePlatform = (platformId) => {
