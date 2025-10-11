@@ -129,8 +129,8 @@ export default function PromptPage() {
                       'bg-red-500/20 text-red-400'
                     }`}
                   >
-                    {prompt.difficulty === 'easy' ? 'Легко' :
-                    prompt.difficulty === 'middle' ? 'Средне' : 'Сложно'}
+                    {prompt.difficulty === 'easy' ? 'Легкий' :
+                    prompt.difficulty === 'middle' ? 'Средний' : 'Сложный'}
                   </div>
 
               </div>
