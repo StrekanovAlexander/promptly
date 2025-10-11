@@ -2,23 +2,22 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Calendar, Sparkles, Star, User } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
-// import { useAuth } from "@/context/AuthContext.jsx";
+import { useAuth } from "@/context/AuthContext.jsx";
 import { getPrompt } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
-// import FormEditPrompt from "@/components/Prompts/FormEditPrompt.jsx";
-import { Icon2, Spinner } from "@/components/ui/index.jsx";
+import EditPromptForm from "@/components/Prompts/EditPromptForm.jsx";
+import { Icon2, Spinner, NeonButton } from "@/components/ui/index.jsx";
 import CustomIcon from "@/components/ui/custom-icons/CustomIcon.jsx";
 
 export default function PromptPage() {
-//const { user } = useAuth();
+  const { user } = useAuth();
   const { categorySlug, slug } = useParams();
   const { setLoading, setError } = useApiStatus();
   const [ prompt, setPrompt ] = useState([]);
-//const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const [ isModalOpen, setIsModalOpen] = useState(false);
 
   const parts = slug.split('-');
   const id = parseInt(parts.pop(), 10);
-//const placeholders = normalizePlaceholders(prompt?.placeholders || []);
   const loadPrompt = async () => {
     setLoading("prompt", true);
     setError("prompt", null);
@@ -68,10 +67,19 @@ export default function PromptPage() {
           </nav>
           {/* Заголовок и описание промпта */}
           <section className="mt-6 mb-8">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-4 mb-4 justify-between">
               <h1 className="text-2xl md:text-3xl font-bold font-opensans text-neutral-300">
                 {prompt.title}
               </h1>
+
+              <div>
+                {/* Кнопка редактирования промпта */}
+                {user && prompt && user.id === prompt.userId &&  
+                  <NeonButton onClick={() => setIsModalOpen(true)}>
+                    Редактировать
+                  </NeonButton>
+                }
+              </div>
             </div>
             <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-3xl mt-2">
               {prompt.description || prompt.Category.description}
@@ -223,61 +231,15 @@ export default function PromptPage() {
               </div>
             )}
           </section>
-              
-
-
-
-
-
-
-
-          {/* <div className="flex items-center justify-between">
-            <h1 className="text-2xl sm:text-3xl font-opensans font-semibold text-gray-800 mb-6">
-              { prompt.title }
-            </h1>
-            {user &&
-              <button
-                onClick={() => setIsModalOpen(true)} 
-                className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm transition font-medium text-sm"
-              >
-                Редактировать
-              </button>
-            }
-          </div> */}
-
-          {/* Кнопки действий */}
-          {/* <div className="flex flex-wrap gap-4">
-            <button className="bg-[#4F8EF7] hover:bg-[#3A6DD1] text-white px-5 py-2 rounded-xl shadow-sm hover:shadow-md transition font-medium text-sm">
-              Скопировать
-            </button>
-          </div>
           { isModalOpen && 
-            <FormEditPrompt 
+            <EditPromptForm 
               prompt={prompt}
               onClose={() => setIsModalOpen(false)} 
               onEdited={loadPrompt}
             />
-          } */}
+          }
         </>
       }
     </div>
   )
 }
-
-// function normalizePlaceholders(value) {
-//   if (!value) return [];
-//   if (Array.isArray(value)) return value;
-//   if (typeof value === "string") {
-//     try {
-//       const parsed = JSON.parse(value);
-//       return Array.isArray(parsed) ? parsed : [];
-//     } catch {
-//       return [];
-//     }
-//   }
-//   if (typeof value === "object" && value !== null) {
-//     if ("name" in value && "description" in value) return [value];
-//     return [];
-//   }
-//   return [];
-// }
