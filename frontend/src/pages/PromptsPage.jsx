@@ -199,8 +199,8 @@ export default function PromptsPage() {
             </section>
             { isModalOpen && 
                 <CreatePromptForm
-                    isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
+                    onCreated={loadPrompts}
                 /> 
             }  
         </div>
