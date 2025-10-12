@@ -76,9 +76,9 @@ export default function PromptsPage() {
     if (sorting === "popular") {
         filteredPrompts = [...filteredPrompts].sort((a, b) => b.usageCount - a.usageCount);
     } else if (sorting === "newest") {
-        filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+        filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sorting === "oldest") {
-        filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+        filteredPrompts = [...filteredPrompts].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     } else {
         filteredPrompts.sort((a, b) => a.title.localeCompare(b.title));
     }
