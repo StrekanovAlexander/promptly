@@ -9,7 +9,11 @@ export default function SidebarPrompts() {
     const { categories, platforms } = useCategories();
     const { filterCategory, filterPlatforms, togglePlatform } = useFilters();
     
-    const allCategories = [{id: 0, name: "Все категории", icon: "Layers", slug: ""}, ...categories];
+    const promptCount = categories.reduce((acc, el) => acc + el.promptCount, 0);
+    const allCategories = [
+        {id: 0, name: "Все категории", icon: "Layers", slug: "", promptCount: promptCount}, 
+        ...categories
+    ];
     const isActive = (id) => filterPlatforms.includes(id);
 
     return (
@@ -31,14 +35,19 @@ export default function SidebarPrompts() {
                         <li key={el.id}>
                             <Link
                                 to={`/prompts/${el.slug}`}
-                                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors
-                                ${isActive 
-                                    ? "bg-sky-500/20 text-sky-400 border border-sky-500/30" 
-                                    : "text-neutral-300 hover:bg-neutral-800/60 hover:text-sky-300"
-                                }`}
+                                className={`flex items-center justify-between gap-3 px-3 py-2 rounded-lg transition-colors
+                                    ${isActive 
+                                        ? "bg-sky-500/20 text-sky-400 border border-sky-500/30" 
+                                        : "text-neutral-300 hover:bg-neutral-800/60 hover:text-sky-300"
+                                    }`}
                             >
-                                <Icon2 icon={el.icon} size={18} className={isActive ? "text-sky-400" : "text-neutral-400"} />
-                                <span className="text-sm font-medium">{el.name}</span>
+                                <div className="flex items-center gap-3">
+                                    <Icon2 icon={el.icon} size={18} className={isActive ? "text-sky-400" : "text-neutral-400"} />
+                                    <span className="text-sm font-medium">{el.name}</span>
+                                </div>
+                                <span className="bg-neutral-700/50 text-neutral-400 text-xs font-medium px-2 py-0.5 rounded-full">
+                                    {el.promptCount}
+                                </span>
                             </Link>
                         </li>
                     );
