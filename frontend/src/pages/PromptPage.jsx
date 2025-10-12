@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext.jsx";
 import { getPrompt } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
 import EditPromptForm from "@/components/Prompts/EditPromptForm.jsx";
-import { Icon2, Spinner, NeonButton } from "@/components/ui/index.jsx";
+import { Difficulty, Icon2, Spinner, NeonButton } from "@/components/ui/index.jsx";
 import CustomIcon from "@/components/ui/custom-icons/CustomIcon.jsx";
 
 export default function PromptPage() {
@@ -41,6 +41,9 @@ export default function PromptPage() {
     canonical: prompt ? `https://www.promptly.team/prompts/${categorySlug}/${slug}` : null,
     ogImage: prompt?.previewImage
   });
+
+  const placeholders = Array.isArray(prompt.placeholders)
+    ? prompt.placeholders : (prompt.placeholders ? JSON.parse(prompt.placeholders) : []);
 
   return (
     <div className="w-full">
@@ -122,18 +125,9 @@ export default function PromptPage() {
                   )}
 
                   {/* Индикатор сложности */}
-                  <div
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      prompt.difficulty === 'easy' ? 'bg-green-500/20 text-green-400' :
-                      prompt.difficulty === 'middle' ? 'bg-yellow-500/20 text-yellow-400' :
-                      'bg-red-500/20 text-red-400'
-                    }`}
-                  >
-                    {prompt.difficulty === 'easy' ? 'Легкий' :
-                    prompt.difficulty === 'middle' ? 'Средний' : 'Сложный'}
-                  </div>
-
+                  <Difficulty difficulty={ prompt.difficulty } />
               </div>
+              
               {/* Правая часть: популярность и дата */}
               <div className="flex items-center gap-4 text-xs text-neutral-300 mt-4">
                 {/* Популярность */}
@@ -156,42 +150,41 @@ export default function PromptPage() {
             </div>
           </section>
                     
-          <section className="mt-10 flex flex-col gap-6">
-            {/* Тело промпта */}
-            <div className="bg-neutral-800/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-700/50">
-              <h2 className="text-xl font-semibold text-neutral-50 mb-2">Текст промпта</h2>
-              <p className="text-neutral-300 leading-relaxed whitespace-pre-wrap">
-                {prompt.body}
-              </p>
-            </div>
+          <section className="mt-8 flex flex-col gap-6">
+            {/* Тело промпта и плейсхолдеры */}
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Тело промпта */}
+              <div className="flex-1 bg-neutral-800/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-700/50">
+                <h2 className="text-xl font-semibold text-neutral-50 mb-2">Текст промпта</h2>
+                <p className="text-neutral-300 leading-relaxed whitespace-pre-wrap">
+                  {prompt.body}
+                </p>
+              </div>
 
-            {/* Переменные / placeholders */}
-            {prompt.placeholders?.length && (
-              <section className="mt-10 mb-4">
-                <h2 className="text-xl md:text-2xl font-semibold font-opensans text-neutral-200 mb-4">
-                  Плейсхолдеры
-                </h2>
-                <div className="flex flex-wrap gap-4">
-                  {JSON.parse(prompt.placeholders).map((ph) => (
-                    <div
-                      key={ph.name}
-                      className="relative bg-neutral-800/70 border border-neutral-700/50 rounded-2xl p-4 flex flex-col gap-2 
-                        shadow-sm hover:shadow-md transition-all duration-300"
-                      style={{ minWidth: '150px', maxWidth: '320px' }}
-                    >
-                      {/* Название плейсхолдера */}
-                      <div className="inline-block bg-neutral-700/60 text-neutral-200 text-sm font-medium px-3 py-1 rounded-full">
-                        {ph.name}
+              {/* Плейсхолдеры */}
+              {placeholders.length > 0 && (
+                <div className="flex-1 bg-neutral-800/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-700/50">
+                  <h2 className="text-xl font-semibold text-neutral-50 mb-4">Плейсхолдеры</h2>
+                  <div className="flex flex-col gap-3">
+                    {placeholders.map((el) => (
+                      <div
+                        key={el.name}
+                        className="bg-neutral-800/60 border border-neutral-700/50 rounded-2xl p-3 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
+                      >
+                        {/* Название плейсхолдера */}
+                        <div className="inline-block bg-neutral-700/60 text-neutral-200 text-sm font-medium px-3 py-1 rounded-full">
+                          {el.name}
+                        </div>
+                        {/* Описание */}
+                        <p className="text-neutral-400 text-sm leading-relaxed whitespace-nowrap overflow-hidden text-ellipsis">
+                          {el.description}
+                        </p>
                       </div>
-                      {/* Описание */}
-                      <p className="text-neutral-400 text-sm leading-relaxed">
-                        {ph.description}
-                      </p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </section>
-            )}
+              )}  
+            </div>
 
             {/* Пример ответа */}
             {prompt.response && (

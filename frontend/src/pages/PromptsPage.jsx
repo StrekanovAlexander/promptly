@@ -7,7 +7,7 @@ import { useCategories } from "@/context/GlobalContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
-import Card2 from "@/components/Prompts/Card2.jsx";
+import Card from "@/components/Prompts/Card.jsx";
 import CreatePromptForm from "@/components/Prompts/CreatePromptForm.jsx";
 import { Icon2, NeonButton, Spinner2}  from "@/components/ui/index.jsx";
 
@@ -190,14 +190,14 @@ export default function PromptsPage() {
             <section className="mt-10">
                 { status.prompts?.isLoading && <Spinner2 /> }
                 {!status.prompts?.isLoading &&
-<div className="grid gap-6 sm:gap-8
-    grid-cols-[repeat(auto-fit,minmax(280px,1fr))]
-    justify-center"
->
-  {filteredPrompts.map((el) => (
-    <Card2 key={el.id} prompt={el} />
-  ))}
-</div>
+                    <div className="grid gap-6 sm:gap-8
+                        grid-cols-[repeat(auto-fit,minmax(280px,1fr))]
+                        justify-center"
+                    >
+                    {filteredPrompts.map((el) => (
+                        <Card key={el.id} prompt={el} />
+                    ))}
+                    </div>
                 }
             </section>
             { isModalOpen && 

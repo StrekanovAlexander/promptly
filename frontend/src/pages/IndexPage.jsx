@@ -5,7 +5,7 @@ import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { getPrompts } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
 import { Spinner2}  from "@/components/ui/index.jsx";
-import Card2 from "@/components/Prompts/Card2.jsx";
+import Card from "@/components/Prompts/Card.jsx";
 
 export default function IndexPage() {
     const { status, setLoading, setError } = useApiStatus();
@@ -88,7 +88,7 @@ export default function IndexPage() {
                         </h3>
                         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
                             {filteredPrompts.map((el) => (
-                                <Card2 key={el.id} prompt={el} />
+                                <Card key={el.id} prompt={el} />
                             ))}
                         </div>
                     </>
