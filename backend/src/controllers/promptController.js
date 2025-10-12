@@ -1,4 +1,4 @@
-import { Platform, Prompt, PromptPlatform, Category } from "../models/index.js";
+import { Category, Platform, Prompt, PromptPlatform, UserPromptUsage } from "../models/index.js";
 // GET /api/prompts
 export const getAllPrompts = async (req, res) => {
     try {
@@ -128,14 +128,29 @@ export const deletePrompt = async (req, res) => {
 // PATCH /api/prompts/:id/usage
 export const incrementUsage = async (req, res) => {
     try {
-        const prompt = await Prompt.findByPk(req.params.id);
+        const userId = req.user.userId;
+        const promptId = req.params.id;
+
+        const prompt = await Prompt.findByPk(promptId);
         if (!prompt) return res.status(404).json({ error: "Prompt not found" });
+
+        const [usage, created] = await UserPromptUsage.findOrCreate({
+            where: { userId, promptId },
+            defaults: { usedAt: new Date() },
+        });
+
+        if (!created) {
+            return res.json(prompt);
+        }
+
         await prompt.update({
             usageCount: prompt.usageCount + 1,
             lastUsedAt: new Date(),
         });
+
         res.json(prompt);
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: err.message });
     }
 };

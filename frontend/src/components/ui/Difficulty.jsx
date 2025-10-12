@@ -1,14 +1,16 @@
 export default function Difficulty({ difficulty }) {
+    const colors = {
+        easy: 'text-green-400',
+        middle: 'text-yellow-400',
+        hard: 'text-red-400'
+    };
+
     return (
-        <div
-            className={`px-2 py-1 rounded-full text-xs font-medium ${
-                difficulty === 'easy' ? 'bg-green-500/20 text-green-400' :
-                difficulty === 'middle' ? 'bg-yellow-500/20 text-yellow-400' :
-                    'bg-red-500/20 text-red-400'
-            }`}
+        <span
+            className={`px-2 py-0.5 rounded-full text-xs font-medium bg-neutral-700/50 hover:bg-neutral-600/50 transition-colors ${colors[difficulty]}`}
         >
-            { difficulty === 'easy' ? 'Легкий' :
-             difficulty === 'middle' ? 'Средний' : 'Сложный' }
-        </div>
-    )
+            {difficulty === 'easy' ? 'Легкий' :
+             difficulty === 'middle' ? 'Средний' : 'Сложный'}
+        </span>
+    );
 }

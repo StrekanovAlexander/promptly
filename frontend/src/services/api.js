@@ -41,6 +41,22 @@ export async function updatePrompt(data) {
     if (!res.ok) throw new Error("Failed to create prompt");
     return res.json();
 }
+
+// Increment prompt usage
+export async function incrementPromptUsage(id) {
+    const token = localStorage.getItem("token");
+    
+    const res = await fetch(`${API_URL}/prompts/${id}/usage`, {
+        method: "PATCH",
+        headers: {
+            Authorization: `Bearer ${token}` 
+        },
+    });
+    
+    if (!res.ok) throw new Error("Failed to increment prompt");
+    return res.json();
+}
+
 // Prompts By User
 export async function getPromptsByUser(id, token) {
     const res = await fetch(`${API_URL}/prompts/user/${id}`, {

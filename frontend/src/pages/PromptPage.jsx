@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Calendar, Sparkles, Star, User } from "lucide-react";
+import { Calendar, Copy, Sparkles, Star, User } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useAuth } from "@/context/AuthContext.jsx";
-import { getPrompt } from "@/services/api.js";
+import { getPrompt, incrementPromptUsage } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
 import EditPromptForm from "@/components/Prompts/EditPromptForm.jsx";
 import { Difficulty, Icon2, Spinner, NeonButton } from "@/components/ui/index.jsx";
@@ -15,6 +15,7 @@ export default function PromptPage() {
   const { setLoading, setError } = useApiStatus();
   const [ prompt, setPrompt ] = useState([]);
   const [ isModalOpen, setIsModalOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const parts = slug.split('-');
   const id = parseInt(parts.pop(), 10);
@@ -34,6 +35,23 @@ export default function PromptPage() {
   useEffect(() => {
     loadPrompt();
   }, []); 
+
+  const handleCopy = async (text, id) => {
+    try {
+      await navigator.clipboard.writeText(text);
+
+      try {
+        await incrementPromptUsage(id);
+      } catch (err) {
+        console.warn("Не удалось обновить usageCount:", err.message);
+      }
+
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // скрываем тултип через 2 сек
+    } catch (err) {
+      console.error("Ошибка при копировании:", err);
+    }
+  };
 
   useSEO({
     title: prompt ? prompt.title : "Загрузка — Promptly",
@@ -154,8 +172,39 @@ export default function PromptPage() {
             {/* Тело промпта и плейсхолдеры */}
             <div className="flex flex-col md:flex-row gap-6">
               {/* Тело промпта */}
-              <div className="flex-1 bg-neutral-800/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-700/50">
-                <h2 className="text-xl font-semibold text-neutral-50 mb-2">Текст промпта</h2>
+              <div className="w-full md:flex-1 bg-neutral-800/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-700/50 select-none">
+                {/* Заголовок + кнопка копирования */}
+                <div className="flex justify-between items-center mb-2">
+                  <h2 className="text-xl font-semibold text-neutral-50">Текст промпта</h2>
+                  <div className="relative inline-block">
+                    <button
+                      onClick={() => handleCopy(prompt.body, prompt.id)}
+                      className="relative flex items-center gap-1 px-3 py-1.5 bg-sky-500/20 text-sky-400 rounded-lg text-sm font-medium
+                                hover:bg-sky-500/30 hover:text-sky-200 transition-colors"
+                      title="Скопировать текст"
+                    >
+                      <Copy size={16} />
+                      Копировать
+                      {copied && (
+                        <span
+                          className={`
+                            absolute right-full top-1/2 -translate-y-1/2 mr-2
+                            bg-neutral-100 text-neutral-900 text-xs px-2 py-1 rounded
+                            shadow-[0_0_6px_rgba(56,189,248,0.6)]  /* лёгкое неоновое свечение */
+                            whitespace-nowrap
+                            opacity-0 pointer-events-none
+                            transition-all duration-200 ease-out
+                            ${copied ? "opacity-100 translate-x-0" : "translate-x-2"}
+                          `}
+                        >
+                          Промпт был скопирован
+                        </span>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Содержимое промпта */}
                 <p className="text-neutral-300 leading-relaxed whitespace-pre-wrap">
                   {prompt.body}
                 </p>
@@ -163,7 +212,7 @@ export default function PromptPage() {
 
               {/* Плейсхолдеры */}
               {placeholders.length > 0 && (
-                <div className="flex-1 bg-neutral-800/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-700/50">
+                <div className="w-full md:w-1/3 bg-neutral-800/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-700/50">
                   <h2 className="text-xl font-semibold text-neutral-50 mb-4">Плейсхолдеры</h2>
                   <div className="flex flex-col gap-3">
                     {placeholders.map((el) => (
