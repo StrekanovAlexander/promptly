@@ -141,16 +141,6 @@ export default function IndexPage() {
                     </div>
             </section>
 
-            {/* <section className="text-center">
-                <h2 className="text-3xl md:text-4xl font-opensans font-bold mb-4">
-                    Найди свой идеальный промпт
-                </h2>
-                <p className="text-neutral-400 text-lg max-w-3xl mx-auto leading-relaxed">
-                    Библиотека лучших промптов для генеративного ИИ.
-                    Здесь собраны лучшие промпты для ChatGPT, Bard, Copilot, Claude и других моделей.
-                </p>
-            </section> */}
-
             {/* <section className="flex justify-center mt-6">
                 <div className="relative w-full max-w-xl">
                     
@@ -191,7 +181,7 @@ export default function IndexPage() {
 
             </section> */}
 
-            {/* <section className="text-center">
+            <section className="text-center mb-8">
                 <Link
                     to="/prompts"
                     className="inline-block px-6 py-3 rounded-xl border border-sky-500/40 text-sky-300 font-medium
@@ -204,7 +194,7 @@ export default function IndexPage() {
                 >
                     Смотреть все промпты
                 </Link>
-            </section> */}
+            </section>
         </>
     )
 }
