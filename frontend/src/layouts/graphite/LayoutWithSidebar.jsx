@@ -14,12 +14,12 @@ export default function LayoutWithSidebar({ nav }) {
 
             {/* Сайдбар */}
             <aside className="w-full md:w-64 md:flex-shrink-0 py-8 pr-6 overflow-auto">
-            {nav}
+                {nav}
             </aside>
 
             {/* Контент */}
             <main className="flex-1 px-6 py-10">
-            <Outlet />
+                <Outlet />
             </main>
 
         </div>

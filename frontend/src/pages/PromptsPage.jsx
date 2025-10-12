@@ -190,13 +190,12 @@ export default function PromptsPage() {
             <section className="mt-10">
                 { status.prompts?.isLoading && <Spinner2 /> }
                 {!status.prompts?.isLoading &&
-                    <div className="grid gap-6 sm:gap-8
-                        grid-cols-[repeat(auto-fit,minmax(280px,1fr))]
-                        justify-center"
+                    <div className="grid gap-6 sm:gap-8 justify-center"
+                        style={{gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 320px))'}}
                     >
-                    {filteredPrompts.map((el) => (
-                        <Card key={el.id} prompt={el} />
-                    ))}
+                        {filteredPrompts.map((el) => (
+                            <Card key={el.id} prompt={el} />
+                        ))}
                     </div>
                 }
             </section>
