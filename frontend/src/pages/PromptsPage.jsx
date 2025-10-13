@@ -141,7 +141,7 @@ export default function PromptsPage() {
                             />
                         )}
                         <h1 className="text-2xl md:text-3xl font-bold font-opensans text-neutral-300">
-                            {category ? `Промпты категории «${category.name}»` : "Все промпты библиотеки"}
+                            {category ? `Промпты категории «${category.name}»` : "Библиотека промптов"}
                         </h1>
                     </div>
 
@@ -158,8 +158,8 @@ export default function PromptsPage() {
                 <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-3xl">
                     {category
                     ? category.description ||
-                        "Все промпты, связанные с визуальной творческой деятельностью: логотипы, макеты, UI/UX, генерация изображений."
-                    : "Здесь собраны лучшие промпты для ChatGPT, Bard, Copilot, Claude и других моделей. Используй фильтры слева, чтобы выбрать нужную категорию или платформу."}
+                        "Промпты, связанные с творческой деятельностью: логотипы, макеты, UI/UX"
+                    : "Фильтруй по категориям и платформам - и находи нужные идеи за секунды."}
                 </p>
             </section>
 
