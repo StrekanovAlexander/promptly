@@ -204,18 +204,23 @@ export default function PromptsPage() {
             </section>
 
             {/* Контент */}
-            <section className="mt-10">
-                { status.prompts?.isLoading && <Spinner /> }
-                {!status.prompts?.isLoading &&
-                    <div className="grid gap-6 sm:gap-8 justify-center"
-                        style={{gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 320px))'}}
-                    >
-                        {filteredPrompts.map((el) => (
-                            <Card key={el.id} prompt={el} />
-                        ))}
+            <section className="mt-10 flex-1">
+                {status.prompts?.isLoading && <Spinner />}
+
+                {!status.prompts?.isLoading && (
+                    <div className="w-full pr-6">
+                        <div
+                            className="grid gap-10"
+                            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))' }}
+                        >
+                            {filteredPrompts.map((el) => (
+                                <Card prompt={el} />
+                            ))}
+                        </div>
                     </div>
-                }
+                )}
             </section>
+
             { isModalOpen && 
                 <CreatePromptForm
                     onClose={() => setIsModalOpen(false)}

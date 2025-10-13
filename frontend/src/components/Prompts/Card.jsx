@@ -8,18 +8,18 @@ export default function Card({ prompt }) {
     <Link
       to={`/prompts/${prompt.Category.slug}/${prompt.slug}-${prompt.id}`} 
       className="bg-neutral-800 
-        backdrop-blur-md 
-        border border-neutral-700 
-        p-6 
-        flex flex-col justify-between 
-        rounded-t-2xl rounded-b-xl 
-        shadow-sm 
-        hover:shadow-md 
-        hover:bg-neutral-700/80 
-        transition-colors duration-300 ease-out 
-        cursor-pointer 
-        aspect-[3/4] 
-        relative overflow-hidden"
+      backdrop-blur-md 
+      border border-neutral-700 
+      p-6 
+      flex flex-col justify-between 
+      rounded-t-2xl rounded-b-xl 
+      shadow-sm 
+      hover:shadow-md 
+      hover:bg-neutral-700/80 
+      transition-colors duration-300 ease-out 
+      cursor-pointer 
+      relative overflow-hidden 
+      aspect-[3/2] h-full"
     >
 
       {/* Неоновая верхняя полоса */}
@@ -94,7 +94,6 @@ export default function Card({ prompt }) {
             }).replace(/\//g, '.')}
           </span>
         </div>
-
       </div>
     </Link>
   );
