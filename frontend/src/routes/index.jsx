@@ -12,11 +12,19 @@ import {
 } from "../pages/index.jsx";
 
 // ***************** Next version 
-import { IndexPage, LoginPage, PromptsPage, PromptPage  } from "@/pages/index.jsx"
-
 import LayoutWithoutSidebar from "@/layouts/graphite/LayoutWithoutSidebar.jsx";
 import LayoutWithSidebar from "@/layouts/graphite/LayoutWithSidebar.jsx";
 import SidebarPrompts from "@/components/Prompts/SidebarPrompts.jsx";
+
+import { 
+    IndexPage, 
+    LoginPage, 
+    PromptsPage, 
+    PromptPage,
+    RunPromptPage  
+} from "@/pages/index.jsx"
+
+
 // ***************** End next version
 
 export default function Routing() {
@@ -43,6 +51,7 @@ export default function Routing() {
                 <Route path="/prompts" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} />
+                <Route path="/run-prompt" element={<RunPromptPage />} />
             </Route>
 
         </Routes>

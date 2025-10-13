@@ -9,6 +9,7 @@ import {
     postRoutes,
     postCategoryRoutes, 
     promptRoutes, 
+    promptRunnerRoutes, 
     sitemapRoutes,
     userRoutes 
 } from "./src/routes/index.js";
@@ -45,6 +46,7 @@ app.use("/api/platforms", platformRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/post-categories", postCategoryRoutes);
 app.use("/api/prompts", promptRoutes);
+app.use("/api/prompt-runner", promptRunnerRoutes);
 app.use("/api/sitemap.xml", sitemapRoutes);
 app.use("/api/users", userRoutes);
 

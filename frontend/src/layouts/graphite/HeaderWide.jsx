@@ -29,6 +29,12 @@ export default function HeaderWide() {
                     >
                         Промпты
                     </Link>
+                    <Link
+                        to="/run-prompt"
+                        className="hover:text-sky-400 transition-colors"
+                    >
+                        Запусти промпт
+                    </Link>
 
                     {!user && 
                         <Link 
@@ -81,6 +87,12 @@ export default function HeaderWide() {
                         onClick={() => setMenuOpen(false)}
                     >
                         Промпты
+                    </Link>
+                    <Link
+                        to="/run-prompt"
+                        className="text-neutral-100 hover:text-sky-400 transition-colors"
+                    >
+                        Запусти промпт
                     </Link>
                 </div>
             )}

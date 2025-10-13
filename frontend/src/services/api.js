@@ -98,14 +98,19 @@ export async function getPost(id) {
     if (!res.ok) throw new Error("Failed to fetch post");
     return res.json();
 }
-// User data
-// export async function getUserData(id) {
-//     const res = await fetch(`${API_URL}/users/${id}`, {
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         }
-//     });
-//     
-//     if (!res.ok) throw new Error("Failed to fetch user data");
-//     return res.json();
-// }
+
+// Run prompt
+export async function runPrompt(promptText) {
+    const res = await fetch(`${API_URL}/prompt-runner/run`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ promptText, model: "gpt-3.5-turbo" })
+    });
+
+    if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Failed to run prompt");
+    }
+    
+    return res.json();
+}
