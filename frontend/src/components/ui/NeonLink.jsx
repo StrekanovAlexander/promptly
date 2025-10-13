@@ -1,8 +1,9 @@
-export default function NeonButton({ onClick, children, className, type="button", pulse=false }) {
+import { Link } from "react-router-dom";
+
+export default function NeonLink({ to, children, className, pulse = false }) {
     return (
-        <button
-            type={type}
-            onClick={onClick}
+        <Link
+            to={to}
             className={`
                 inline-block px-6 py-3 rounded-xl border border-sky-500/40 text-neutral-100 font-medium
                 bg-gradient-to-b from-neutral-800/60 to-neutral-900/60
@@ -16,6 +17,6 @@ export default function NeonButton({ onClick, children, className, type="button"
             `}
         >
             {children}
-        </button>
+        </Link>
     );
-}
+};

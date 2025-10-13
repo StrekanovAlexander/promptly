@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Search } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useAuth } from "@/context/AuthContext.jsx";
@@ -9,9 +9,10 @@ import { getPrompts } from "@/services/api.js";
 import { useSEO } from "@/hooks/useSEO";
 import Card from "@/components/Prompts/Card.jsx";
 import CreatePromptForm from "@/components/Prompts/CreatePromptForm.jsx";
-import { Icon2, NeonButton, Spinner2}  from "@/components/ui/index.jsx";
+import { Icon2, NeonButton, Spinner }  from "@/components/ui/index.jsx";
 
 export default function PromptsPage() {
+    const navigate = useNavigate();
     const { status, setLoading, setError } = useApiStatus();
     const { user } = useAuth();
     const [ prompts, setPrompts ] = useState([]);
@@ -91,6 +92,14 @@ export default function PromptsPage() {
             : "https://www.promptly.team/prompts"
     });
 
+    function handleModalOpen() {
+        if (user) {
+            setIsModalOpen(true)
+        } else {
+            navigate("/login");
+        }
+    }
+
     return (
         <div className="w-full">
             <nav aria-label="breadcrumb" className="flex items-center gap-2 text-sm text-neutral-400 mb-6">
@@ -137,11 +146,12 @@ export default function PromptsPage() {
                     </div>
 
                     {/* Кнопка добавления промпта */}
-                    {user && (
-                        <NeonButton onClick={() => setIsModalOpen(true)}>
-                            Добавить промпт
-                        </NeonButton>
-                    )}
+                    <NeonButton 
+                        onClick={handleModalOpen}
+                        pulse
+                    >
+                        Создать промпт
+                    </NeonButton>
                 </div>
 
                 {/* Подзаголовок / описание */}
@@ -154,30 +164,36 @@ export default function PromptsPage() {
             </section>
 
             {/* Поиск */}
-            <section className="flex justify-center mt-6">
-                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
-                    <div className="relative w-full sm:max-w-md">
+            <section className="flex justify-center mt-10">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 w-full max-w-3xl">
+                    {/* Поле поиска */}
+                    <div className="relative w-full">
                         <Search
-                            className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-400 transition-colors duration-300
-                            peer-focus:text-sky-300"
-                            size={20}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 text-sky-400 z-10"
+                            size={22}
                         />
                         <input
                             type="text"
                             value={filterSearch}
                             onChange={(ev) => setFilterSearch(ev.target.value)}
-                            placeholder="Поиск по промптам..."
-                            className="w-full rounded-xl bg-neutral-800/80 pl-10 pr-4 py-2.5 text-sm 
-                                border border-neutral-700 text-neutral-100 placeholder-neutral-400
-                                focus:outline-none focus:ring-2 focus:ring-sky-500 transition peer h-11"
+                            placeholder="Поиск промпта..."
+                            className="w-full rounded-xl bg-neutral-900/70 pl-12 pr-4 py-3 text-base 
+                            border border-sky-500/40 text-neutral-100 placeholder-neutral-500
+                            focus:outline-none focus:ring-2 focus:ring-sky-400 
+                            shadow-[0_0_10px_rgba(56,189,248,0.25)]
+                            hover:shadow-[0_0_14px_rgba(56,189,248,0.35)]
+                            transition-all duration-300 peer backdrop-blur-sm"
                         />
                     </div>
+
                     {/* Селектор сортировки */}
                     <select
                         value={sorting}
                         onChange={(ev) => setSorting(ev.target.value)}
-                        className="rounded-xl bg-neutral-800/80 border border-neutral-700 text-neutral-200 text-sm 
-                            px-4 h-11 focus:outline-none focus:ring-2 focus:ring-sky-500 transition cursor-pointer appearance-none"
+                        className="rounded-xl bg-neutral-900/70 border border-neutral-700 text-neutral-200 text-sm 
+                            px-4 h-12 focus:outline-none focus:ring-2 focus:ring-sky-500 
+                            hover:border-sky-400 transition cursor-pointer appearance-none
+                            shadow-[0_0_8px_rgba(56,189,248,0.15)] backdrop-blur-sm"
                     >
                         <option value="popular">По популярности</option>
                         <option value="newest">Сначала новые</option>
@@ -186,9 +202,10 @@ export default function PromptsPage() {
                     </select>
                 </div>
             </section>
+
             {/* Контент */}
             <section className="mt-10">
-                { status.prompts?.isLoading && <Spinner2 /> }
+                { status.prompts?.isLoading && <Spinner /> }
                 {!status.prompts?.isLoading &&
                     <div className="grid gap-6 sm:gap-8 justify-center"
                         style={{gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 320px))'}}

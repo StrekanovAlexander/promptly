@@ -31,7 +31,7 @@ export default function LoginPage() {
       <div
         className="bg-neutral-800/80 border border-neutral-700/60 
           rounded-2xl p-10 w-full max-w-md shadow-[0_0_30px_rgba(56,189,248,0.2)]
-          backdrop-blur-sm"
+          backdrop-blur-sm md:mt-24"
       >
         <h2 className="text-2xl font-semibold text-center text-neutral-200 mb-2">
           Вход в систему

@@ -1,8 +1,8 @@
 export default function Difficulty({ difficulty }) {
     const colors = {
-        easy: 'text-green-400',
-        middle: 'text-yellow-400',
-        hard: 'text-red-400'
+        easy: 'text-green-300/80',
+        middle: 'text-amber-300/80',
+        hard: 'text-red-300/80'
     };
 
     return (

@@ -39,12 +39,14 @@ export default function PromptPage() {
   const handleCopy = async (text, id) => {
     try {
       await navigator.clipboard.writeText(text);
-
-      try {
-        await incrementPromptUsage(id);
-      } catch (err) {
-        console.warn("Не удалось обновить usageCount:", err.message);
-      }
+      
+      if (user) {
+        try {
+          await incrementPromptUsage(id);
+        } catch (err) {
+          console.warn("Не удалось обновить usageCount:", err.message);
+        }  
+      } 
 
       setCopied(true);
       setTimeout(() => setCopied(false), 2000); // скрываем тултип через 2 сек
