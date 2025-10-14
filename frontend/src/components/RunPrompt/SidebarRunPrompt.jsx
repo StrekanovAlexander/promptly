@@ -1,34 +1,13 @@
 import { useState, useEffect } from "react";
-import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useCategories } from "@/context/GlobalContext.jsx";
-import { usePages } from "@/context/PagesContext";
-import { getPlatformVersions } from "@/services/api.js";
+import { usePlatformVersions } from "@/context/PlatformVersionsContext.jsx";
 import CustomIcon from "../ui/custom-icons/CustomIcon.jsx";
 
 export default function SidebarRunPrompt() {
-    const { setPageTitle } = usePages();
+    const { platformVersions, platformVersion, setPlatformVersion } = usePlatformVersions();
     const { platforms } = useCategories();
-    const { setLoading, setError } = useApiStatus();
-    const [platformVersions, setPlatformVersions] = useState([]); 
     const [menu, setMenu] = useState([]);
     const [selectedVersion, setSelectedVersion] = useState(1);
-    
-    useEffect(() => {
-        const loadPlatformVersions = async () => {
-            setLoading("platform_versions", true);
-            setError("platform_versions", null);
-            try {
-                const data = await getPlatformVersions();
-                setPlatformVersions(data);
-            } catch (err) {
-                setError("platform_versions", err.toString());
-            } finally {
-                setLoading("platform_versions", false);
-            }
-        };
-    
-        loadPlatformVersions();
-    }, []); 
 
     useEffect(() => {
         if (menu.length && selectedVersion) {
@@ -40,9 +19,8 @@ export default function SidebarRunPrompt() {
                 ? `Запуск промпта с ${selectedPlatform.parentName} версии ${selectedPlatform.name}`
                 : "Запуск промпта";    
 
-            setPageTitle(pageTitle);
         }
-    }, [menu, selectedVersion, setPageTitle]);
+    }, [menu, selectedVersion]);
 
     useEffect(() => {
         if (platformVersions.length && platforms.length) {
@@ -53,9 +31,9 @@ export default function SidebarRunPrompt() {
         }
     }, [platformVersions, platforms]);
     
-    function handleSelectVersion(id) {
-        if (id !== selectedVersion) {
-            setSelectedVersion(id);
+    function handleSelectVersion(version) {
+        if (version.id !== platformVersion.id) {
+            setPlatformVersion(version);
         }
     }
 
@@ -85,21 +63,21 @@ export default function SidebarRunPrompt() {
                     {/* Версии платформы */}
                     <ul className="flex flex-col gap-1 pl-6">
                         {platform.versions.map((version) => (
-                        <li key={version.id}>
-                            <button
-                                onClick={() => handleSelectVersion(version.id)}
-                                className={`w-full text-left px-3 py-1 rounded-lg text-sm transition-all ${
-                                version.id === selectedVersion
-                                    ? "bg-sky-500/20 text-sky-400 border border-sky-500/30"
-                                    : "text-neutral-300 hover:bg-neutral-800/50 hover:text-sky-300"
-                                }`}
-                            >
-                                {version.name}
-                            </button>
+                            <li key={version.id}>
+                                <button
+                                    onClick={() => handleSelectVersion(version)}
+                                    className={`w-full text-left px-3 py-1 rounded-lg text-sm transition-all ${
+                                    version.id === platformVersion.id
+                                        ? "bg-sky-500/20 text-sky-400 border border-sky-500/30"
+                                        : "text-neutral-300 hover:bg-neutral-800/50 hover:text-sky-300"
+                                    }`}
+                                >
+                                    {version.name}
+                                </button>
                             </li>
                         ))}
                     </ul>
-                    </li>
+                </li>
                 ))}
             </ul>
         </nav>

@@ -19,6 +19,10 @@ export const PlatformVersion = db.define("PlatformVersion", {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     },
+    isAvailable: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    },
 }, {
     tableName: "platform_versions",
     timestamps: false,

@@ -12,7 +12,8 @@ import {
 } from "../pages/index.jsx";
 
 // ***************** Next version 
-import PagesProvider from "@/context/PagesContext.jsx";
+// import PagesProvider from "@/context/PagesContext.jsx";
+import PlatformVersionsProvider from "@/context/PlatformVersionsContext.jsx"
 import LayoutWithoutSidebar from "@/layouts/graphite/LayoutWithoutSidebar.jsx";
 import LayoutWithSidebar from "@/layouts/graphite/LayoutWithSidebar.jsx";
 import SidebarPrompts from "@/components/Prompts/SidebarPrompts.jsx";
@@ -57,9 +58,9 @@ export default function Routing() {
 
             <Route
                 element={
-                    <PagesProvider>
+                    <PlatformVersionsProvider>
                         <LayoutWithSidebar nav={<SidebarRunPrompt />} />
-                    </PagesProvider>
+                    </PlatformVersionsProvider>
                 }
             >
                 <Route path="/run-prompt" element={<RunPromptPage />} />

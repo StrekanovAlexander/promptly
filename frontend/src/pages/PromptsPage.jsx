@@ -214,7 +214,7 @@ export default function PromptsPage() {
                             style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))' }}
                         >
                             {filteredPrompts.map((el) => (
-                                <Card prompt={el} />
+                                <Card key={el.id} prompt={el} />
                             ))}
                         </div>
                     </div>

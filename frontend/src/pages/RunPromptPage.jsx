@@ -1,17 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
-import { usePages } from "@/context/PagesContext";
+import { useCategories } from "@/context/GlobalContext.jsx";
+import { usePlatformVersions } from "@/context/PlatformVersionsContext.jsx";
 import { runPrompt } from "../services/api.js";
 
 export default function RunPromptPage() {
-    const { pageTitle } = usePages();
+    const { platforms } = useCategories();
+    const { platformVersion } = usePlatformVersions();
     const { status, setLoading, setError } = useApiStatus();
     const [promptText, setPromptText] = useState("");
     const [result, setResult] = useState("");
+    const [title, setTitle] = useState("");
+
+    useEffect(() => {
+        if (platforms.length > 0 && platformVersion) {
+            const platform = platforms.find(el => el.icon === platformVersion.platform);
+            if (platform) {
+            setTitle(`Запуск промпта: ${platform.name} версия ${platformVersion.name}`);
+            }
+        }
+    }, [platforms, platformVersion]);
 
     const run = async () => {
-        if (!promptText.trim()) return;
+        if (!platformVersion.isAvailable) {
+            toast.error("Функционал временно недоступен. Используйте другие версии платформ.");
+            return;
+        }
+
+        if (!promptText.trim()) {
+            toast.error("Тело промпта пустое. Действие отменено.");
+            return;
+        }    
         setLoading("run_prompt", true);
         setError("run_prompt", null);
         setResult("");
@@ -44,7 +65,7 @@ export default function RunPromptPage() {
 
             <section className="mt-6 mb-8">
                 <h1 className="text-2xl md:text-3xl font-bold font-opensans text-neutral-300">
-                    { pageTitle }
+                   {title ? title : 'Not title'}
                 </h1>
             </section> 
 
