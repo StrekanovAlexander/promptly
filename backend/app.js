@@ -6,6 +6,7 @@ import {
     authRoutes, 
     categoryRoutes, 
     platformRoutes, 
+    platformVersionRoutes, 
     postRoutes,
     postCategoryRoutes, 
     promptRoutes, 
@@ -43,6 +44,7 @@ app.get('/', (req, res) => res.send('Server is running...'));
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/platforms", platformRoutes);
+app.use("/api/platform-versions", platformVersionRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/post-categories", postCategoryRoutes);
 app.use("/api/prompts", promptRoutes);

@@ -1,5 +1,6 @@
 import { Category } from "./Category.js";
 import { Platform } from "./Platform.js";
+import { PlatformVersion } from "./PlatformVersion.js";
 import { Post } from "./Post.js";
 import { PostCategory } from "./PostCategory.js";
 import { Prompt } from "./Prompt.js";
@@ -45,6 +46,7 @@ Prompt.belongsToMany(User, {
 export { 
     Category, 
     Platform, 
+    PlatformVersion,
     Post, 
     PostCategory, 
     Prompt, 
