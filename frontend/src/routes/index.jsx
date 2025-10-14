@@ -1,14 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import PostLayout from "../components/layouts/post/PostLayout.jsx";
-import ProfileLayout from "../components/layouts/profile/ProfileLayout.jsx";
-import ProtectedRoute from "./ProtectedRoute.jsx";
 import { 
     PostPage, 
     PostsPage, 
-
     OAuthCallback, 
-    AccountPage,
-    MyPromptsPage,
 } from "../pages/index.jsx";
 
 // ***************** Next version 
@@ -33,12 +28,6 @@ import {
 export default function Routing() {
     return (
         <Routes>
-            <Route element={<ProtectedRoute />}>
-                <Route element={<ProfileLayout />}>
-                    <Route path="/account" element={<AccountPage />} />
-                    <Route path="/my-prompts" element={<MyPromptsPage />} />
-                </Route>
-            </Route>
             <Route element={<PostLayout />}>
                 <Route path="/posts" element={<PostsPage />} />
                 <Route path="/posts/:id" element={<PostPage />} />

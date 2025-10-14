@@ -26,12 +26,12 @@ export default function PromptsPage() {
         setLoading("prompts", true);
         setError("prompts", null);
         try {
-        const data = await getPrompts();
-        setPrompts(data);
+            const data = await getPrompts();
+            setPrompts(data);
         } catch (err) {
-        setError("prompts", err.toString());
+            setError("prompts", err.toString());
         } finally {
-        setLoading("prompts", false);
+            setLoading("prompts", false);
         }
     };
 

@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, LogIn, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext.jsx";
+import GeneralModal from "@/components/modals/GeneralModal.jsx";
+import PromptEnhancerForm from "@/components/PromptEnhancer/PromptEnhancerForm.jsx";
 import Logo from "./Logo.jsx";
 
 export default function HeaderWide() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
+    const [showEnhancer, setShowEnhancer] = useState(false);
 
     function handleLogout() {
         logout();
@@ -35,6 +38,12 @@ export default function HeaderWide() {
                     >
                         Запусти промпт
                     </Link>
+                    <button
+                        onClick={() => setShowEnhancer(true)}
+                        className="hover:text-sky-400 transition-colors"
+                    >
+                        Улучшить промпт
+                    </button>
 
                     {!user && 
                         <Link 
@@ -70,7 +79,6 @@ export default function HeaderWide() {
                     {menuOpen ? <X size={26} /> : <Menu size={26} />}
                 </button>
             </div>
-
             {/* Мобильное меню */}
             {menuOpen && (
                 <div className="md:hidden bg-neutral-900/95 border-t border-neutral-700 backdrop-blur-md px-8 py-4 flex flex-col gap-4 text-sm font-medium">
@@ -95,6 +103,12 @@ export default function HeaderWide() {
                         Запусти промпт
                     </Link>
                 </div>
+            )}
+
+            {showEnhancer && (
+                <GeneralModal isOpen={showEnhancer} onClose={() => setShowEnhancer(false)}>
+                    <PromptEnhancerForm />
+                </GeneralModal>
             )}
         </header>
     );

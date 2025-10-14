@@ -115,6 +115,22 @@ export async function runPrompt(promptText) {
     return res.json();
 }
 
+// api/promptEnhancer.js
+export async function enhancePrompt({ promptText, style = "standard", intensity = "balanced", goal = "general" }) {
+    const res = await fetch(`${API_URL}/prompt-enhancer/enhance`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ promptText, style, intensity, goal })
+    });
+
+    if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Failed to enhance prompt");
+    }
+
+    return res.json();
+}
+
 // Platform versions
 export async function getPlatformVersions() {
     const res = await fetch(`${API_URL}/platform-versions`);
