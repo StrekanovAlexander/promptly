@@ -9,7 +9,7 @@ import {
     postRoutes,
     postCategoryRoutes, 
     promptRoutes, 
-    promptRunnerRoutes, 
+    // promptRunnerRoutes, 
     sitemapRoutes,
     userRoutes 
 } from "./src/routes/index.js";
