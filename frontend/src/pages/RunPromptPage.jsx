@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
+import { usePages } from "@/context/PagesContext";
 import { runPrompt } from "../services/api.js";
 
 export default function RunPromptPage() {
+    const { pageTitle } = usePages();
     const { status, setLoading, setError } = useApiStatus();
     const [promptText, setPromptText] = useState("");
     const [result, setResult] = useState("");
@@ -42,7 +44,7 @@ export default function RunPromptPage() {
 
             <section className="mt-6 mb-8">
                 <h1 className="text-2xl md:text-3xl font-bold font-opensans text-neutral-300">
-                    Запуск промпта
+                    { pageTitle }
                 </h1>
             </section> 
 

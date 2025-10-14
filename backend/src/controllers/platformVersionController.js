@@ -3,6 +3,7 @@ import { PlatformVersion } from "../models/PlatformVersion.js";
 export const getAllPlatformVersions = async (req, res) => {
     try {
         const platformVersions = await PlatformVersion.findAll({
+            attributes: ['id', 'name', 'platform', 'description'],
             where: { isActive: true },
         });
         res.json(platformVersions);

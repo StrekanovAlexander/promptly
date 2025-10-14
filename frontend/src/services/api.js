@@ -114,3 +114,12 @@ export async function runPrompt(promptText) {
     
     return res.json();
 }
+
+// Platform versions
+export async function getPlatformVersions() {
+    const res = await fetch(`${API_URL}/platform-versions`);
+    if (!res.ok) throw new Error("Failed to fetch platform versions");
+
+    const data = await res.json();
+    return data;
+}
