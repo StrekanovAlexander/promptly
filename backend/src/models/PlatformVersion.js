@@ -15,6 +15,10 @@ export const PlatformVersion = db.define("PlatformVersion", {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    version: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,

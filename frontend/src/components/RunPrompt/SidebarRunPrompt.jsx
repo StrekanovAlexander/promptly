@@ -7,21 +7,7 @@ export default function SidebarRunPrompt() {
     const { platformVersions, platformVersion, setPlatformVersion } = usePlatformVersions();
     const { platforms } = useCategories();
     const [menu, setMenu] = useState([]);
-    const [selectedVersion, setSelectedVersion] = useState(1);
-
-    useEffect(() => {
-        if (menu.length && selectedVersion) {
-            const selectedPlatform = menu
-                .flatMap(platform => platform.versions.map(v => ({ ...v, parentName: platform.name })))
-                .find(v => v.id === selectedVersion);
-
-            const pageTitle = selectedPlatform
-                ? `Запуск промпта с ${selectedPlatform.parentName} версии ${selectedPlatform.name}`
-                : "Запуск промпта";    
-
-        }
-    }, [menu, selectedVersion]);
-
+    
     useEffect(() => {
         if (platformVersions.length && platforms.length) {
             const menuArray = platforms.map(el => {
