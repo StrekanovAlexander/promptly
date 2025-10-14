@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authMiddleware } from "../middleware/authMiddleware.js";
-import { runPrompt } from "../controllers/PromptRunnerController.js";
+import { runPrompt } from "../controllers/promptRunnerController.js";
 
 const router = Router();
 
