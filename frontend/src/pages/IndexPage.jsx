@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Lightbulb, Edit3, Users } from "lucide-react";
-import { useSEO } from "@/hooks/useSEO";
+import { useSEO } from "@/hooks/useSEO.jsx";
 import { NeonLink}  from "@/components/ui/index.jsx";
 import CustomIcon from "@/components/ui/custom-icons/CustomIcon.jsx";
 

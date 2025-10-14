@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext.jsx";
 import { useCategories } from "@/context/GlobalContext.jsx";
 import { useFilters } from "@/context/FiltersContext.jsx";
 import { getPrompts } from "@/services/api.js";
-import { useSEO } from "@/hooks/useSEO";
+import { useSEO } from "@/hooks/useSEO.jsx";
 import Card from "@/components/Prompts/Card.jsx";
 import CreatePromptForm from "@/components/Prompts/CreatePromptForm.jsx";
 import { Icon2, NeonButton, Spinner }  from "@/components/ui/index.jsx";

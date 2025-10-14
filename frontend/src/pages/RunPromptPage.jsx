@@ -5,6 +5,7 @@ import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useAuth } from "@/context/AuthContext.jsx";
 import { useCategories } from "@/context/GlobalContext.jsx";
 import { usePlatformVersions } from "@/context/PlatformVersionsContext.jsx";
+import { useSEO } from "@/hooks/useSEO.jsx";
 import { runPrompt } from "../services/api.js";
 import CustomIcon from "@/components/ui/custom-icons/CustomIcon.jsx";
 
@@ -25,6 +26,16 @@ export default function RunPromptPage() {
             }
         }
     }, [platforms, platformVersion]);
+
+    useSEO({
+        title: platform && platformVersion
+            ? `Запуск промпта с ${platform.name} версии ${platformVersion.name}`
+            : "Запуск промптов с ChatGPT, Claude, Bard, Copilot и другими ИИ",
+        description: platform && platformVersion
+            ? `Используйте ${platform.name} версии ${platformVersion.name} для отправки запросов к ИИ. Введите промпт, получите результат прямо здесь.`
+            : "Отправляйте запросы к ChatGPT, Claude, Bard, Copilot и другим моделям ИИ. Выберите платформу и версию для получения результата.",
+        canonical: "https://ваш-сайт.ru/run-prompt"
+    });
 
     const run = async () => {
         if (!user) {

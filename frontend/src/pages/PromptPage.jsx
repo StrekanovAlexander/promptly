@@ -4,7 +4,7 @@ import { Calendar, Copy, Sparkles, Star, User } from "lucide-react";
 import { useApiStatus } from "@/context/ApiStatusContext.jsx";
 import { useAuth } from "@/context/AuthContext.jsx";
 import { getPrompt, incrementPromptUsage } from "@/services/api.js";
-import { useSEO } from "@/hooks/useSEO";
+import { useSEO } from "@/hooks/useSEO.jsx";
 import EditPromptForm from "@/components/Prompts/EditPromptForm.jsx";
 import { Difficulty, Icon2, Spinner, NeonButton } from "@/components/ui/index.jsx";
 import CustomIcon from "@/components/ui/custom-icons/CustomIcon.jsx";

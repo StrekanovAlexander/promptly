@@ -6,7 +6,7 @@ export const generateSitemap = async (req, res) => {
         const sitemap = new SitemapStream({ hostname: "https://www.promptly.team" });
         sitemap.write({ url: "/", changefreq: "daily", priority: 1.0 });
         sitemap.write({ url: "/prompts", changefreq: "daily", priority: 0.9 });
-    
+            
         const categories = await Category.findAll({ where: {isActive: true}});
 
         categories.forEach((el) => {
@@ -30,6 +30,13 @@ export const generateSitemap = async (req, res) => {
                 changefreq: "monthly",
                 priority: 0.7,
             });
+        });
+
+        sitemap.write({
+            url: "/run-prompt",
+            changefreq: "daily",
+            priority: 0.8,
+            lastmod: new Date().toISOString(),
         });
     
         sitemap.end();
