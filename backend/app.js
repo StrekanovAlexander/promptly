@@ -10,6 +10,7 @@ import {
     postRoutes,
     postCategoryRoutes, 
     promptEnhancerRoutes,
+    promptFieldRoutes,
     promptRoutes, 
     promptRunnerRoutes, 
     sitemapRoutes,
@@ -49,6 +50,7 @@ app.use("/api/platform-versions", platformVersionRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/post-categories", postCategoryRoutes);
 app.use("/api/prompts", promptRoutes);
+app.use("/api/prompt-fields", promptFieldRoutes);
 app.use("/api/prompt-enhancer", promptEnhancerRoutes);
 app.use("/api/prompt-runner", promptRunnerRoutes);
 app.use("/api/sitemap.xml", sitemapRoutes);

@@ -4,6 +4,7 @@ import { PlatformVersion } from "./PlatformVersion.js";
 import { Post } from "./Post.js";
 import { PostCategory } from "./PostCategory.js";
 import { Prompt } from "./Prompt.js";
+import { PromptField } from "./PromptField.js";
 import { PromptPlatform } from "./PromptPlatform.js";
 import { User } from "./User.js";
 import { UserPromptUsage } from "./UserPromptUsage.js";
@@ -13,6 +14,9 @@ Prompt.belongsTo(User, { foreignKey: "userId", as: "user" });
 
 Category.hasMany(Prompt, { foreignKey: "categoryId", as: "prompts" });
 Prompt.belongsTo(Category, { foreignKey: "categoryId"});
+
+Category.hasMany(PromptField, { foreignKey: "categoryId", as: "promptFields" });
+PromptField.belongsTo(Category, { foreignKey: "categoryId"});
 
 PostCategory.hasMany(Post, { foreignKey: "postCategoryId", as: "posts" });
 Post.belongsTo(PostCategory, { foreignKey: "postCategoryId", as: "postCategory"});
@@ -50,6 +54,7 @@ export {
     Post, 
     PostCategory, 
     Prompt, 
+    PromptField,
     PromptPlatform, 
     User,
     UserPromptUsage 
