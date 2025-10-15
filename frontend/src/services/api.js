@@ -101,9 +101,14 @@ export async function getPost(id) {
 
 // Run prompt
 export async function runPrompt(promptText) {
+    const token = localStorage.getItem("token");
+
     const res = await fetch(`${API_URL}/prompt-runner/run`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            Authorization: `Bearer ${token}`, 
+            "Content-Type": "application/json" 
+        },
         body: JSON.stringify({ promptText, model: "gpt-3.5-turbo" })
     });
 
@@ -116,11 +121,15 @@ export async function runPrompt(promptText) {
 }
 
 // api/promptEnhancer.js
-export async function enhancePrompt({ promptText, style = "standard", intensity = "balanced", goal = "general" }) {
+export async function enhancePrompt({ promptText, options }) {
+    const token = localStorage.getItem("token");
     const res = await fetch(`${API_URL}/prompt-enhancer/enhance`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ promptText, style, intensity, goal })
+        headers: { 
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({ promptText, options })
     });
 
     if (!res.ok) {

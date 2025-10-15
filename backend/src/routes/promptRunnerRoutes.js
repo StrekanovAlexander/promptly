@@ -5,7 +5,6 @@ import { runPrompt } from "../controllers/promptRunnerController.js";
 const router = Router();
 
 // POST /api/prompt-runner/run
-// router.post("/run", authMiddleware, runPrompt);
-router.post("/run", runPrompt);
+router.post("/run", authMiddleware, runPrompt);
 
 export default router;

@@ -36,7 +36,7 @@ export default function HeaderWide() {
                         to="/run-prompt"
                         className="hover:text-sky-400 transition-colors"
                     >
-                        Запусти промпт
+                        Запустить промпт
                     </Link>
                     <button
                         onClick={() => setShowEnhancer(true)}

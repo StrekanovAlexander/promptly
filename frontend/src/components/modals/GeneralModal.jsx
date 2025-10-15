@@ -4,14 +4,16 @@ export default function GeneralModal({ isOpen, onClose, children }) {
     if (!isOpen) return null;
 
     return createPortal(
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-neutral-800/80 backdrop-blur-md">
-            <div className="bg-neutral-900/95 rounded-2xl shadow-[0_0_40px_rgba(56,189,248,0.35)] w-full max-w-lg p-6 relative animate-fade-in">
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+            <div className="bg-neutral-800/90 rounded-2xl w-[90vw] max-w-[1200px] h-[90vh] flex flex-col relative p-6 pt-10">
+                {/* Кнопка закрытия */}
                 <button
-                onClick={onClose}
-                className="absolute top-3 right-3 text-gray-400 hover:text-cyan-400 transition-colors"
+                    onClick={onClose}
+                    className="absolute top-3 right-3 text-neutral-200 hover:text-white"
                 >
                 ✖
                 </button>
+                {/* Содержимое модального окна */}
                 {children}
             </div>
         </div>, document.getElementById("modal-root")

@@ -17,4 +17,4 @@ Allow: /prompts/biznes
 Allow: /prompts/kreativ
 Allow: /prompts/*/*
 
-Sitemap: https://api.promptly.team/api/sitemap.xml
+Sitemap: https://www.promptly.team/sitemap.xml
