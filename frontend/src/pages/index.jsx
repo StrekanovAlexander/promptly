@@ -7,6 +7,7 @@ import OAuthCallback from "./auth/OAuthCallback.jsx";
 import IndexPage from "./IndexPage.jsx";
 import PromptsPage from "./PromptsPage.jsx";
 import PromptPage from "./PromptPage.jsx";
+import PromptGeneratorPage from "./PromptGeneratorPage.jsx";
 import RunPromptPage from "./RunPromptPage.jsx";
 
 // ***************** End next version
@@ -21,5 +22,6 @@ export {
     LoginPage,
     PromptsPage,
     PromptPage,
+    PromptGeneratorPage,
     RunPromptPage
 }

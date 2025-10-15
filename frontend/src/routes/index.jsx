@@ -12,6 +12,7 @@ import PlatformVersionsProvider from "@/context/PlatformVersionsContext.jsx"
 import LayoutWithoutSidebar from "@/layouts/graphite/LayoutWithoutSidebar.jsx";
 import LayoutWithSidebar from "@/layouts/graphite/LayoutWithSidebar.jsx";
 import SidebarPrompts from "@/components/Prompts/SidebarPrompts.jsx";
+import SidebarGenerator from "@/components/PromptGenerator/SidebarGenerator.jsx";
 import SidebarRunPrompt from "@/components/RunPrompt/SidebarRunPrompt.jsx";
 
 import { 
@@ -19,6 +20,7 @@ import {
     LoginPage, 
     PromptsPage, 
     PromptPage,
+    PromptGeneratorPage,
     RunPromptPage  
 } from "@/pages/index.jsx"
 
@@ -43,6 +45,11 @@ export default function Routing() {
                 <Route path="/prompts" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug" element={<PromptsPage />} />
                 <Route path="/prompts/:categorySlug/:slug" element={<PromptPage />} />
+            </Route>
+
+            <Route element={<LayoutWithSidebar nav={<SidebarGenerator />}  />}>
+                <Route path="/prompt-generator" element={<PromptGeneratorPage />} />
+                <Route path="/prompt-generator/:categorySlug" element={<PromptGeneratorPage />} />
             </Route>
 
             <Route

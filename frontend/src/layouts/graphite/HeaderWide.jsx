@@ -27,6 +27,12 @@ export default function HeaderWide() {
 
                 <nav className="hidden md:flex items-center gap-6 text-md font-medium">
                     <Link
+                        to="/prompt-generator"
+                        className="text-sky-400 hover:text-sky-400 transition-colors"
+                    >
+                        Генератор промптов
+                    </Link>
+                    <Link
                         to="/prompts"
                         className="hover:text-sky-400 transition-colors"
                     >
