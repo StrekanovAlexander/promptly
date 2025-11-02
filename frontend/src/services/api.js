@@ -148,3 +148,11 @@ export async function getPlatformVersions() {
     const data = await res.json();
     return data;
 }
+// Prompt fields by category
+export async function getPlatformFieldsByCategory(categoryId) {
+    const res = await fetch(`${API_URL}/prompt-fields/category/${categoryId}`);
+    if (!res.ok) throw new Error("Failed to fetch prompt fields by category");
+
+    const data = await res.json();
+    return data;
+}
