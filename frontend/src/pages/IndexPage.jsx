@@ -167,6 +167,22 @@ export default function IndexPage() {
                     Перейти к библиотеке
                 </NeonLink>
             </section>
+
+            <section className="py-16 px-6 text-center rounded-2xl shadow-lg mx-6 md:mx-auto max-w-3xl mt-12">
+                <h2 className="text-3xl font-opensans font-bold text-neutral-200 mb-4 drop-shadow-[0_0_10px_rgba(56,189,248,0.2)]">
+                    Дополнительные инструменты автоматизации
+                </h2>
+                <p className="text-neutral-400 text-lg mb-6">
+                    Пока вы исследуете и создаете промпты, упорядочивайте свои локальные изображения и проекты.
+                    <a href="https://www.next-step.expert/tools/photosweep" target="_blank" rel="noopener noreferrer" className="text-gray-50 hover:underline font-semibold">
+                    Ознакомьтесь с PhotoSweep — организатором изображений для Windows
+                    </a>, который поможет сортировать, фильтровать и безопасно управлять файлами.
+                </p>
+                <a href="https://www.next-step.expert/tools/photosweep" target="_blank" rel="noopener noreferrer"
+                    className="inline-block bg-neutral-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-neutral-700 transition">
+                    Подробнее
+                </a>
+            </section>
         </>
     )
 }
