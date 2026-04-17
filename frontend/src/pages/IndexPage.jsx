@@ -167,20 +167,55 @@ export default function IndexPage() {
                     Перейти к библиотеке
                 </NeonLink>
             </section>
-
-            <section className="py-16 px-6 text-center rounded-2xl shadow-lg mx-6 md:mx-auto max-w-3xl mt-12">
-                <h2 className="text-3xl font-opensans font-bold text-neutral-200 mb-4 drop-shadow-[0_0_10px_rgba(56,189,248,0.2)]">
+            {/* PhotoSweep */}
+            <section className="py-10 px-6 text-center rounded-2xl shadow-lg mx-6 md:mx-auto max-w-3xl mt-12">
+                <h2 className="text-3xl font-opensans font-bold text-neutral-200 mb-10">
                     Дополнительные инструменты автоматизации
                 </h2>
+
+                <div className="mx-auto w-16 h-16 mb-4 bg-white rounded-md flex items-center justify-center">        
+                    <img
+                        src="https://www.next-step.expert/images/svg/widgets.svg"
+                        alt="PhotoSweep logo"
+                        className="w-12 h-12"
+                    />
+                </div>
+
                 <p className="text-neutral-400 text-lg mb-6">
-                    Пока вы исследуете и создаете промпты, упорядочивайте свои локальные изображения и проекты.
-                    <a href="https://www.next-step.expert/tools/photosweep" target="_blank" rel="noopener noreferrer" className="text-gray-50 hover:underline font-semibold">
-                    Ознакомьтесь с PhotoSweep — организатором изображений для Windows
-                    </a>, который поможет сортировать, фильтровать и безопасно управлять файлами.
+                    PhotoSweep — инструмент для Windows, предназначенный для организации больших коллекций изображений.
+                    Позволяет находить дубликаты, фильтровать файлы по типу, ориентации и метаданным, а также безопасно управлять изображениями.
                 </p>
-                <a href="https://www.next-step.expert/tools/photosweep" target="_blank" rel="noopener noreferrer"
-                    className="inline-block bg-neutral-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-neutral-700 transition">
-                    Подробнее
+
+                <a
+                    href="https://www.next-step.expert/tools/photosweep"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-neutral-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-neutral-700 transition"
+                >
+                    Подробнее о PhotoSweep
+                </a>
+            </section>
+            {/* AI File Analyzer */}
+            <section className="py-10 px-6 text-center rounded-2xl shadow-lg mx-6 md:mx-auto max-w-3xl mt-2">
+                <div className="mx-auto w-16 h-16 mb-4 bg-white rounded-md flex items-center justify-center">        
+                    <img
+                        src="https://www.next-step.expert/images/svg/hub.svg"
+                        alt="AI File Analyzer logo"
+                        className="w-12 h-12"
+                    />
+                </div>
+                <p className="text-neutral-400 text-lg mb-6">
+                    AI File Analyzer — локальный AI инструмент для Windows, который анализирует целые папки документов.
+                    Извлекает темы, краткие содержания, ключевые слова и ключевые инсайты полностью оффлайн, без использования облака.
+                </p>
+
+                <a
+                    href="https://www.next-step.expert/tools/ai-file-analyzer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-neutral-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-neutral-700 transition"
+                >
+                    Подробнее об AI File Analyzer
                 </a>
             </section>
         </>
